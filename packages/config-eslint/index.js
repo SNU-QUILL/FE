@@ -30,5 +30,6 @@ module.exports = {
     "react/jsx-props-no-spreading": "off", // props에 spread 사용 가능
     "import/no-unresolved": "off", // import 경로 오류 허용(절대 경로 사용)
     "import/extensions": "off", // import 확장자 오류 허용(절대 경로 사용)
+    forceConsistentCasingInFileNames: "off",
   },
 };
