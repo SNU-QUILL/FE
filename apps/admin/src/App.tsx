@@ -5,8 +5,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Page.LoginPage />} />
-        <Route path='/login' element={<Page.LoginPage />} />
+        <Route path='/' element={<Page.AuthPage />}>
+          <Route path='/login' element={<Page.LoginPage />} />
+          <Route path='/test' element={<div>test</div>} />
+        </Route>
       </Routes>
     </Router>
   );
