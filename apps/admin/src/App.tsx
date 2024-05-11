@@ -9,6 +9,7 @@ function App() {
           <Route path='/login' element={<Page.LoginPage />} />
           <Route path='/test' element={<div>test</div>} />
         </Route>
+        <Route path='*' element={<Page.AuthPage />} />
       </Routes>
     </Router>
   );
