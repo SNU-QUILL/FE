@@ -1,5 +1,5 @@
 import AuthPage from "@/pages/auth/AuthPage";
-import LoginPage from "./login/LoginPage";
+import LoginPage from "@/pages/login/LoginPage";
 
 export const Page = {
   AuthPage,
