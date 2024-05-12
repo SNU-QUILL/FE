@@ -1,15 +1,17 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { Page } from "@/pages";
+import { ProtectedRoute } from "@/components/routes/ProtectedRoute";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Page.AuthPage />}>
-          <Route path='/login' element={<Page.LoginPage />} />
+        <Route path='/*' element={<Navigate to='/login' />} />
+        <Route path='/login' element={<Page.LoginPage />} />
+
+        <Route element={<ProtectedRoute />}>
           <Route path='/test' element={<div>test</div>} />
         </Route>
-        <Route path='/*' element={<Page.AuthPage />} />
       </Routes>
     </Router>
   );

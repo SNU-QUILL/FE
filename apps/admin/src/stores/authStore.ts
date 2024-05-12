@@ -1,17 +1,23 @@
-import { IAuth } from "@/interfaces/auth";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 interface IAuthStore {
-  auth: IAuth;
-  setAuth: (auth: IAuth) => void;
+  token?: string;
+  setToken: (token: string) => void;
+  isLoggedIn: () => boolean;
+  getName: () => string;
+  getRole: () => string;
 }
 
-export const AuthStore = create<IAuthStore>()(
+export const useAuthStore = create<IAuthStore>()(
   persist(
-    set => ({
-      auth: { name: "", role: "", token: "" },
-      setAuth: (auth: IAuth) => set({ auth }),
+    (set, get) => ({
+      token: undefined,
+      setToken: (token: string) => set({ token }),
+      isLoggedIn: () => !!get().token,
+      /** JWT에서 name, role 뽑아오기 */
+      getName: () => "name",
+      getRole: () => "role",
     }),
     { name: "auth", storage: createJSONStorage(() => localStorage) }
   )

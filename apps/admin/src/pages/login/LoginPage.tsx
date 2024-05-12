@@ -1,6 +1,8 @@
+import { useAuthStore } from "@/stores/authStore";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { useForm, Controller } from "react-hook-form";
+import { Navigate } from "react-router-dom";
 
 interface FormValues {
   username: string;
@@ -8,6 +10,7 @@ interface FormValues {
 }
 
 const LoginPage = () => {
+  const { setToken, isLoggedIn } = useAuthStore();
   const { control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       username: "",
@@ -16,10 +19,13 @@ const LoginPage = () => {
   });
 
   const onSubmit = (data: FormValues) => {
+    setToken("test");
     console.log(data);
   };
 
-  return (
+  return isLoggedIn() ? (
+    <Navigate to='/test' replace />
+  ) : (
     <form style={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
       <div
         style={{

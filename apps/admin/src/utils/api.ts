@@ -1,4 +1,4 @@
-import { AuthStore } from "@/stores/authStore";
+import { useAuthStore } from "@/stores/authStore";
 import axios from "axios";
 
 export const api = axios.create({
@@ -7,7 +7,7 @@ export const api = axios.create({
 
 axios.interceptors.request.use(config => {
   /** TODO: store에서 토큰 가져오기 */
-  const token = AuthStore().auth.token;
+  const token = useAuthStore().token;
   config.headers.Authorization = `Bearer ${token}`;
   console.log("[request]=================================================");
   console.log(config);
@@ -29,7 +29,7 @@ axios.interceptors.response.use(
     console.log("=================================================");
 
     /** TODO: Auth 에러일 경우  */
-    AuthStore().setAuth({ name: "", role: "", token: "" });
+    useAuthStore().setToken("");
     return error;
   }
 );
