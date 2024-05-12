@@ -1,83 +1,85 @@
+import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useForm } from "react-hook-form";
 import { useAuthStore } from "@/stores/authStore";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import { useForm, Controller } from "react-hook-form";
 import { Navigate } from "react-router-dom";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Label } from "@/components/ui/label";
 
-interface FormValues {
+interface LoginForm {
   username: string;
   password: string;
 }
 
-const LoginPage = () => {
-  const { setToken, isLoggedIn } = useAuthStore();
-  const { control, handleSubmit } = useForm<FormValues>({
+export const LoginPage = () => {
+  const authStore = useAuthStore();
+  const form = useForm<LoginForm>({
+    resolver: zodResolver(
+      z.object({
+        username: z
+          .string()
+          .min(2, "Username must be at least 2 characters")
+          .max(20, "Username must be at most 20 characters"),
+        password: z
+          .string()
+          .min(8, "Password must be at least 8 characters")
+          .max(30, "Password must be at most 30 characters"),
+      })
+    ),
     defaultValues: {
       username: "",
       password: "",
     },
   });
 
-  const onSubmit = (data: FormValues) => {
-    setToken("test");
-    console.log(data);
+  const handleLogin = (values: LoginForm) => {
+    /** TODO: 서버 요청 */
+    console.log(values);
   };
 
-  return isLoggedIn() ? (
-    <Navigate to='/test' replace />
+  const handleTestLogin = () => {
+    authStore.setToken("test");
+  };
+
+  return authStore.isLoggedIn() ? (
+    <Navigate to='/' />
   ) : (
-    <form style={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100vh",
-        }}
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(handleLogin)}
+        className='flex flex-col items-center justify-center h-full w-full gap-3'
       >
-        <Controller
+        <FormField
+          control={form.control}
           name='username'
-          control={control}
-          rules={{ required: "Username is required" }}
-          render={({ field, fieldState: { error } }) => (
-            <TextField
-              style={{ marginBottom: "20px", width: "320px" }}
-              label='Username'
-              variant='outlined'
-              error={!!error}
-              helperText={error ? error.message : null}
-              {...field}
-            />
+          render={({ field }) => (
+            <FormItem>
+              <Input {...field} placeholder='Username' style={{ width: "320px" }} />
+              <FormMessage />
+            </FormItem>
           )}
         />
-        <Controller
+        <FormField
+          control={form.control}
           name='password'
-          control={control}
-          rules={{ required: "Password is required" }}
-          render={({ field, fieldState: { error } }) => (
-            <TextField
-              style={{ marginBottom: "20px", width: "320px" }}
-              label='Password'
-              variant='outlined'
-              type='password'
-              error={!!error}
-              helperText={error ? error.message : null}
-              {...field}
-            />
+          render={({ field }) => (
+            <FormItem>
+              <Input {...field} placeholder='Password' style={{ width: "320px" }} />
+              <FormMessage />
+            </FormItem>
           )}
         />
-        <Button
-          style={{ marginTop: "20px", width: "320px" }}
-          variant='contained'
-          color='primary'
-          type='submit'
-        >
-          Login
-        </Button>
-      </div>
-    </form>
+        <FormItem>
+          <Button style={{ width: "320px" }}>Login</Button>
+        </FormItem>
+        <FormItem>
+          <Label onClick={handleTestLogin} style={{ width: "320px" }}>
+            테스트 로그인
+          </Label>
+        </FormItem>
+      </form>
+    </Form>
   );
 };
-
-export default LoginPage;
