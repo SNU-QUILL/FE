@@ -40,7 +40,7 @@ export const LoginPage = () => {
   };
 
   const handleTestLogin = () => {
-    authStore.setToken("test");
+    authStore.setAccessToken("test");
   };
 
   return authStore.isLoggedIn() ? (
