@@ -70,7 +70,7 @@ export const LoginPage = () => {
           name='password'
           render={({ field }) => (
             <FormItem>
-              <Input {...field} placeholder='Password' style={{ width: "320px" }} />
+              <Input {...field} type='password' placeholder='Password' style={{ width: "320px" }} />
               <FormMessage />
             </FormItem>
           )}
