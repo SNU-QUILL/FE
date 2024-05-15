@@ -14,7 +14,7 @@ interface LoginForm {
   password: string;
 }
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const authStore = useAuthStore();
   const { mutateAsync: loginAsync } = useLoginMutation();
   const form = useForm<LoginForm>({
@@ -87,3 +87,5 @@ export const LoginPage = () => {
     </Form>
   );
 };
+
+export default LoginPage;
