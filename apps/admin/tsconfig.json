@@ -3,7 +3,9 @@
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"]
-    }
+    },
+    "declaration": false,
+    "declarationMap": false
   },
   "extends": "@repo/typescript-config/vite.json",
   "include": ["src"]

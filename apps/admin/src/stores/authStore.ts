@@ -4,8 +4,8 @@ import { createJSONStorage, persist } from "zustand/middleware";
 interface IAuthStore {
   accessToken?: string;
   refreshToken?: string;
-  setAccessToken: (token?: string) => void;
-  setRefreshToken: (token?: string) => void;
+  setAccessToken: (accessToken?: string) => void;
+  setRefreshToken: (refreshToken?: string) => void;
   isLoggedIn: () => boolean;
   getName: () => string;
   getRole: () => string;
@@ -18,8 +18,9 @@ export const useAuthStore = create<IAuthStore>()(
       refreshToken: undefined,
       setAccessToken: (token?: string) => set({ accessToken: token }),
       setRefreshToken: (token?: string) => set({ refreshToken: token }),
+      /** TODO: JWT에서 expireTime 뽑아서 판별하기  */
       isLoggedIn: () => !!get().accessToken,
-      /** JWT에서 name, role 뽑아오기 */
+      /** TODO: JWT에서 name, role 뽑아오기 */
       getName: () => "name",
       getRole: () => "role",
     }),

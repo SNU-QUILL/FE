@@ -7,6 +7,7 @@ import { Navigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@/components/ui/label";
+import { useLoginMutation } from "@/hooks/queries/auth";
 
 interface LoginForm {
   username: string;
@@ -15,6 +16,7 @@ interface LoginForm {
 
 export const LoginPage = () => {
   const authStore = useAuthStore();
+  const { mutateAsync: loginAsync } = useLoginMutation();
   const form = useForm<LoginForm>({
     resolver: zodResolver(
       z.object({
@@ -34,9 +36,11 @@ export const LoginPage = () => {
     },
   });
 
-  const handleLogin = (values: LoginForm) => {
+  const handleLogin = async (values: LoginForm) => {
     /** TODO: 서버 요청 */
-    console.log(values);
+    await loginAsync({ id: values.username, password: values.password })
+      .then(r => console.log(r))
+      .catch(console.log);
   };
 
   const handleTestLogin = () => {
