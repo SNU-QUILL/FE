@@ -13,7 +13,9 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<CommonLayout />}>
             <Route path='/main' element={<Page.MainPage />} />
-            <Route path='/user' element={<Page.UserPage />} />
+            <Route path='/article' element={<Page.ArticlePage />}>
+              <Route path=':category' element={<Page.ArticlePage />} />
+            </Route>
             <Route path='/logout' element={<Page.LogoutPage />} />
           </Route>
         </Route>

@@ -5,7 +5,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 const CommonLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const currentPath = location.pathname.split("/").pop() || "";
+  const currentPath = location.pathname.split("/").at(-1) || "";
 
   const tabItems = useMemo(() => {
     return [
@@ -14,8 +14,8 @@ const CommonLayout = () => {
         value: "main",
       },
       {
-        label: "User",
-        value: "user",
+        label: "Article",
+        value: "article",
       },
       {
         label: "Logout",
