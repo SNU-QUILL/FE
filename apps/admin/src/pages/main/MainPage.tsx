@@ -1,5 +1,4 @@
-interface Props {}
-const MainPage = (props: Props) => {
+const MainPage = () => {
   return <div>MainPage</div>;
 };
 export default MainPage;
