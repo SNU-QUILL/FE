@@ -9,7 +9,7 @@ const ArticlePage = () => {
   return (
     <div className='flex flex-col gap-4'>
       <div className='text-4xl font-bold text-primary'>Article</div>
-      <Tabs defaultValue={category} onValueChange={value => navigate(`/article/${value}`)}>
+      <Tabs value={category} onValueChange={value => navigate(`/article/${value}`)}>
         <TabsList>
           {Object.values(ARTICLE_CATEGORY_ENUM).map(category => (
             <TabsTrigger

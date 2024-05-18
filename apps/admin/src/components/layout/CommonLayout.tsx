@@ -28,7 +28,7 @@ const CommonLayout = () => {
 
   return (
     <Tabs
-      defaultValue={currentPath}
+      value={currentPath}
       className='w-full h-full flex'
       orientation='vertical'
       onValueChange={key => navigate(tabItems[key as keyof typeof tabItems].route)}
