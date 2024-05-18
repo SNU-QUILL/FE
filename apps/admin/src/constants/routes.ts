@@ -3,4 +3,8 @@ const AUTH = {
   refresh: "auth/refresh",
 };
 
-export const ApiRoutes = { AUTH };
+const ARTICLE = {
+  list: "articles",
+};
+
+export const ApiRoutes = { AUTH, ARTICLE };

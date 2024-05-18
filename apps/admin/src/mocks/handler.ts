@@ -1,5 +1,7 @@
 import { ApiRoutes } from "@/constants/routes";
+import { IArticle, IArticleRequest } from "@/interfaces/article";
 import { ICommonError, ICommonResponse } from "@/interfaces/common";
+import { data } from "@/mocks/data/article";
 import { HttpHandler, HttpResponse, PathParams, http } from "msw";
 
 export const handlers: HttpHandler[] = [
@@ -26,5 +28,25 @@ export const handlers: HttpHandler[] = [
       );
     }
     return HttpResponse.json<ICommonError>({ message: "expired" }, { status: 401 });
+  }),
+
+  http.post<PathParams, IArticleRequest>(ApiRoutes.ARTICLE.list, async ({ request }) => {
+    const body = await request.json();
+
+    const articleData = data.article as IArticle[];
+    const filteredArticles = articleData.filter((article: IArticle) => {
+      return (
+        article.category === body.category ||
+        article.title === body.title ||
+        article.authorName === body.authorName
+      );
+    });
+    const startIndex = (body.page - 1) * 10;
+    const paginatedArticles = filteredArticles.slice(startIndex, startIndex + 10);
+
+    return HttpResponse.json<ICommonResponse<IArticle[]>>(
+      { data: paginatedArticles },
+      { status: 200 }
+    );
   }),
 ];

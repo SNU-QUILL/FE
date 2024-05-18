@@ -15,7 +15,7 @@ const CommonLayout = () => {
       },
       {
         label: "Article",
-        value: "article",
+        value: "article/features",
       },
       {
         label: "Logout",

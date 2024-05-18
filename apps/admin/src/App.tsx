@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import { ProtectedRoute } from "@/components/routes/ProtectedRoute";
 import CommonLayout from "@/components/layout/CommonLayout";
 import { Page } from "@/pages";
+import ArticleTable from "@/pages/articles/components/ArticleTable";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           <Route element={<CommonLayout />}>
             <Route path='/main' element={<Page.MainPage />} />
             <Route path='/article' element={<Page.ArticlePage />}>
-              <Route path=':category' element={<Page.ArticlePage />} />
+              <Route path=':category' element={<ArticleTable />} />
             </Route>
             <Route path='/logout' element={<Page.LogoutPage />} />
           </Route>
