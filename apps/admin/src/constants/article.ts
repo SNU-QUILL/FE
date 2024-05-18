@@ -1,7 +1,7 @@
 export enum ARTICLE_CATEGORY_ENUM {
-  FEATURES = "FEATURES",
-  SNU_SOCIETY = "SNU_SOCIETY",
-  ARTS_CULTURE = "ARTS_CULTURE",
-  OPINION = "OPINION",
-  SHORT_ARTICELS = "SHORT_ARTICLES",
+  FEATURES = "features",
+  SNU_SOCIETY = "snu_society",
+  ARTS_CULTURE = "arts_culture",
+  OPINION = "opinion",
+  SHORT_ARTICELS = "short_articles",
 }

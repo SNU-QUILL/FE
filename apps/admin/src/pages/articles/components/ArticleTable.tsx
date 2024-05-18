@@ -17,7 +17,7 @@ const ArticleTable = () => {
   /** TODO: 데이터 가져오기 */
   const { data, isPending } = useArticleListQuery({
     page: 1,
-    category: category as ARTICLE_CATEGORY_ENUM,
+    category: category?.toUpperCase() as ARTICLE_CATEGORY_ENUM,
   });
   return (
     <Table>
