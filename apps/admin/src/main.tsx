@@ -5,7 +5,7 @@ import "./index.css";
 import { setupWorker } from "msw/browser";
 import { handlers } from "@/mocks/handler.ts";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import GlobalDialog from "@/components/global/GlobalDialog.tsx";
+import GlobalConfirm from "@/components/global/GlobalConfirm.tsx";
 
 const worker = setupWorker();
 if (import.meta.env.MODE === "development") {
@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={new QueryClient()}>
       <App />
-      <GlobalDialog />
+      <GlobalConfirm />
     </QueryClientProvider>
   </React.StrictMode>
 );
