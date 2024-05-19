@@ -10,7 +10,7 @@ import {
 import { ARTICLE_CATEGORY_ENUM } from "@/constants/article";
 import { useArticleListQuery } from "@/hooks/queries/article";
 import { useParams } from "react-router-dom";
-import { Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
+import { Pencil1Icon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
@@ -40,26 +40,36 @@ const ArticleTable = () => {
 
   return (
     <div>
-      {selectedArticles.length !== 0 && (
-        <div className='flex justify-between items-center p-4'>
-          <div>
-            <span>{selectedArticles.length} Selected</span>
+      <div className='flex justify-between items-center gap-2 p-4'>
+        {selectedArticles.length !== 0 ? (
+          <div className='grow flex justify-between items-center'>
+            <div>
+              <span>{selectedArticles.length} Selected</span>
+            </div>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Button>Action</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>Delete</DropdownMenuItem>
+                <DropdownMenuItem>Entroll Editor&#39;s Pick</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Button>Action</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem>Delete</DropdownMenuItem>
-              <DropdownMenuItem>Entroll Editor&#39;s Pick</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      )}
+        ) : (
+          <div />
+        )}
+        <Button>
+          <Pencil1Icon />
+        </Button>
+      </div>
+
       <hr />
       <Table>
         <TableHeader>
           <TableRow>
+            <TableHead>Select</TableHead>
             <TableHead>No.</TableHead>
             <TableHead>Title</TableHead>
             <TableHead>Contents</TableHead>
@@ -96,7 +106,7 @@ const ArticleTable = () => {
                   {format(new Date(article.modifiedDate), "yyyy-MM-dd'\n'hh:mm:ss")}
                 </TableCell>
                 <TableCell className='flex gap-2'>
-                  <Button>
+                  <Button variant='outline'>
                     <Pencil2Icon />
                   </Button>
                   <Button variant='destructive'>
