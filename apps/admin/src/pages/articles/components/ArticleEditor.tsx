@@ -1,10 +1,12 @@
 import { Editor } from "@toast-ui/react-editor";
 import { useRef } from "react";
+import "@toast-ui/editor/dist/toastui-editor.css";
 
 interface IArticleEditorProps {
+  initialValue?: string;
   onChange: (html: string) => void;
 }
-const ArticleEditor = ({ onChange }: IArticleEditorProps) => {
+const ArticleEditor = ({ initialValue, onChange }: IArticleEditorProps) => {
   const editorRef = useRef<Editor>(null);
 
   const getHTMLContents = () => {
@@ -14,15 +16,17 @@ const ArticleEditor = ({ onChange }: IArticleEditorProps) => {
 
   return (
     <Editor
+      ref={editorRef}
       toolbarItems={[
         ["heading", "bold", "italic", "strike"],
         ["hr", "quote"],
         ["ul", "ol", "task", "indent", "outdent"],
         ["table", "image", "link"],
-        ["code", "codeblock"],
       ]}
-      initialEditorType='markdown'
-      ref={editorRef}
+      initialEditType='wysiwyg'
+      hideModeSwitch
+      height='full'
+      initialValue={initialValue}
       onChange={getHTMLContents}
     />
   );

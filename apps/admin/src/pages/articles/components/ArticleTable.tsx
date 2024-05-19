@@ -20,9 +20,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useGlobalDialogStore } from "@/stores/globalDialog";
+import ArticleEditor from "@/pages/articles/components/ArticleEditor";
 
 const ArticleTable = () => {
   const { category } = useParams();
+  const { openDialog } = useGlobalDialogStore();
   const { data, isPending } = useArticleListQuery({
     page: 1,
     category: category?.toUpperCase() as ARTICLE_CATEGORY_ENUM,
@@ -34,6 +37,12 @@ const ArticleTable = () => {
     setSelectedArticles(prev =>
       prev.includes(articleId) ? prev.filter(id => id !== articleId) : [...prev, articleId]
     );
+  };
+
+  const openWriteArticleDialog = (initialValue?: string) => {
+    openDialog({
+      contents: <ArticleEditor initialValue={initialValue} onChange={console.log} />,
+    });
   };
 
   return (
@@ -58,7 +67,7 @@ const ArticleTable = () => {
         ) : (
           <div />
         )}
-        <Button>
+        <Button onClick={() => openWriteArticleDialog()}>
           <Pencil1Icon />
         </Button>
       </div>
@@ -104,7 +113,10 @@ const ArticleTable = () => {
                   {format(new Date(article.modifiedDate), "yyyy-MM-dd'\n'hh:mm:ss")}
                 </TableCell>
                 <TableCell className='flex gap-2'>
-                  <Button variant='outline'>
+                  <Button
+                    variant='outline'
+                    onClick={() => openWriteArticleDialog(article.contents)}
+                  >
                     <Pencil2Icon />
                   </Button>
                   <Button variant='destructive'>
