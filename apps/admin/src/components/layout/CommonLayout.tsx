@@ -1,5 +1,5 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useMemo } from "react";
+import { startTransition, useEffect, useMemo, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const CommonLayout = () => {
@@ -7,7 +7,11 @@ const CommonLayout = () => {
   const location = useLocation();
   const currentPath = location.pathname.split("/")[1];
 
-  console.log(currentPath);
+  const [tabValue, setTabValue] = useState(currentPath);
+
+  useEffect(() => {
+    setTabValue(currentPath);
+  }, [currentPath]);
 
   const tabItems = useMemo(() => {
     return {
@@ -26,14 +30,19 @@ const CommonLayout = () => {
     };
   }, []);
 
+  const onTabChange = (value: string) => {
+    setTabValue(value);
+    startTransition(() => navigate(tabItems[value as keyof typeof tabItems].route));
+  };
+
   return (
     <Tabs
-      value={currentPath}
+      value={tabValue}
       className='w-full h-full flex'
       orientation='vertical'
-      onValueChange={key => navigate(tabItems[key as keyof typeof tabItems].route)}
+      onValueChange={onTabChange}
     >
-      <TabsList className='h-full w-40 flex-col gap-3 border-r border-secondary rounded-none bg-white'>
+      <TabsList className='h-full min-w-40 flex-col gap-3 border-r border-secondary rounded-none bg-white'>
         {Object.keys(tabItems).map(key => (
           <TabsTrigger
             key={key}
