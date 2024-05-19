@@ -11,6 +11,7 @@ import { ARTICLE_CATEGORY_ENUM } from "@/constants/article";
 import { useArticleListQuery } from "@/hooks/queries/article";
 import { useParams } from "react-router-dom";
 import { Pencil2Icon } from "@radix-ui/react-icons";
+import { format } from "date-fns";
 
 const ArticleTable = () => {
   const { category } = useParams();
@@ -24,7 +25,6 @@ const ArticleTable = () => {
       <TableHeader>
         <TableRow>
           <TableHead>No.</TableHead>
-          <TableHead>Category</TableHead>
           <TableHead>Title</TableHead>
           <TableHead>Contents</TableHead>
           <TableHead>Author</TableHead>
@@ -40,7 +40,6 @@ const ArticleTable = () => {
           {data.map(article => (
             <TableRow key={article.articleId}>
               <TableCell>{article.articleId}</TableCell>
-              <TableCell>{article.category}</TableCell>
               <TableCell className='max-w-[300px]'>{article.title}</TableCell>
               <TableCell className='max-w-[600px]'>
                 <div className='line-clamp-4'>
@@ -48,8 +47,12 @@ const ArticleTable = () => {
                 </div>
               </TableCell>
               <TableCell>{article.authorName}</TableCell>
-              <TableCell>{article.publishDate}</TableCell>
-              <TableCell>{article.modifiedDate}</TableCell>
+              <TableCell>
+                {format(new Date(article.publishDate), "yyyy-MM-dd'\n'hh:mm:ss")}
+              </TableCell>
+              <TableCell>
+                {format(new Date(article.modifiedDate), "yyyy-MM-dd'\n'hh:mm:ss")}
+              </TableCell>
               <TableCell>
                 <Button>
                   <Pencil2Icon />
