@@ -14,7 +14,8 @@ function App() {
           <Route element={<CommonLayout />}>
             <Route path='/main' element={<Page.MainPage />} />
             <Route path='/article' element={<Page.ArticlePage />}>
-              <Route path=':category' element={<Page.ArticleTablePage />} />
+              <Route path=':category' element={<Navigate to='1' />} />
+              <Route path=':category/:page' element={<Page.ArticleTablePage />} />
             </Route>
             <Route path='/logout' element={<Page.LogoutPage />} />
           </Route>

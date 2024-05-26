@@ -14,17 +14,28 @@ import { format } from "date-fns";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useGlobalDialogStore } from "@/stores/globalDialog";
 import ArticleEditor from "@/pages/articles/components/ArticleEditor";
+import ArticleTablePagination from "@/pages/articles/components/ArticleTablePagination";
 
 interface IArticleTableProps {
   category: ARTICLE_CATEGORY_ENUM;
+  page: number;
   selectedArticles: number[];
   onSelectedChange: (articleId: number) => void;
+  onPrevClick: () => void;
+  onNextClick: () => void;
 }
 
-const ArticleTable = ({ category, selectedArticles, onSelectedChange }: IArticleTableProps) => {
+const ArticleTable = ({
+  category,
+  page,
+  selectedArticles,
+  onSelectedChange,
+  onPrevClick,
+  onNextClick,
+}: IArticleTableProps) => {
   const { openDialog } = useGlobalDialogStore();
   const { data, isPending } = useArticleListQuery({
-    page: 1,
+    page,
     category: category?.toUpperCase() as ARTICLE_CATEGORY_ENUM,
   });
 
@@ -91,6 +102,14 @@ const ArticleTable = ({ category, selectedArticles, onSelectedChange }: IArticle
           </TableBody>
         )}
       </Table>
+      {data && (
+        <ArticleTablePagination
+          total={data.total}
+          current={page}
+          onPrevClick={onPrevClick}
+          onNextClick={onNextClick}
+        />
+      )}
     </div>
   );
 };

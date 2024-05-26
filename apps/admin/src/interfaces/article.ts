@@ -8,6 +8,11 @@ export interface IArticleRequest {
   authorName?: string;
 }
 
+export interface IArticleResponse {
+  articles: IArticle[];
+  total: number;
+}
+
 /** Biz */
 export interface IArticle {
   articleId: number;

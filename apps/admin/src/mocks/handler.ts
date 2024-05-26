@@ -1,5 +1,5 @@
 import { ApiRoutes } from "@/constants/routes";
-import { IArticle, IArticleRequest } from "@/interfaces/article";
+import { IArticle, IArticleRequest, IArticleResponse } from "@/interfaces/article";
 import { ICommonError, ICommonResponse } from "@/interfaces/common";
 import { data } from "@/mocks/data/article";
 import { HttpHandler, HttpResponse, PathParams, http } from "msw";
@@ -44,8 +44,8 @@ export const handlers: HttpHandler[] = [
     const startIndex = (body.page - 1) * 10;
     const paginatedArticles = filteredArticles.slice(startIndex, startIndex + 10);
 
-    return HttpResponse.json<ICommonResponse<IArticle[]>>(
-      { data: paginatedArticles },
+    return HttpResponse.json<ICommonResponse<IArticleResponse>>(
+      { data: { articles: paginatedArticles, total: filteredArticles.length } },
       { status: 200 }
     );
   }),
