@@ -36,27 +36,25 @@ const CommonLayout = () => {
   };
 
   return (
-    <Tabs
-      value={tabValue}
-      className='w-full h-full flex'
-      orientation='vertical'
-      onValueChange={onTabChange}
-    >
-      <TabsList className='h-full min-w-40 flex-col gap-3 border-r border-secondary rounded-none bg-white'>
-        {Object.keys(tabItems).map(key => (
-          <TabsTrigger
-            key={key}
-            value={key}
-            className='w-full justify-start data-[state=active]:bg-primary data-[state=active]:text-secondary'
-          >
-            {tabItems[key as keyof typeof tabItems].label}
-          </TabsTrigger>
-        ))}
-      </TabsList>
-      <div className='p-5'>
+    <div className='flex items-center w-full h-full overflow-hidden'>
+      <Tabs value={tabValue} className='flex' orientation='vertical' onValueChange={onTabChange}>
+        <TabsList className='h-full min-w-40 flex-col gap-3 border-r border-secondary rounded-none bg-white'>
+          {Object.keys(tabItems).map(key => (
+            <TabsTrigger
+              key={key}
+              value={key}
+              className='w-full justify-start data-[state=active]:bg-primary data-[state=active]:text-secondary'
+            >
+              {tabItems[key as keyof typeof tabItems].label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </Tabs>
+
+      <div className='p-5 w-full h-full overflow-auto'>
         <Outlet />
       </div>
-    </Tabs>
+    </div>
   );
 };
 export default CommonLayout;

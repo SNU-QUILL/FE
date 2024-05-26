@@ -9,35 +9,24 @@ import {
 } from "@/components/ui/table";
 import { ARTICLE_CATEGORY_ENUM } from "@/constants/article";
 import { useArticleListQuery } from "@/hooks/queries/article";
-import { useParams } from "react-router-dom";
-import { Pencil1Icon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
+import { Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useState } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { useGlobalDialogStore } from "@/stores/globalDialog";
 import ArticleEditor from "@/pages/articles/components/ArticleEditor";
 
-const ArticleTable = () => {
-  const { category } = useParams();
+interface IArticleTableProps {
+  category: ARTICLE_CATEGORY_ENUM;
+  selectedArticles: number[];
+  onSelectedChange: (articleId: number) => void;
+}
+
+const ArticleTable = ({ category, selectedArticles, onSelectedChange }: IArticleTableProps) => {
   const { openDialog } = useGlobalDialogStore();
   const { data, isPending } = useArticleListQuery({
     page: 1,
     category: category?.toUpperCase() as ARTICLE_CATEGORY_ENUM,
   });
-
-  const [selectedArticles, setSelectedArticles] = useState<number[]>([]);
-
-  const onCheckedChange = (articleId: number) => {
-    setSelectedArticles(prev =>
-      prev.includes(articleId) ? prev.filter(id => id !== articleId) : [...prev, articleId]
-    );
-  };
 
   const openWriteArticleDialog = (initialValue?: string) => {
     openDialog({
@@ -47,33 +36,7 @@ const ArticleTable = () => {
 
   return (
     <div>
-      <div className='flex justify-between items-center gap-2 p-4'>
-        {selectedArticles.length !== 0 ? (
-          <div className='grow flex justify-between items-center'>
-            <div>
-              <span>{selectedArticles.length} Selected</span>
-            </div>
-
-            <DropdownMenu>
-              <DropdownMenuTrigger>
-                <Button>Action</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem>Delete</DropdownMenuItem>
-                <DropdownMenuItem>Entroll Editor&#39;s Pick</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        ) : (
-          <div />
-        )}
-        <Button onClick={() => openWriteArticleDialog()}>
-          <Pencil1Icon />
-        </Button>
-      </div>
-
-      <hr />
-      <Table>
+      <Table className='w-full'>
         <TableHeader>
           <TableRow>
             <TableHead>Select</TableHead>
@@ -90,12 +53,12 @@ const ArticleTable = () => {
           <TableBody></TableBody>
         ) : (
           <TableBody>
-            {data.map(article => (
+            {data.articles.map(article => (
               <TableRow key={article.articleId}>
                 <TableCell>
                   <Checkbox
                     checked={selectedArticles.includes(article.articleId)}
-                    onCheckedChange={() => onCheckedChange(article.articleId)}
+                    onCheckedChange={() => onSelectedChange(article.articleId)}
                   />
                 </TableCell>
                 <TableCell>{article.articleId}</TableCell>
