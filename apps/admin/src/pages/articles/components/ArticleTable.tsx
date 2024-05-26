@@ -73,12 +73,8 @@ const ArticleTable = ({
                   />
                 </TableCell>
                 <TableCell>{article.articleId}</TableCell>
-                <TableCell className='max-w-[300px]'>{article.title}</TableCell>
-                <TableCell className='max-w-[600px]'>
-                  <div className='line-clamp-4'>
-                    {article.contents.split("\n").slice(0, 3).join("\n")}...
-                  </div>
-                </TableCell>
+                <TableCell className='max-w-[200px] truncate'>{article.title}</TableCell>
+                <TableCell className='max-w-[400px] truncate'>{article.contents}</TableCell>
                 <TableCell>{article.authorName}</TableCell>
                 <TableCell>
                   {format(new Date(article.publishDate), "yyyy-MM-dd'\n'hh:mm:ss")}
