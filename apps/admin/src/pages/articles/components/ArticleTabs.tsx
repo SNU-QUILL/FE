@@ -1,25 +1,26 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ARTICLE_CATEGORY_ENUM } from "@/constants/article";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 
-const ArticleTabs = () => {
-  const navigate = useNavigate();
-  const { category } = useParams();
+interface ArticleTabs {
+  initialTab: ARTICLE_CATEGORY_ENUM;
+  onTabChange: (value: ARTICLE_CATEGORY_ENUM) => void;
+}
 
-  const [tabValue, setTabValue] = useState(category);
+const ArticleTabs = (props: ArticleTabs) => {
+  const [tabValue, setTabValue] = useState(props.initialTab);
 
   useEffect(() => {
-    setTabValue(category);
-  }, [category]);
+    setTabValue(props.initialTab);
+  }, [props.initialTab]);
 
-  const onTabChange = (value: string) => {
+  const onTabChange = (value: ARTICLE_CATEGORY_ENUM) => {
     setTabValue(value);
-    navigate(`/article/${value}`);
+    props.onTabChange(value);
   };
 
   return (
-    <Tabs value={tabValue} onValueChange={onTabChange}>
+    <Tabs value={tabValue} onValueChange={value => onTabChange(value as ARTICLE_CATEGORY_ENUM)}>
       <TabsList>
         {Object.values(ARTICLE_CATEGORY_ENUM).map(category => (
           <TabsTrigger
