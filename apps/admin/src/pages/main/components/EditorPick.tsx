@@ -9,16 +9,32 @@ const EditorPick = () => {
       <TopArticleDialog isOpen={isOpen} onOpenChange={setIsOpen} onSelect={id => alert(id)} />
       <div className='text-primary text-2xl'>Editor&apos;s Picks</div>
       <div className='flex gap-10'>
-        <Button className='h-36 grow hover:animate-pulse' onClick={() => setIsOpen(true)}>
+        <Button
+          variant='secondary'
+          className='h-36 grow outline-dashed outline-primary hover:animate-pulse hover:bg-primary/30'
+          onClick={() => setIsOpen(true)}
+        >
           Edit Editor&apos;s Pick
         </Button>
-        <Button className='h-36 grow hover:animate-pulse' onClick={() => setIsOpen(true)}>
+        <Button
+          variant='secondary'
+          className='h-36 grow outline-dashed outline-primary hover:animate-pulse hover:bg-primary/30'
+          onClick={() => setIsOpen(true)}
+        >
           Edit Editor&apos;s Pick
         </Button>
-        <Button className='h-36 grow hover:animate-pulse' onClick={() => setIsOpen(true)}>
+        <Button
+          variant='secondary'
+          className='h-36 grow outline-dashed outline-primary hover:animate-pulse hover:bg-primary/30'
+          onClick={() => setIsOpen(true)}
+        >
           Edit Editor&apos;s Pick
         </Button>
-        <Button className='h-36 grow hover:animate-pulse' onClick={() => setIsOpen(true)}>
+        <Button
+          variant='secondary'
+          className='h-36 grow outline-dashed outline-primary hover:animate-pulse hover:bg-primary/30'
+          onClick={() => setIsOpen(true)}
+        >
           Edit Editor&apos;s Pick
         </Button>
       </div>
