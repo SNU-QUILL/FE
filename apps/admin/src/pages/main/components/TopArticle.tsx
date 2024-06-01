@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import TopArticleDialog from "@/pages/main/components/dialog/TopArticleDialog";
 import { useState } from "react";
 

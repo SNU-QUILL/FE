@@ -5,3 +5,8 @@ export enum ARTICLE_CATEGORY_ENUM {
   OPINION = "opinion",
   SHORT_ARTICELS = "short_articles",
 }
+
+export enum ARTICLE_TABLE_MODE_ENUM {
+  DEFAULT = "default",
+  SELECT = "select",
+}

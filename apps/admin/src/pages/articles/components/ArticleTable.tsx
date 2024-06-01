@@ -7,37 +7,23 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ARTICLE_CATEGORY_ENUM } from "@/constants/article";
-import { useArticleListQuery } from "@/hooks/queries/article";
 import { Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useGlobalDialogStore } from "@/stores/globalDialog";
 import ArticleEditor from "@/pages/articles/components/ArticleEditor";
-import ArticleTablePagination from "@/pages/articles/components/ArticleTablePagination";
+import { IArticle } from "@/interfaces/article";
+import { ARTICLE_TABLE_MODE_ENUM } from "@/constants/article";
 
 interface IArticleTableProps {
-  category: ARTICLE_CATEGORY_ENUM;
-  page: number;
-  selectedArticles: number[];
-  onSelectedChange: (articleId: number) => void;
-  onPrevClick: () => void;
-  onNextClick: () => void;
+  data: IArticle[];
+  mode: ARTICLE_TABLE_MODE_ENUM;
+  selectedArticles?: number[];
+  onSelectedChange?: (articleId: number) => void;
 }
 
-const ArticleTable = ({
-  category,
-  page,
-  selectedArticles,
-  onSelectedChange,
-  onPrevClick,
-  onNextClick,
-}: IArticleTableProps) => {
+const ArticleTable = (props: IArticleTableProps) => {
   const { openDialog } = useGlobalDialogStore();
-  const { data, isPending } = useArticleListQuery({
-    page,
-    category: category?.toUpperCase() as ARTICLE_CATEGORY_ENUM,
-  });
 
   const openWriteArticleDialog = (initialValue?: string) => {
     openDialog({
@@ -50,38 +36,38 @@ const ArticleTable = ({
       <Table className='w-full'>
         <TableHeader>
           <TableRow>
-            <TableHead>Select</TableHead>
+            {props.mode === ARTICLE_TABLE_MODE_ENUM.DEFAULT && <TableHead>Select</TableHead>}
             <TableHead>No.</TableHead>
             <TableHead>Title</TableHead>
             <TableHead>Contents</TableHead>
             <TableHead>Author</TableHead>
             <TableHead>Published At</TableHead>
             <TableHead>Modified At</TableHead>
-            <TableHead>Actions</TableHead>
+            {props.mode === ARTICLE_TABLE_MODE_ENUM.DEFAULT && <TableHead>Actions</TableHead>}
           </TableRow>
         </TableHeader>
-        {isPending || !data ? (
-          <TableBody></TableBody>
-        ) : (
-          <TableBody>
-            {data.articles.map(article => (
-              <TableRow key={article.articleId}>
+        <TableBody>
+          {props.data.map(article => (
+            <TableRow key={article.articleId}>
+              {props.mode === ARTICLE_TABLE_MODE_ENUM.DEFAULT && (
                 <TableCell>
                   <Checkbox
-                    checked={selectedArticles.includes(article.articleId)}
-                    onCheckedChange={() => onSelectedChange(article.articleId)}
+                    checked={props.selectedArticles?.includes(article.articleId)}
+                    onCheckedChange={() => props.onSelectedChange?.(article.articleId)}
                   />
                 </TableCell>
-                <TableCell>{article.articleId}</TableCell>
-                <TableCell className='max-w-[200px] truncate'>{article.title}</TableCell>
-                <TableCell className='max-w-[400px] truncate'>{article.contents}</TableCell>
-                <TableCell>{article.authorName}</TableCell>
-                <TableCell>
-                  {format(new Date(article.publishDate), "yyyy-MM-dd'\n'hh:mm:ss")}
-                </TableCell>
-                <TableCell>
-                  {format(new Date(article.modifiedDate), "yyyy-MM-dd'\n'hh:mm:ss")}
-                </TableCell>
+              )}
+              <TableCell>{article.articleId}</TableCell>
+              <TableCell className='max-w-[200px] truncate'>{article.title}</TableCell>
+              <TableCell className='max-w-[400px] truncate'>{article.contents}</TableCell>
+              <TableCell>{article.authorName}</TableCell>
+              <TableCell>
+                {format(new Date(article.publishDate), "yyyy-MM-dd'\n'hh:mm:ss")}
+              </TableCell>
+              <TableCell>
+                {format(new Date(article.modifiedDate), "yyyy-MM-dd'\n'hh:mm:ss")}
+              </TableCell>
+              {props.mode === ARTICLE_TABLE_MODE_ENUM.DEFAULT && (
                 <TableCell className='flex gap-2'>
                   <Button
                     variant='outline'
@@ -93,19 +79,11 @@ const ArticleTable = ({
                     <TrashIcon />
                   </Button>
                 </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        )}
+              )}
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
-      {data && (
-        <ArticleTablePagination
-          total={data.total}
-          current={page}
-          onPrevClick={onPrevClick}
-          onNextClick={onNextClick}
-        />
-      )}
     </div>
   );
 };

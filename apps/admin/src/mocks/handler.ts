@@ -32,11 +32,12 @@ export const handlers: HttpHandler[] = [
 
   http.post<PathParams, IArticleRequest>(ApiRoutes.ARTICLE.list, async ({ request }) => {
     const body = await request.json();
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     const articleData = data.article as IArticle[];
     const filteredArticles = articleData.filter((article: IArticle) => {
       return (
-        article.category === body.category ||
+        article.category.toLowerCase() === body.category.toLowerCase() ||
         article.title === body.title ||
         article.authorName === body.authorName
       );
