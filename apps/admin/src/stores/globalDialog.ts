@@ -3,13 +3,22 @@ import { create } from "zustand";
 interface IGlobalDialogStore {
   isOpen: boolean;
   contents: React.ReactNode;
-  openDialog: ({ contents }: { contents: React.ReactNode }) => void;
+  contentsWrapperClassName: string;
+  openDialog: ({
+    contents,
+    contentsWrapperClassName,
+  }: {
+    contents: React.ReactNode;
+    contentsWrapperClassName?: string;
+  }) => void;
   closeDialog: () => void;
 }
 
 export const useGlobalDialogStore = create<IGlobalDialogStore>()(set => ({
   isOpen: false,
   contents: null,
-  openDialog: ({ contents }) => set({ isOpen: true, contents }),
+  contentsWrapperClassName: "",
+  openDialog: ({ contents, contentsWrapperClassName }) =>
+    set({ isOpen: true, contents, contentsWrapperClassName }),
   closeDialog: () => set({ isOpen: false }),
 }));

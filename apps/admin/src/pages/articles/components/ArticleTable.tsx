@@ -29,6 +29,7 @@ const ArticleTable = (props: IArticleTableProps) => {
   const openWriteArticleDialog = (initialValue?: string) => {
     openDialog({
       contents: <ArticleEditor initialValue={initialValue} onChange={console.log} />,
+      contentsWrapperClassName: "w-4/5 h-4/5",
     });
   };
 
