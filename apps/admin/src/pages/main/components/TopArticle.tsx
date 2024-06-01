@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
-import TopArticleDialog from "@/pages/main/components/dialog/TopArticleDialog";
+import TopArticleDialog from "@/pages/main/components/dialog/ArticleTableDialog";
 import { useState } from "react";
 
 const TopArticle = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className='flex h-60'>
-      <TopArticleDialog isOpen={isOpen} onOpenChange={setIsOpen} />
+      <TopArticleDialog isOpen={isOpen} onOpenChange={setIsOpen} onSelect={id => alert(id)} />
       <Button className='basis-2/3 grow h-full hover:animate-pulse' onClick={() => setIsOpen(true)}>
         Edit TopArticle
       </Button>

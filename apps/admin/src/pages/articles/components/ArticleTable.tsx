@@ -20,6 +20,7 @@ interface IArticleTableProps {
   mode: ARTICLE_TABLE_MODE_ENUM;
   selectedArticles?: number[];
   onSelectedChange?: (articleId: number) => void;
+  onSelect?: (articleId: number) => void;
 }
 
 const ArticleTable = (props: IArticleTableProps) => {
@@ -48,7 +49,11 @@ const ArticleTable = (props: IArticleTableProps) => {
         </TableHeader>
         <TableBody>
           {props.data.map(article => (
-            <TableRow key={article.articleId}>
+            <TableRow
+              key={article.articleId}
+              onClick={() => props.onSelect?.(article.articleId)}
+              className={props.mode === ARTICLE_TABLE_MODE_ENUM.SELECT ? "cursor-pointer" : ""}
+            >
               {props.mode === ARTICLE_TABLE_MODE_ENUM.DEFAULT && (
                 <TableCell>
                   <Checkbox

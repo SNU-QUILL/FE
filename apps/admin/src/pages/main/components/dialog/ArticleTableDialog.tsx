@@ -9,6 +9,7 @@ import { useState } from "react";
 interface ITopArticleDialogProps {
   isOpen: boolean;
   onOpenChange: (value: boolean) => void;
+  onSelect: (id: number) => void;
 }
 
 const TopArticleDialog = (props: ITopArticleDialogProps) => {
@@ -28,10 +29,7 @@ const TopArticleDialog = (props: ITopArticleDialogProps) => {
             <ArticleTable
               data={data.articles}
               mode={ARTICLE_TABLE_MODE_ENUM.SELECT}
-              selectedArticles={[]}
-              onSelectedChange={id => {
-                alert(id);
-              }}
+              onSelect={props.onSelect}
             />
             <ArticleTablePagination
               current={page}
