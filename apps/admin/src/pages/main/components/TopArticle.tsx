@@ -1,16 +1,23 @@
 import { Button } from "@/components/ui/button";
 import TopArticleDialog from "@/pages/main/components/dialog/ArticleTableDialog";
-import { useState } from "react";
+import { useGlobalDialogStore } from "@/stores/globalDialog";
 
 const TopArticle = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { openDialog } = useGlobalDialogStore();
+
+  const openTopArticleDialog = () => {
+    openDialog({
+      title: "Top Article",
+      contents: <TopArticleDialog onSelect={id => alert(id)} />,
+    });
+  };
+
   return (
     <div className='flex h-60'>
-      <TopArticleDialog isOpen={isOpen} onOpenChange={setIsOpen} onSelect={id => alert(id)} />
       <Button
         variant='secondary'
         className='basis-2/3 grow h-full outline-dashed outline-primary hover:animate-pulse hover:bg-primary/30'
-        onClick={() => setIsOpen(true)}
+        onClick={openTopArticleDialog}
       >
         Edit TopArticle
       </Button>

@@ -10,6 +10,7 @@ const EditQuillVideoForm = () => {
 
   const openQuillVideoPreviewDialog = () => {
     openDialog({
+      title: "Quill Video Preview",
       contents: <QuillVideoPreview youtubeLink={youtubeLink} />,
       contentsWrapperClassName: "w-3/5",
     });
