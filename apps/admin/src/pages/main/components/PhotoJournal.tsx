@@ -1,37 +1,47 @@
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Input } from "@/components/ui/input";
+import { ChevronLeftCircle, ChevronRightCircle } from "lucide-react";
 import { useState } from "react";
 
 const PhotoJournal = () => {
   const [api, setApi] = useState<CarouselApi>();
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(true);
 
-  console.log(api?.canScrollNext());
+  api?.on("scroll", () => {
+    setCanScrollPrev(api?.canScrollPrev());
+    setCanScrollNext(api?.canScrollNext());
+  });
+
   return (
     <div>
       <div className='text-primary text-2xl'>Photo Journals</div>
-      <div className='mx-10'>
-        <Carousel setApi={setApi}>
-          <CarouselContent>
-            <CarouselItem>
-              <PhotoJournalItem id='journal-1' />
-            </CarouselItem>
-            <CarouselItem>
-              <PhotoJournalItem id='journal-2' />
-            </CarouselItem>
-            <CarouselItem>
-              <PhotoJournalItem id='journal-3' />
-            </CarouselItem>
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+      <Carousel setApi={setApi}>
+        <CarouselContent>
+          <CarouselItem>
+            <PhotoJournalItem id='journal-1' />
+          </CarouselItem>
+          <CarouselItem>
+            <PhotoJournalItem id='journal-2' />
+          </CarouselItem>
+          <CarouselItem>
+            <PhotoJournalItem id='journal-3' />
+          </CarouselItem>
+        </CarouselContent>
+      </Carousel>
+      <div className='flex justify-center gap-10 mt-2'>
+        <ChevronLeftCircle
+          size={32}
+          color={canScrollPrev ? "hsl(var(--primary))" : "hsl(var(--secondary))"}
+          className='cursor-pointer'
+          onClick={() => api?.scrollPrev()}
+        />
+        <ChevronRightCircle
+          size={32}
+          color={canScrollNext ? "hsl(var(--primary))" : "hsl(var(--secondary))"}
+          className='cursor-pointer'
+          onClick={() => api?.scrollNext()}
+        />
       </div>
     </div>
   );
@@ -56,7 +66,7 @@ const PhotoJournalItem = ({ id }: { id: string }) => {
       <Input type='file' id={id} className='hidden' accept='image/*' onChange={handleFileChange} />
       <label
         htmlFor={id}
-        className='flex items-center justify-center text-sm h-96 border-[3.5px] border-dashed border-primary bg-secondary hover:animate-pulse hover:bg-primary/30 hover:cursor-pointer rounded-md'
+        className='flex items-center justify-center text-sm h-96 outline-primary outline-dashed m-[2px] bg-secondary hover:animate-pulse hover:bg-primary/30 hover:cursor-pointer rounded-md'
       >
         {preview && (
           <img src={preview} alt='Preview' className='w-full h-full object-cover rounded-md' />
