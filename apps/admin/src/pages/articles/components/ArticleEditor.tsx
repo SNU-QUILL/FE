@@ -25,7 +25,7 @@ const ArticleEditor = ({ initialValue, onChange }: IArticleEditorProps) => {
       ]}
       initialEditType='wysiwyg'
       hideModeSwitch
-      height='full'
+      height='100%'
       initialValue={initialValue}
       onChange={getHTMLContents}
     />
