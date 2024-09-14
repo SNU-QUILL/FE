@@ -1,4 +1,5 @@
 import { ApiRoutes } from "@/constants/routes";
+import { IAuthLoginRequest } from "@/interfaces/auth";
 import { ICommonResponse } from "@/interfaces/common";
 import { useAuthStore } from "@/stores/authStore";
 import { api } from "@/utils/api";
@@ -16,16 +17,16 @@ export const useLoginMutation = () => {
     mutationKey: authQueryKey.login,
     mutationFn: postAuthLogin,
     onSuccess: data => {
-      setAccessToken(data.data.accessToken);
-      setRefreshToken(data.data.refreshToken);
+      setAccessToken(data.headers["authorization"]);
+      setRefreshToken(data.headers["refresh-token"]);
     },
   });
 };
 
-const postAuthLogin = async (data: { id: string; password: string }) => {
+const postAuthLogin = async (data: IAuthLoginRequest) => {
   const response = await api.post<ICommonResponse<{ accessToken: string; refreshToken: string }>>(
     ApiRoutes.AUTH.login,
     data
   );
-  return response.data;
+  return response;
 };

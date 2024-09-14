@@ -38,7 +38,7 @@ const LoginPage = () => {
 
   const handleLogin = async (values: LoginForm) => {
     /** TODO: 서버 요청 */
-    await loginAsync({ id: values.username, password: values.password })
+    await loginAsync({ email: values.username, password: values.password })
       .then(r => console.log(r))
       .catch(console.log);
   };

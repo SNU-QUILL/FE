@@ -10,7 +10,9 @@ export const api = axios.create({
 api.interceptors.request.use(config => {
   /** TODO: store에서 토큰 가져오기 */
   const token = useAuthStore.getState().accessToken;
-  config.headers.Authorization = `Bearer ${token}`;
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
   console.log("[request]=================================================");
   console.log(config);
   console.log("=================================================");
