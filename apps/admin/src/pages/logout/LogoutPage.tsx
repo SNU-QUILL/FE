@@ -1,7 +1,7 @@
 import { useAuthStore } from "@/stores/authStore";
 import { useGlobalConfirmStore } from "@/stores/globalConfirm";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const LogoutPage = () => {
   const { openDialog, closeDialog } = useGlobalConfirmStore();
@@ -22,6 +22,6 @@ const LogoutPage = () => {
       },
     });
   }, []);
-  return <div>LogoutPage</div>;
+  return <Navigate to='/main' replace />;
 };
 export default LogoutPage;

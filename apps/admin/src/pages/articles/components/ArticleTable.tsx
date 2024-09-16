@@ -12,7 +12,7 @@ import { format } from "date-fns";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useGlobalDialogStore } from "@/stores/globalDialog";
 import ArticleEditor from "@/pages/articles/components/ArticleEditor";
-import { IArticle } from "@/interfaces/article";
+import { IArticle } from "@/interfaces/api/article";
 import { ARTICLE_TABLE_MODE_ENUM } from "@/constants/article";
 
 interface IArticleTableProps {

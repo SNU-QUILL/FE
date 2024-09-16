@@ -1,6 +1,5 @@
 import { ARTICLE_CATEGORY_ENUM } from "@/constants/article";
 
-/** API */
 export interface IArticleRequest {
   category: ARTICLE_CATEGORY_ENUM;
   page: number;
@@ -13,7 +12,6 @@ export interface IArticleResponse {
   total: number;
 }
 
-/** Biz */
 export interface IArticle {
   articleId: number;
   title: string;

@@ -1,6 +1,6 @@
 import { ARTICLE_CATEGORY_ENUM } from "@/constants/article";
 import { ApiRoutes } from "@/constants/routes";
-import { IArticleRequest, IArticleResponse } from "@/interfaces/article";
+import { IArticleRequest, IArticleResponse } from "@/interfaces/api/article";
 import { ICommonResponse } from "@/interfaces/common";
 import { api } from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";

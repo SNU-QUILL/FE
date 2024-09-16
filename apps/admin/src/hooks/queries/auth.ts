@@ -1,5 +1,5 @@
 import { ApiRoutes } from "@/constants/routes";
-import { IAuthLoginRequest } from "@/interfaces/auth";
+import { IAuthLoginRequest } from "@/interfaces/api/auth";
 import { ICommonResponse } from "@/interfaces/common";
 import { useAuthStore } from "@/stores/authStore";
 import { api } from "@/utils/api";
