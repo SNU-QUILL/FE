@@ -1,4 +1,5 @@
 import { ApiRoutes } from "@/constants/routes";
+import { toast } from "@/hooks/use-toast";
 import { ICommonResponse, ICommonError } from "@/interfaces/common";
 import { useAuthStore } from "@/stores/authStore";
 import axios, { AxiosError } from "axios";
@@ -28,6 +29,11 @@ api.interceptors.response.use(
   },
   async (error: AxiosError<ICommonError>) => {
     /** TODO: 에러 공통 처리(ErrorBoundary) */
+    toast({
+      variant: "destructive",
+      title: "Error",
+      description: error.response?.data.message.toString(),
+    });
     console.log("[ERROR response]=================================================");
     console.log(error);
     console.log("=================================================");
