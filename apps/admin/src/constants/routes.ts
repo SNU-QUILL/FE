@@ -1,10 +1,10 @@
 const AUTH = {
-  login: "api/admin/auth/login",
-  refresh: "api/auth/refresh",
+  login: "/auth/login",
+  refresh: "/auth/renew",
 };
 
 const ARTICLE = {
-  list: "api/articles",
+  list: "/articles",
 };
 
 export const ApiRoutes = { AUTH, ARTICLE };

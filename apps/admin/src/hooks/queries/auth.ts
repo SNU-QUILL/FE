@@ -24,9 +24,6 @@ export const useLoginMutation = () => {
 };
 
 const postAuthLogin = async (data: IAuthLoginRequest) => {
-  const response = await api.post<ICommonResponse<{ accessToken: string; refreshToken: string }>>(
-    ApiRoutes.AUTH.login,
-    data
-  );
+  const response = await api.post<ICommonResponse<void>>(ApiRoutes.AUTH.login, data);
   return response;
 };

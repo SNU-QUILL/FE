@@ -5,14 +5,15 @@ import { useAuthStore } from "@/stores/authStore";
 import axios, { AxiosError } from "axios";
 
 export const api = axios.create({
-  baseURL: "",
+  baseURL: "/api/admin",
 });
 
+let times = 1;
+
 api.interceptors.request.use(config => {
-  /** TODO: store에서 토큰 가져오기 */
   const token = useAuthStore.getState().accessToken;
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = token;
   }
   console.log("[request]=================================================");
   console.log(config);
@@ -32,23 +33,24 @@ api.interceptors.response.use(
     toast({
       variant: "destructive",
       title: "Error",
-      description: error.response?.data.message.toString(),
+      description: "error.response?.data.message.toString()",
     });
     console.log("[ERROR response]=================================================");
     console.log(error);
     console.log("=================================================");
 
     /** Auth 에러일 경우 refresh토큰 요청 후, 재요청  */
-    if (error.response?.status === 401 && error.response.data.message === "expired") {
+    if (error.response?.status === 401 && times) {
+      --times;
       const originalRequest = error.config!;
-      const response = await api.post<
-        ICommonResponse<{ accessToken: string; refreshToken: string }>
-      >(ApiRoutes.AUTH.refresh, {
-        refreshToken: useAuthStore.getState().refreshToken,
-      });
+      const response = await api.post<ICommonResponse<void>>(
+        ApiRoutes.AUTH.refresh,
+        {},
+        { headers: { "refresh-token": useAuthStore.getState().refreshToken } }
+      );
       useAuthStore.setState({
-        accessToken: response.data.data.accessToken,
-        refreshToken: response.data.data.refreshToken,
+        accessToken: response.headers["authorization"],
+        refreshToken: response.headers["refresh-token"],
       });
 
       return api(originalRequest);
