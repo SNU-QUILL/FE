@@ -1,10 +1,15 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ITab } from "@/interfaces/tab";
+import { useAuthStore } from "@/stores/authStore";
+import { useGlobalConfirmStore } from "@/stores/globalConfirm";
 import { startTransition, useEffect, useMemo, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const CommonLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { openDialog, closeDialog } = useGlobalConfirmStore();
+  const { logout } = useAuthStore();
   const currentPath = location.pathname.split("/")[1];
 
   const [tabValue, setTabValue] = useState(currentPath);
@@ -13,39 +18,57 @@ const CommonLayout = () => {
     setTabValue(currentPath);
   }, [currentPath]);
 
-  const tabItems = useMemo(() => {
-    return {
-      main: {
+  const tabItems: ITab[] = useMemo(
+    () => [
+      {
         label: "Main",
+        value: "main",
         route: "/main",
       },
-      article: {
+      {
         label: "Article",
+        value: "article",
         route: "/article/features",
       },
-      logout: {
+      {
         label: "Logout",
-        route: "/logout",
+        value: "logout",
       },
-    };
-  }, []);
+    ],
+    []
+  );
 
   const onTabChange = (value: string) => {
+    if (value === "logout") {
+      openDialog({
+        title: "Logout",
+        description: "Are you sure you want to logout?",
+        onConfirm: () => {
+          closeDialog();
+          logout();
+        },
+        onCancel: () => {
+          closeDialog();
+        },
+      });
+      return;
+    }
+
     setTabValue(value);
-    startTransition(() => navigate(tabItems[value as keyof typeof tabItems].route));
+    startTransition(() => navigate(tabItems.find(item => item.value === value)!.route!));
   };
 
   return (
     <div className='flex items-center w-full h-full overflow-hidden'>
       <Tabs value={tabValue} className='flex' orientation='vertical' onValueChange={onTabChange}>
         <TabsList className='h-full min-w-40 flex-col gap-3 border-r border-secondary rounded-none bg-white'>
-          {Object.keys(tabItems).map(key => (
+          {tabItems.map(tabItem => (
             <TabsTrigger
-              key={key}
-              value={key}
+              key={tabItem.value}
+              value={tabItem.value}
               className='w-full justify-start data-[state=active]:bg-primary data-[state=active]:text-secondary'
             >
-              {tabItems[key as keyof typeof tabItems].label}
+              {tabItem.label}
             </TabsTrigger>
           ))}
         </TabsList>

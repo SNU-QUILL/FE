@@ -7,6 +7,7 @@ interface IAuthStore {
   setAccessToken: (accessToken?: string) => void;
   setRefreshToken: (refreshToken?: string) => void;
   isLoggedIn: () => boolean;
+  logout: () => void;
   getName: () => string;
   getRole: () => string;
 }
@@ -20,6 +21,9 @@ export const useAuthStore = create<IAuthStore>()(
       setRefreshToken: (token?: string) => set({ refreshToken: token }),
       /** TODO: JWT에서 expireTime 뽑아서 판별하기  */
       isLoggedIn: () => !!get().accessToken,
+      logout: () => {
+        set({ accessToken: undefined, refreshToken: undefined });
+      },
       /** TODO: JWT에서 name, role 뽑아오기 */
       getName: () => "name",
       getRole: () => "role",
