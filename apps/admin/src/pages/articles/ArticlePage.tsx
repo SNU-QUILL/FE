@@ -11,7 +11,7 @@ const ArticlePage = () => {
   return (
     <div className='flex flex-col gap-4'>
       <div className='text-4xl font-bold text-primary'>Article</div>
-      <Button onClick={() => api.get("/api/admin/members")}>Member</Button>
+      <Button onClick={() => api.get("/members")}>Member</Button>
       <ArticleTabs
         initialTab={category! as ARTICLE_CATEGORY_ENUM}
         onTabChange={value => navigate(`/article/${value}`)}

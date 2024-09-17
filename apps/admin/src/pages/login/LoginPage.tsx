@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { useAuthStore } from "@/stores/authStore";
 import { Navigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Label } from "@/components/ui/label";
 import { useLoginMutation } from "@/hooks/queries/auth";
 import {
   defaultLoginFormSchema,
@@ -23,10 +22,6 @@ const LoginPage = () => {
 
   const handleLogin = async (values: LoginFormSchema) => {
     await loginAsync({ email: values.username, password: values.password });
-  };
-
-  const handleTestLogin = () => {
-    authStore.setAccessToken("test");
   };
 
   return authStore.isLoggedIn() ? (
@@ -59,11 +54,6 @@ const LoginPage = () => {
         />
         <FormItem>
           <Button style={{ width: "320px" }}>Login</Button>
-        </FormItem>
-        <FormItem>
-          <Label onClick={handleTestLogin} style={{ width: "320px" }}>
-            테스트 로그인
-          </Label>
         </FormItem>
       </form>
     </Form>

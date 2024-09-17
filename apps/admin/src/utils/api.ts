@@ -8,8 +8,6 @@ export const api = axios.create({
   baseURL: "/api/admin",
 });
 
-let times = 1;
-
 api.interceptors.request.use(config => {
   const token = useAuthStore.getState().accessToken;
   if (token) {
@@ -29,32 +27,38 @@ api.interceptors.response.use(
     return response;
   },
   async (error: AxiosError<ICommonError>) => {
-    /** TODO: 에러 공통 처리(ErrorBoundary) */
-    toast({
-      variant: "destructive",
-      title: "Error",
-      description: "error.response?.data.message.toString()",
-    });
     console.log("[ERROR response]=================================================");
     console.log(error);
     console.log("=================================================");
 
     /** Auth 에러일 경우 refresh토큰 요청 후, 재요청  */
-    if (error.response?.status === 401 && times) {
-      --times;
-      const originalRequest = error.config!;
-      const response = await api.post<ICommonResponse<void>>(
-        ApiRoutes.AUTH.refresh,
-        {},
-        { headers: { "refresh-token": useAuthStore.getState().refreshToken } }
-      );
-      useAuthStore.setState({
-        accessToken: response.headers["authorization"],
-        refreshToken: response.headers["refresh-token"],
-      });
-
-      return api(originalRequest);
+    const accessToken = useAuthStore.getState().accessToken;
+    if (error.response?.status === 401) {
+      if (accessToken) {
+        useAuthStore.setState({ accessToken: undefined });
+        await api
+          .post<ICommonResponse<void>>(
+            ApiRoutes.AUTH.refresh,
+            {},
+            { headers: { "refresh-token": useAuthStore.getState().refreshToken } }
+          )
+          .then(response =>
+            useAuthStore.setState({
+              accessToken: response.headers["authorization"],
+              refreshToken: response.headers["refresh-token"],
+            })
+          )
+          .catch(() => useAuthStore.setState({ refreshToken: undefined }));
+        const originalRequest = error.config!;
+        return api(originalRequest);
+      }
     }
+    toast({
+      variant: "destructive",
+      title: "Error",
+      description: "error.response?.data.message.toString()",
+    });
+
     return Promise.reject(error.response);
   }
 );

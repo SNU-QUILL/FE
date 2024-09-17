@@ -19,8 +19,7 @@ export const useAuthStore = create<IAuthStore>()(
       refreshToken: undefined,
       setAccessToken: (token?: string) => set({ accessToken: token }),
       setRefreshToken: (token?: string) => set({ refreshToken: token }),
-      /** TODO: JWT에서 expireTime 뽑아서 판별하기  */
-      isLoggedIn: () => !!get().accessToken,
+      isLoggedIn: () => !!get().refreshToken,
       logout: () => {
         set({ accessToken: undefined, refreshToken: undefined });
       },
