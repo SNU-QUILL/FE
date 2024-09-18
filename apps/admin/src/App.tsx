@@ -17,7 +17,6 @@ function App() {
               <Route path=':category' element={<Navigate to='1' />} />
               <Route path=':category/:page' element={<Page.ArticleTablePage />} />
             </Route>
-            <Route path='/logout' element={<Page.LogoutPage />} />
           </Route>
         </Route>
       </Routes>
