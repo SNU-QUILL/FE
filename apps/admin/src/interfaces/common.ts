@@ -3,5 +3,10 @@ export interface ICommonResponse<T> {
 }
 
 export interface ICommonError {
-  message: string;
+  errorCode: string;
+  timestamp: Date;
+  title: string;
+  status: string;
+  detail: string;
+  instance: string;
 }
