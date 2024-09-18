@@ -1,3 +1,4 @@
+import { ERROR_MESSAGE } from "@/constants/message";
 import { ApiRoutes } from "@/constants/routes";
 import { toast } from "@/hooks/use-toast";
 import { ICommonResponse, ICommonError } from "@/interfaces/common";
@@ -48,7 +49,14 @@ api.interceptors.response.use(
               refreshToken: response.headers["refresh-token"],
             })
           )
-          .catch(() => useAuthStore.setState({ refreshToken: undefined }));
+          .catch(() => {
+            useAuthStore.setState({ refreshToken: undefined });
+            toast({
+              variant: "destructive",
+              title: "Error",
+              description: ERROR_MESSAGE.INVALID_TOKEN,
+            });
+          });
         const originalRequest = error.config!;
         return api(originalRequest);
       }
@@ -56,7 +64,7 @@ api.interceptors.response.use(
     toast({
       variant: "destructive",
       title: "Error",
-      description: "error.response?.data.message.toString()",
+      description: ERROR_MESSAGE.SERVER_ERROR,
     });
 
     return Promise.reject(error.response);
