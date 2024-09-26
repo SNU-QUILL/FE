@@ -8,7 +8,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
-import { format } from "date-fns";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useGlobalDialogStore } from "@/stores/globalDialog";
 import ArticleEditor from "@/pages/articles/components/ArticleEditor";
@@ -26,10 +25,10 @@ interface IArticleTableProps {
 const ArticleTable = (props: IArticleTableProps) => {
   const { openDialog } = useGlobalDialogStore();
 
-  const openWriteArticleDialog = (initialValue?: string) => {
+  const openWriteArticleDialog = (id?: number) => {
     openDialog({
       title: "Edit Article",
-      contents: <ArticleEditor initialValue={initialValue} onChange={console.log} />,
+      contents: <ArticleEditor id={id} onChange={console.log} />,
       contentsWrapperClassName: "w-4/5 h-4/5",
     });
   };
@@ -44,42 +43,39 @@ const ArticleTable = (props: IArticleTableProps) => {
             <TableHead>Title</TableHead>
             <TableHead>Contents</TableHead>
             <TableHead>Author</TableHead>
-            <TableHead>Published At</TableHead>
-            <TableHead>Modified At</TableHead>
+            {/* <TableHead>Published At</TableHead>
+            <TableHead>Modified At</TableHead> */}
             {props.mode === ARTICLE_TABLE_MODE_ENUM.DEFAULT && <TableHead>Actions</TableHead>}
           </TableRow>
         </TableHeader>
         <TableBody>
           {props.data.map(article => (
             <TableRow
-              key={article.articleId}
-              onClick={() => props.onSelect?.(article.articleId)}
+              key={article.id}
+              onClick={() => props.onSelect?.(article.id)}
               className={props.mode === ARTICLE_TABLE_MODE_ENUM.SELECT ? "cursor-pointer" : ""}
             >
               {props.mode === ARTICLE_TABLE_MODE_ENUM.DEFAULT && (
                 <TableCell>
                   <Checkbox
-                    checked={props.selectedArticles?.includes(article.articleId)}
-                    onCheckedChange={() => props.onSelectedChange?.(article.articleId)}
+                    checked={props.selectedArticles?.includes(article.id)}
+                    onCheckedChange={() => props.onSelectedChange?.(article.id)}
                   />
                 </TableCell>
               )}
-              <TableCell>{article.articleId}</TableCell>
-              <TableCell className='max-w-[200px] truncate'>{article.title}</TableCell>
-              <TableCell className='max-w-[400px] truncate'>{article.contents}</TableCell>
+              <TableCell>{article.id}</TableCell>
+              <TableCell className='max-w-[200px] truncate'>{article.articleTitle}</TableCell>
+              <TableCell className='max-w-[400px] truncate'>{article.articleSummary}</TableCell>
               <TableCell>{article.authorName}</TableCell>
-              <TableCell>
+              {/* <TableCell>
                 {format(new Date(article.publishDate), "yyyy-MM-dd'\n'hh:mm:ss")}
               </TableCell>
               <TableCell>
                 {format(new Date(article.modifiedDate), "yyyy-MM-dd'\n'hh:mm:ss")}
-              </TableCell>
+              </TableCell> */}
               {props.mode === ARTICLE_TABLE_MODE_ENUM.DEFAULT && (
                 <TableCell className='flex gap-2'>
-                  <Button
-                    variant='outline'
-                    onClick={() => openWriteArticleDialog(article.contents)}
-                  >
+                  <Button variant='outline' onClick={() => openWriteArticleDialog(article.id)}>
                     <Pencil2Icon />
                   </Button>
                   <Button variant='destructive'>

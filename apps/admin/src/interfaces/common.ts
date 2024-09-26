@@ -1,7 +1,3 @@
-export interface ICommonResponse<T> {
-  data: T;
-}
-
 export interface ICommonError {
   errorCode: string;
   timestamp: Date;

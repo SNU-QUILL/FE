@@ -32,10 +32,10 @@ const ArticleTablePage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
-  const openWriteArticleDialog = (initialValue?: string) => {
+  const openWriteArticleDialog = () => {
     openDialog({
       title: "New Article",
-      contents: <ArticleEditor initialValue={initialValue} onChange={console.log} />,
+      contents: <ArticleEditor onChange={console.log} />,
       contentsWrapperClassName: "w-4/5 h-4/5",
     });
   };
@@ -57,13 +57,13 @@ const ArticleTablePage = () => {
           <ArticleTabletHead onWriteArticleClick={() => openWriteArticleDialog()} />
           <hr />
           <ArticleTable
-            data={data.articles}
+            data={data.content}
             mode={ARTICLE_TABLE_MODE_ENUM.DEFAULT}
             selectedArticles={selectedArticles}
             onSelectedChange={onSelectedChange}
           />
           <ArticleTablePagination
-            total={data.total}
+            total={data.totalPages}
             current={parseInt(page)}
             onPrevClick={onPrevClick}
             onNextClick={onNextClick}

@@ -8,19 +8,16 @@ export interface IArticleRequest {
 }
 
 export interface IArticleResponse {
-  articles: IArticle[];
-  total: number;
+  content: IArticle[];
+  totalPages: number;
+  totalElements: number;
+  nomOfElements: number;
 }
 
 export interface IArticle {
-  articleId: number;
-  title: string;
-  pictureUrl: string;
-  category: ARTICLE_CATEGORY_ENUM;
-  contents: string;
-  invisible: boolean;
+  id: number;
+  articleTitle: string;
+  articleSummary: string;
+  articlePictureUrl: string;
   authorName: string;
-  viewCount: number;
-  modifiedDate: string;
-  publishDate: string;
 }

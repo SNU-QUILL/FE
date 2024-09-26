@@ -1,6 +1,5 @@
 import { ApiRoutes } from "@/constants/routes";
 import { IAuthLoginRequest } from "@/interfaces/api/auth";
-import { ICommonResponse } from "@/interfaces/common";
 import { useAuthStore } from "@/stores/authStore";
 import { api } from "@/utils/api";
 import { useMutation } from "@tanstack/react-query";
@@ -24,6 +23,6 @@ export const useLoginMutation = () => {
 };
 
 const postAuthLogin = async (data: IAuthLoginRequest) => {
-  const response = await api.post<ICommonResponse<void>>(ApiRoutes.AUTH.login, data);
+  const response = await api.post<void>(ApiRoutes.AUTH.login, data);
   return response;
 };

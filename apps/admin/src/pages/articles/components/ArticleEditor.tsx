@@ -3,10 +3,10 @@ import { useRef } from "react";
 import "@toast-ui/editor/dist/toastui-editor.css";
 
 interface IArticleEditorProps {
-  initialValue?: string;
+  id?: number;
   onChange: (html: string) => void;
 }
-const ArticleEditor = ({ initialValue, onChange }: IArticleEditorProps) => {
+const ArticleEditor = ({ id, onChange }: IArticleEditorProps) => {
   const editorRef = useRef<Editor>(null);
 
   const getHTMLContents = () => {
@@ -26,7 +26,7 @@ const ArticleEditor = ({ initialValue, onChange }: IArticleEditorProps) => {
       initialEditType='wysiwyg'
       hideModeSwitch
       height='100%'
-      initialValue={initialValue}
+      initialValue={id}
       onChange={getHTMLContents}
     />
   );

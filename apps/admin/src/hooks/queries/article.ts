@@ -1,7 +1,6 @@
 import { ARTICLE_CATEGORY_ENUM } from "@/constants/article";
 import { ApiRoutes } from "@/constants/routes";
 import { IArticleRequest, IArticleResponse } from "@/interfaces/api/article";
-import { ICommonResponse } from "@/interfaces/common";
 import { api } from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
 
@@ -21,6 +20,8 @@ export const useArticleListQuery = (data: IArticleRequest) => {
 };
 
 const getArticles = async (data: IArticleRequest) => {
-  const response = await api.post<ICommonResponse<IArticleResponse>>(ApiRoutes.ARTICLE.list, data);
-  return response.data.data;
+  const response = await api.get<IArticleResponse>(
+    `${ApiRoutes.ARTICLE.list}/${data.category}/${data.page}`
+  );
+  return response.data;
 };

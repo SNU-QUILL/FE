@@ -1,7 +1,7 @@
 import { ERROR_MESSAGE } from "@/constants/message";
 import { ApiRoutes } from "@/constants/routes";
 import { toast } from "@/hooks/use-toast";
-import { ICommonResponse, ICommonError } from "@/interfaces/common";
+import { ICommonError } from "@/interfaces/common";
 import { useAuthStore } from "@/stores/authStore";
 import axios, { AxiosError } from "axios";
 
@@ -38,7 +38,7 @@ api.interceptors.response.use(
       if (accessToken) {
         useAuthStore.setState({ accessToken: undefined });
         await api
-          .post<ICommonResponse<void>>(
+          .post<void>(
             ApiRoutes.AUTH.refresh,
             {},
             { headers: { "refresh-token": useAuthStore.getState().refreshToken } }
