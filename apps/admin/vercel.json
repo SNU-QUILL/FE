@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://snuquill.com/:path*"
+      "destination": "https://snuquill.com/api/:path*"
     },
     {
       "source": "/api/:path*/",
-      "destination": "https://snuquill.com/:path*/"
+      "destination": "https://snuquill.com/api/:path*/"
     }
   ]
 }
