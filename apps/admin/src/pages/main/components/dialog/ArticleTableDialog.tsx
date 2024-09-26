@@ -21,13 +21,13 @@ const TopArticleDialog = (props: ITopArticleDialogProps) => {
     <div>
       <ArticleTabs initialTab={selectedTab} onTabChange={setSelectedTab} />
       <ArticleTable
-        data={data.articles}
+        data={data.content}
         mode={ARTICLE_TABLE_MODE_ENUM.SELECT}
         onSelect={props.onSelect}
       />
       <ArticleTablePagination
         current={page}
-        total={data.total}
+        total={data.totalPages}
         onPrevClick={() => setPage(page - 1)}
         onNextClick={() => setPage(page + 1)}
       />
