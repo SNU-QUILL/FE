@@ -1,8 +1,16 @@
 {
-    "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/"
-        }
-    ]
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "https://snuquill.com/:path*"
+    },
+    {
+      "source": "/api/:path*/",
+      "destination": "https://snuquill.com/:path*/"
+    }
+  ]
 }
