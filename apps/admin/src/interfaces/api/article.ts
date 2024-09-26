@@ -1,7 +1,7 @@
-import { ARTICLE_CATEGORY_ENUM } from "@/constants/article";
+import { EARTICLE_CATEGORY } from "@/constants/article";
 
 export interface IArticleRequest {
-  category: ARTICLE_CATEGORY_ENUM;
+  category: EARTICLE_CATEGORY;
   page: number;
   title?: string;
   authorName?: string;
@@ -25,7 +25,7 @@ export interface IArticle {
 export interface IArticleDetailResponse {
   title: string;
   pictureUrl: string;
-  category: string;
+  category: Uppercase<EARTICLE_CATEGORY>;
   contents: string[];
   author: IAuthorDetail;
 }

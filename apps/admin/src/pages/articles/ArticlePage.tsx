@@ -4,14 +4,14 @@ import ArticleEditor from "@/pages/articles/components/ArticleEditor";
 import ArticleTable from "@/pages/articles/components/ArticleTable";
 import ArticleTabletHead from "@/pages/articles/components/ArticleTabletHead";
 import { useArticleSelectStore } from "@/stores/articleSelectStore";
-import { ARTICLE_CATEGORY_ENUM, ARTICLE_TABLE_MODE_ENUM } from "@/constants/article";
+import { EARTICLE_CATEGORY, EARTICLE_TABLE_MODE } from "@/constants/article";
 import { useEffect } from "react";
 import { useArticleListQuery } from "@/hooks/queries/article";
 import ArticleTablePagination from "@/pages/articles/components/ArticleTablePagination";
 import ArticleTabs from "@/pages/articles/components/ArticleTabs";
 
 const ArticlePage = () => {
-  const { category, page } = useParams() as { category: ARTICLE_CATEGORY_ENUM; page: string };
+  const { category, page } = useParams() as { category: EARTICLE_CATEGORY; page: string };
   const navigate = useNavigate();
   const { openDialog } = useGlobalDialogStore();
   const { selectedArticles, setSelectedArticles } = useArticleSelectStore();
@@ -53,7 +53,7 @@ const ArticlePage = () => {
     <div className='flex flex-col gap-4'>
       <div className='text-4xl font-bold text-primary'>Article</div>
       <ArticleTabs
-        initialTab={category! as ARTICLE_CATEGORY_ENUM}
+        initialTab={category! as EARTICLE_CATEGORY}
         onTabChange={value => navigate(`/article/${value}`)}
       />
       <div className='w-full'>
@@ -65,7 +65,7 @@ const ArticlePage = () => {
             <hr />
             <ArticleTable
               data={data.content}
-              mode={ARTICLE_TABLE_MODE_ENUM.DEFAULT}
+              mode={EARTICLE_TABLE_MODE.DEFAULT}
               selectedArticles={selectedArticles}
               onSelectedChange={onSelectedChange}
             />

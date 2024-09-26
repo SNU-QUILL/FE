@@ -1,4 +1,4 @@
-import { ARTICLE_CATEGORY_ENUM, ARTICLE_TABLE_MODE_ENUM } from "@/constants/article";
+import { EARTICLE_CATEGORY, EARTICLE_TABLE_MODE } from "@/constants/article";
 import { useArticleListQuery } from "@/hooks/queries/article";
 import ArticleTable from "@/pages/articles/components/ArticleTable";
 import ArticleTablePagination from "@/pages/articles/components/ArticleTablePagination";
@@ -10,9 +10,7 @@ interface ITopArticleDialogProps {
 }
 
 const TopArticleDialog = (props: ITopArticleDialogProps) => {
-  const [selectedTab, setSelectedTab] = useState<ARTICLE_CATEGORY_ENUM>(
-    ARTICLE_CATEGORY_ENUM.FEATURES
-  );
+  const [selectedTab, setSelectedTab] = useState<EARTICLE_CATEGORY>(EARTICLE_CATEGORY.FEATURES);
   const [page, setPage] = useState<number>(1);
   const { data, isPending } = useArticleListQuery({ page, category: selectedTab });
   return isPending || !data ? (
@@ -22,7 +20,7 @@ const TopArticleDialog = (props: ITopArticleDialogProps) => {
       <ArticleTabs initialTab={selectedTab} onTabChange={setSelectedTab} />
       <ArticleTable
         data={data.content}
-        mode={ARTICLE_TABLE_MODE_ENUM.SELECT}
+        mode={EARTICLE_TABLE_MODE.SELECT}
         onSelect={props.onSelect}
       />
       <ArticleTablePagination

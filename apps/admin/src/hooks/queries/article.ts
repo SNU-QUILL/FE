@@ -1,4 +1,4 @@
-import { ARTICLE_CATEGORY_ENUM } from "@/constants/article";
+import { EARTICLE_CATEGORY } from "@/constants/article";
 import { ApiRoutes } from "@/constants/routes";
 import {
   IArticleDetailResponse,
@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 const articleQueryKey = {
   all: ["article"],
   articlesAll: ["article", "list"],
-  articlesTab: (tab: ARTICLE_CATEGORY_ENUM, page: number) => ["article", "list", tab, page],
+  articlesTab: (tab: EARTICLE_CATEGORY, page: number) => ["article", "list", tab, page],
   articleDetail: (id: number) => ["article", "detail", id],
 };
 

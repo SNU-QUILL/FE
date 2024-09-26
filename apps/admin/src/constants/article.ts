@@ -1,4 +1,4 @@
-export enum ARTICLE_CATEGORY_ENUM {
+export enum EARTICLE_CATEGORY {
   FEATURES = "features",
   SNU_SOCIETY = "snu_society",
   ARTS_CULTURE = "arts_culture",
@@ -6,7 +6,7 @@ export enum ARTICLE_CATEGORY_ENUM {
   SHORT_ARTICELS = "short_articles",
 }
 
-export enum ARTICLE_TABLE_MODE_ENUM {
+export enum EARTICLE_TABLE_MODE {
   DEFAULT = "default",
   SELECT = "select",
 }

@@ -1,10 +1,10 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ARTICLE_CATEGORY_ENUM } from "@/constants/article";
+import { EARTICLE_CATEGORY } from "@/constants/article";
 import { useState, useEffect } from "react";
 
 interface ArticleTabs {
-  initialTab: ARTICLE_CATEGORY_ENUM;
-  onTabChange: (value: ARTICLE_CATEGORY_ENUM) => void;
+  initialTab: EARTICLE_CATEGORY;
+  onTabChange: (value: EARTICLE_CATEGORY) => void;
 }
 
 const ArticleTabs = (props: ArticleTabs) => {
@@ -14,15 +14,15 @@ const ArticleTabs = (props: ArticleTabs) => {
     setTabValue(props.initialTab);
   }, [props.initialTab]);
 
-  const onTabChange = (value: ARTICLE_CATEGORY_ENUM) => {
+  const onTabChange = (value: EARTICLE_CATEGORY) => {
     setTabValue(value);
     props.onTabChange(value);
   };
 
   return (
-    <Tabs value={tabValue} onValueChange={value => onTabChange(value as ARTICLE_CATEGORY_ENUM)}>
+    <Tabs value={tabValue} onValueChange={value => onTabChange(value as EARTICLE_CATEGORY)}>
       <TabsList>
-        {Object.values(ARTICLE_CATEGORY_ENUM).map(category => (
+        {Object.values(EARTICLE_CATEGORY).map(category => (
           <TabsTrigger
             key={category}
             value={category}

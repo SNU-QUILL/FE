@@ -12,11 +12,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useGlobalDialogStore } from "@/stores/globalDialog";
 import ArticleEditor from "@/pages/articles/components/ArticleEditor";
 import { IArticle } from "@/interfaces/api/article";
-import { ARTICLE_TABLE_MODE_ENUM } from "@/constants/article";
+import { EARTICLE_TABLE_MODE } from "@/constants/article";
 
 interface IArticleTableProps {
   data: IArticle[];
-  mode: ARTICLE_TABLE_MODE_ENUM;
+  mode: EARTICLE_TABLE_MODE;
   selectedArticles?: number[];
   onSelectedChange?: (articleId: number) => void;
   onSelect?: (articleId: number) => void;
@@ -38,14 +38,14 @@ const ArticleTable = (props: IArticleTableProps) => {
       <Table className='w-full'>
         <TableHeader>
           <TableRow>
-            {props.mode === ARTICLE_TABLE_MODE_ENUM.DEFAULT && <TableHead>Select</TableHead>}
+            {props.mode === EARTICLE_TABLE_MODE.DEFAULT && <TableHead>Select</TableHead>}
             <TableHead>No.</TableHead>
             <TableHead>Title</TableHead>
             <TableHead>Contents</TableHead>
             <TableHead>Author</TableHead>
             {/* <TableHead>Published At</TableHead>
             <TableHead>Modified At</TableHead> */}
-            {props.mode === ARTICLE_TABLE_MODE_ENUM.DEFAULT && <TableHead>Actions</TableHead>}
+            {props.mode === EARTICLE_TABLE_MODE.DEFAULT && <TableHead>Actions</TableHead>}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -53,9 +53,9 @@ const ArticleTable = (props: IArticleTableProps) => {
             <TableRow
               key={article.id}
               onClick={() => props.onSelect?.(article.id)}
-              className={props.mode === ARTICLE_TABLE_MODE_ENUM.SELECT ? "cursor-pointer" : ""}
+              className={props.mode === EARTICLE_TABLE_MODE.SELECT ? "cursor-pointer" : ""}
             >
-              {props.mode === ARTICLE_TABLE_MODE_ENUM.DEFAULT && (
+              {props.mode === EARTICLE_TABLE_MODE.DEFAULT && (
                 <TableCell>
                   <Checkbox
                     checked={props.selectedArticles?.includes(article.id)}
@@ -73,7 +73,7 @@ const ArticleTable = (props: IArticleTableProps) => {
               <TableCell>
                 {format(new Date(article.modifiedDate), "yyyy-MM-dd'\n'hh:mm:ss")}
               </TableCell> */}
-              {props.mode === ARTICLE_TABLE_MODE_ENUM.DEFAULT && (
+              {props.mode === EARTICLE_TABLE_MODE.DEFAULT && (
                 <TableCell className='flex gap-2'>
                   <Button variant='outline' onClick={() => openWriteArticleDialog(article.id)}>
                     <Pencil2Icon />
