@@ -13,9 +13,9 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<CommonLayout />}>
             <Route path='/main' element={<Page.MainPage />} />
-            <Route path='/article' element={<Page.ArticlePage />}>
+            <Route path='/article'>
               <Route path=':category' element={<Navigate to='1' />} />
-              <Route path=':category/:page' element={<Page.ArticleTablePage />} />
+              <Route path=':category/:page' element={<Page.ArticlePage />} />
             </Route>
           </Route>
         </Route>
