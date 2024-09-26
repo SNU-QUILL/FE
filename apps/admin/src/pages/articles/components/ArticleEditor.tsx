@@ -1,6 +1,7 @@
 import { Editor } from "@toast-ui/react-editor";
 import { useRef } from "react";
 import "@toast-ui/editor/dist/toastui-editor.css";
+import { useArticleDetailQuery } from "@/hooks/queries/article";
 
 interface IArticleEditorProps {
   id?: number;
@@ -9,12 +10,14 @@ interface IArticleEditorProps {
 const ArticleEditor = ({ id, onChange }: IArticleEditorProps) => {
   const editorRef = useRef<Editor>(null);
 
+  const { data, isFetching } = useArticleDetailQuery(id);
+
   const getHTMLContents = () => {
     const html = editorRef.current?.getInstance().getHTML();
     onChange(html);
   };
 
-  return (
+  return isFetching ? null : (
     <Editor
       ref={editorRef}
       toolbarItems={[
@@ -26,7 +29,7 @@ const ArticleEditor = ({ id, onChange }: IArticleEditorProps) => {
       initialEditType='wysiwyg'
       hideModeSwitch
       height='100%'
-      initialValue={id}
+      initialValue={data?.contents?.join("\n")}
       onChange={getHTMLContents}
     />
   );

@@ -21,3 +21,19 @@ export interface IArticle {
   articlePictureUrl: string;
   authorName: string;
 }
+
+export interface IArticleDetailResponse {
+  title: string;
+  pictureUrl: string;
+  category: string;
+  contents: string[];
+  author: IAuthorDetail;
+}
+
+export interface IAuthorDetail {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  pictureUrl: string;
+}

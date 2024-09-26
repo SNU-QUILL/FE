@@ -5,6 +5,7 @@ const AUTH = {
 
 const ARTICLE = {
   list: "/article",
+  detail: "/article",
 };
 
 export const ApiRoutes = { AUTH, ARTICLE };
