@@ -74,8 +74,10 @@ const CommonLayout = () => {
         </TabsList>
       </Tabs>
 
-      <div className='p-5 w-full h-full overflow-auto'>
-        <Outlet />
+      <div className='w-full overflow-auto h-full'>
+        <div className='p-5 w-[1140px] h-full m-auto'>
+          <Outlet />
+        </div>
       </div>
     </div>
   );

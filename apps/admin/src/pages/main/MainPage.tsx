@@ -6,7 +6,7 @@ import VideoInfo from "@/pages/main/components/VideoInfo";
 
 const MainPage = () => {
   return (
-    <div className='flex flex-col gap-10 w-[1140px]'>
+    <div className='flex flex-col gap-10 w-full'>
       <div className='h-[250px] flex justify-center items-center text-primary font-bold'>
         THE SNU QUILL
       </div>
