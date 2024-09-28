@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@repo/ui";
 import { EARTICLE_CATEGORY } from "@/constants/article";
 import { useState, useEffect } from "react";
 

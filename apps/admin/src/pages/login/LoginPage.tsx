@@ -1,6 +1,6 @@
-import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Form, FormField, FormItem, FormMessage } from "@repo/ui";
+import { Input } from "@repo/ui";
+import { Button } from "@repo/ui";
 import { useForm } from "react-hook-form";
 import { useAuthStore } from "@/stores/authStore";
 import { Navigate } from "react-router-dom";

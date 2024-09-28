@@ -1,10 +1,4 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogPortal,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogPortal, DialogTitle } from "@repo/ui";
 import { useGlobalDialogStore } from "@/stores/globalDialog";
 
 const GlobalDialog = () => {

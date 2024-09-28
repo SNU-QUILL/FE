@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui";
 import EditQuillVideoForm from "@/pages/main/components/EditQuillVideoForm";
 import { useGlobalDialogStore } from "@/stores/globalDialog";
 

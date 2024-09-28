@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui";
 import {
   Dialog,
   DialogContent,
@@ -6,7 +6,7 @@ import {
   DialogFooter,
   DialogPortal,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from "@repo/ui";
 import { useGlobalConfirmStore } from "@/stores/globalConfirm";
 
 const GlobalConfirm = () => {

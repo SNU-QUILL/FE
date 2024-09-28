@@ -1,5 +1,5 @@
-import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { Input } from "@/components/ui/input";
+import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@repo/ui";
+import { Input } from "@repo/ui";
 import { ChevronLeftCircle, ChevronRightCircle } from "lucide-react";
 import { useState } from "react";
 

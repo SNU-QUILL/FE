@@ -1,10 +1,5 @@
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Button } from "@repo/ui";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@repo/ui";
 import { useArticleSelectStore } from "@/stores/articleSelectStore";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 

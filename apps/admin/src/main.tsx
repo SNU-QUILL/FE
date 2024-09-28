@@ -7,7 +7,7 @@ import { handlers } from "@/mocks/handler.ts";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import GlobalConfirm from "@/components/global/GlobalConfirm.tsx";
 import GlobalDialog from "@/components/global/GlobalDialog.tsx";
-import { Toaster } from "@/components/ui/toaster.tsx";
+import { Toaster } from "@repo/ui";
 
 const worker = setupWorker();
 if (import.meta.env.MODE === "development") {

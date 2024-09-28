@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@repo/ui";
 import { ITab } from "@/interfaces/tab";
 import { useAuthStore } from "@/stores/authStore";
 import { useGlobalConfirmStore } from "@/stores/globalConfirm";
@@ -60,7 +60,12 @@ const CommonLayout = () => {
 
   return (
     <div className='flex items-center w-full h-full overflow-hidden'>
-      <Tabs value={tabValue} className='flex' orientation='vertical' onValueChange={onTabChange}>
+      <Tabs
+        value={tabValue}
+        className='flex h-full'
+        orientation='vertical'
+        onValueChange={onTabChange}
+      >
         <TabsList className='h-full min-w-40 flex-col gap-3 border-r border-secondary rounded-none bg-white'>
           {tabItems.map(tabItem => (
             <TabsTrigger

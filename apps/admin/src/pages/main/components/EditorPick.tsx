@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui";
 import TopArticleDialog from "@/pages/main/components/dialog/ArticleTableDialog";
 import { useGlobalDialogStore } from "@/stores/globalDialog";
 

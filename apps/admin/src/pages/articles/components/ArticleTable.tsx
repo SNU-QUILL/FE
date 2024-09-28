@@ -1,14 +1,7 @@
-import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Button } from "@repo/ui";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@repo/ui";
 import { Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@repo/ui";
 import { useGlobalDialogStore } from "@/stores/globalDialog";
 import ArticleEditor from "@/pages/articles/components/ArticleEditor";
 import { IArticle } from "@/interfaces/api/article";

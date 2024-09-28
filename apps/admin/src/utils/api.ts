@@ -1,9 +1,9 @@
 import { ERROR_MESSAGE } from "@/constants/message";
 import { ApiRoutes } from "@/constants/routes";
-import { toast } from "@/hooks/use-toast";
 import { ICommonError } from "@/interfaces/common";
 import { useAuthStore } from "@/stores/authStore";
 import axios, { AxiosError } from "axios";
+import { toast } from "@repo/ui";
 
 export const api = axios.create({
   baseURL: "/api/admin",
