@@ -2,7 +2,6 @@ import EditorPick from "@/pages/main/components/EditorPick";
 import Magazine from "@/pages/main/components/Magazine";
 import PhotoJournal from "@/pages/main/components/PhotoJournal";
 import TopArticle from "@/pages/main/components/TopArticle";
-import VideoInfo from "@/pages/main/components/VideoInfo";
 
 const MainPage = () => {
   return (
@@ -13,7 +12,7 @@ const MainPage = () => {
       <TopArticle />
       <EditorPick />
       <Magazine />
-      <VideoInfo />
+      {/* <VideoInfo /> */}
       <PhotoJournal />
     </div>
   );

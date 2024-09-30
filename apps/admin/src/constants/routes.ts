@@ -21,4 +21,8 @@ const MAGAZINE = {
   list: "/magazine",
 };
 
-export const ApiRoutes = { AUTH, ARTICLE, TOP_ARTICLE, EDITOR_PICK, MAGAZINE };
+const PHOTO_JOURNAL = {
+  list: "/photoJournal/lastVolume",
+};
+
+export const ApiRoutes = { AUTH, ARTICLE, TOP_ARTICLE, EDITOR_PICK, MAGAZINE, PHOTO_JOURNAL };
