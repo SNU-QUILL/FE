@@ -9,4 +9,8 @@ const ARTICLE = {
   recent: "/article/recent",
 };
 
-export const ApiRoutes = { AUTH, ARTICLE };
+const TOP_ARTICLE = {
+  get: "/topArticle",
+};
+
+export const ApiRoutes = { AUTH, ARTICLE, TOP_ARTICLE };

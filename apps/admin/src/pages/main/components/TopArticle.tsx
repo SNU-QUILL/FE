@@ -2,10 +2,12 @@ import { Button } from "@repo/ui";
 import TopArticleDialog from "@/pages/main/components/dialog/ArticleTableDialog";
 import { useGlobalDialogStore } from "@/stores/globalDialog";
 import { useRecentArticleQuery } from "@/hooks/queries/article";
+import { useTopArticleQuery } from "@/hooks/queries/topArticle";
 
 const TopArticle = () => {
   const { openDialog } = useGlobalDialogStore();
 
+  const { data: topArticleData } = useTopArticleQuery();
   const { data: recentArticleData } = useRecentArticleQuery({ count: 3 });
 
   const openTopArticleDialog = () => {
@@ -19,10 +21,22 @@ const TopArticle = () => {
     <div className='flex h-[421px]'>
       <Button
         variant='secondary'
-        className='basis-2/3 grow h-full w-[738px] outline-dashed outline-primary hover:animate-pulse hover:bg-primary/30'
+        className='relative basis-2/3 grow h-full w-[738px] p-0 outline-dashed outline-primary hover:animate-pulse hover:bg-primary/30'
         onClick={openTopArticleDialog}
       >
-        Edit TopArticle
+        <img
+          src={topArticleData?.pictureUrl}
+          alt='top-article'
+          className='w-full h-full object-cover'
+        />
+        <div className='overflow-hidden absolute bottom-0 left-0 w-full'>
+          <div className='text-white text-2xl font-bold text-start p-[10px_30px] bg-[linear-gradient(0deg,rgba(0,0,0,0.6),rgba(0,0,0,0))]'>
+            {topArticleData?.title}
+          </div>
+          <div className='whitespace-pre text-white text-sm text-start p-[10px_30px_40px_30px] rounded-b-xl bg-[linear-gradient(0deg,rgba(0,0,0,1),rgba(0,0,0,0.6))]'>
+            {topArticleData?.summary}
+          </div>
+        </div>
       </Button>
       <div className='basis-1/3 shrink-0 overflow-hidden'>
         {recentArticleData?.map(article => (
