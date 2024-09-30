@@ -1,7 +1,9 @@
 import { EARTICLE_CATEGORY } from "@/constants/article";
 import { ApiRoutes } from "@/constants/routes";
 import {
+  IArticle,
   IArticleDetailResponse,
+  IArticleRecentRequest,
   IArticleRequest,
   IArticleResponse,
 } from "@/interfaces/api/article";
@@ -13,6 +15,7 @@ const articleQueryKey = {
   articlesAll: ["article", "list"],
   articlesTab: (tab: EARTICLE_CATEGORY, page: number) => ["article", "list", tab, page],
   articleDetail: (id: number) => ["article", "detail", id],
+  articleRecent: ["article", "list", "recent"],
 };
 
 export const useArticleListQuery = (data: IArticleRequest) => {
@@ -43,5 +46,21 @@ export const useArticleDetailQuery = (id?: number) => {
 
 const getArticleDetail = async (id: number) => {
   const response = await api.get<IArticleDetailResponse>(`${ApiRoutes.ARTICLE.detail}/${id}`);
+  return response.data;
+};
+
+export const useRecentArticleQuery = (request: IArticleRecentRequest) => {
+  return useQuery({
+    queryKey: articleQueryKey.articleRecent,
+    queryFn: () => getRecentArticle(request),
+    gcTime: 0,
+    staleTime: Infinity,
+  });
+};
+
+const getRecentArticle = async (request: IArticleRecentRequest) => {
+  const response = await api.get<IArticle[]>(ApiRoutes.ARTICLE.recent, {
+    params: request,
+  });
   return response.data;
 };

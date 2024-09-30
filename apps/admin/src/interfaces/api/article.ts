@@ -37,3 +37,7 @@ export interface IAuthorDetail {
   role: string;
   pictureUrl: string;
 }
+
+export interface IArticleRecentRequest {
+  count: number;
+}
