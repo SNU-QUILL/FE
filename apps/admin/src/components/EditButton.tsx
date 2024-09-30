@@ -7,7 +7,7 @@ const EditButton = ({ className, children, ...props }: IEditButtonProps) => {
     <Button
       variant='secondary'
       className={cn(
-        "p-0 outline-dashed outline-primary hover:animate-pulse hover:bg-primary/30",
+        "outline-dashed outline-primary hover:animate-pulse hover:bg-primary/30",
         className
       )}
       {...props}

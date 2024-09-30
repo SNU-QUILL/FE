@@ -20,7 +20,7 @@ const TopArticle = () => {
   return (
     <div className='flex h-[421px]'>
       <EditButton
-        className='relative basis-2/3 grow h-full w-[738px]'
+        className='relative p-0 basis-2/3 grow h-full w-[738px]'
         onClick={openTopArticleDialog}
       >
         <img

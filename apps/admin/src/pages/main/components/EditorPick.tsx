@@ -1,9 +1,11 @@
-import { Button } from "@repo/ui";
 import TopArticleDialog from "@/pages/main/components/dialog/ArticleTableDialog";
 import { useGlobalDialogStore } from "@/stores/globalDialog";
+import { useEditorPickListQuery } from "@/hooks/queries/editorPick";
+import EditorsPickButton from "@/pages/main/components/EditorsPickButton";
 
 const EditorPick = () => {
   const { openDialog } = useGlobalDialogStore();
+  const { data } = useEditorPickListQuery();
 
   const openEditorPickDialog = () => {
     openDialog({
@@ -16,34 +18,26 @@ const EditorPick = () => {
     <div>
       <div className='text-primary text-2xl'>Editor&apos;s Picks</div>
       <div className='flex gap-10'>
-        <Button
-          variant='secondary'
-          className='h-36 grow outline-dashed outline-primary hover:animate-pulse hover:bg-primary/30'
+        <EditorsPickButton
+          title={data?.featuresEditorPickList[0].title ?? ""}
+          category='Features'
           onClick={openEditorPickDialog}
-        >
-          Edit Editor&apos;s Pick
-        </Button>
-        <Button
-          variant='secondary'
-          className='h-36 grow outline-dashed outline-primary hover:animate-pulse hover:bg-primary/30'
+        />
+        <EditorsPickButton
+          title={data?.snuSocietyEditorPickList[0].title ?? ""}
+          category='SNU Society'
           onClick={openEditorPickDialog}
-        >
-          Edit Editor&apos;s Pick
-        </Button>
-        <Button
-          variant='secondary'
-          className='h-36 grow outline-dashed outline-primary hover:animate-pulse hover:bg-primary/30'
+        />
+        <EditorsPickButton
+          title={data?.artsAndCultureEditorPickList[0].title ?? ""}
+          category='Arts & Culture'
           onClick={openEditorPickDialog}
-        >
-          Edit Editor&apos;s Pick
-        </Button>
-        <Button
-          variant='secondary'
-          className='h-36 grow outline-dashed outline-primary hover:animate-pulse hover:bg-primary/30'
+        />
+        <EditorsPickButton
+          title={data?.opinionEditorPickList[0].title ?? ""}
+          category='Opinion'
           onClick={openEditorPickDialog}
-        >
-          Edit Editor&apos;s Pick
-        </Button>
+        />
       </div>
     </div>
   );
