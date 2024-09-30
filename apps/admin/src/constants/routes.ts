@@ -17,4 +17,8 @@ const EDITOR_PICK = {
   list: "/editorPick",
 };
 
-export const ApiRoutes = { AUTH, ARTICLE, TOP_ARTICLE, EDITOR_PICK };
+const MAGAZINE = {
+  list: "/magazine",
+};
+
+export const ApiRoutes = { AUTH, ARTICLE, TOP_ARTICLE, EDITOR_PICK, MAGAZINE };
