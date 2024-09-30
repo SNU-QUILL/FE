@@ -1,5 +1,5 @@
 import { useMagazineListQuery } from "@/hooks/queries/magazine";
-import { Input } from "@repo/ui";
+import { Button, Input } from "@repo/ui";
 
 const Magazine = () => {
   const uploadMagazine = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,15 +27,15 @@ const Magazine = () => {
         <div>Add magazine</div>
       </label>
       {data?.map(item => (
-        <button
+        <Button
           key={item.volumeNumber}
-          className='w-[270px] h-[380px] shrink-0 flex items-center justify-center border'
+          className='p-0 w-[270px] h-[380px] shrink-0 flex items-center justify-center border'
           onClick={() => {
             window.open(item.fileLink, "_blank");
           }}
         >
           <img src={item.volumeCoverLink} alt='magazine' className='w-full h-full' />
-        </button>
+        </Button>
       ))}
     </div>
   );
