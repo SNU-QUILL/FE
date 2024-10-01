@@ -18,7 +18,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://snuquill.com",
+        target: "http://localhost:8080",
         changeOrigin: true,
       },
     },
