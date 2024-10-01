@@ -1,16 +1,28 @@
 import TopArticleDialog from "@/pages/main/components/dialog/ArticleTableDialog";
 import { useGlobalDialogStore } from "@/stores/globalDialog";
-import { useEditorPickListQuery } from "@/hooks/queries/editorPick";
+import { useEditorPickListQuery, useEditorPickUpdateMutation } from "@/hooks/queries/editorPick";
 import EditorsPickButton from "@/pages/main/components/EditorsPickButton";
+import { EARTICLE_CATEGORY } from "@/constants/article";
 
 const EditorPick = () => {
-  const { openDialog } = useGlobalDialogStore();
-  const { data } = useEditorPickListQuery();
+  const { openDialog, closeDialog } = useGlobalDialogStore();
+  const { data, refetch } = useEditorPickListQuery();
+  const { mutateAsync: updateEditorPickAsync } = useEditorPickUpdateMutation();
 
-  const openEditorPickDialog = () => {
+  const openEditorPickDialog = (category: EARTICLE_CATEGORY) => {
     openDialog({
       title: "Editor's Pick",
-      contents: <TopArticleDialog onSelect={id => alert(id)} />,
+      contents: (
+        <TopArticleDialog
+          initialTab={category}
+          onSelect={id => {
+            updateEditorPickAsync({ id, category }).then(() => {
+              refetch();
+              closeDialog();
+            });
+          }}
+        />
+      ),
     });
   };
 
@@ -21,22 +33,22 @@ const EditorPick = () => {
         <EditorsPickButton
           title={data?.featuresEditorPickList[0].title ?? ""}
           category='Features'
-          onClick={openEditorPickDialog}
+          onClick={() => openEditorPickDialog(EARTICLE_CATEGORY.FEATURES)}
         />
         <EditorsPickButton
           title={data?.snuSocietyEditorPickList[0].title ?? ""}
           category='SNU Society'
-          onClick={openEditorPickDialog}
+          onClick={() => openEditorPickDialog(EARTICLE_CATEGORY.SNU_SOCIETY)}
         />
         <EditorsPickButton
           title={data?.artsAndCultureEditorPickList[0].title ?? ""}
           category='Arts & Culture'
-          onClick={openEditorPickDialog}
+          onClick={() => openEditorPickDialog(EARTICLE_CATEGORY.ARTS_CULTURE)}
         />
         <EditorsPickButton
           title={data?.opinionEditorPickList[0].title ?? ""}
           category='Opinion'
-          onClick={openEditorPickDialog}
+          onClick={() => openEditorPickDialog(EARTICLE_CATEGORY.OPINION)}
         />
       </div>
     </div>

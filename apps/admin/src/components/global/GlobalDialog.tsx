@@ -6,7 +6,7 @@ const GlobalDialog = () => {
   return (
     <Dialog open={isOpen} onOpenChange={closeDialog}>
       <DialogPortal>
-        <DialogContent className={`${contentsWrapperClassName} flex flex-col max-w-full`}>
+        <DialogContent className={`${contentsWrapperClassName} flex flex-col max-w-[1100px]`}>
           <DialogHeader className='h-6'>
             <DialogTitle className='text-primary'>{title}</DialogTitle>
           </DialogHeader>

@@ -15,6 +15,7 @@ const TOP_ARTICLE = {
 
 const EDITOR_PICK = {
   list: "/editorPick",
+  update: "/editorPick",
 };
 
 const MAGAZINE = {

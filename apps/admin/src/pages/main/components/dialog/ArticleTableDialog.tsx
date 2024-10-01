@@ -6,30 +6,30 @@ import ArticleTabs from "@/pages/articles/components/ArticleTabs";
 import { useState } from "react";
 
 interface ITopArticleDialogProps {
+  initialTab?: EARTICLE_CATEGORY;
   onSelect: (id: number) => void;
 }
 
-const TopArticleDialog = (props: ITopArticleDialogProps) => {
-  const [selectedTab, setSelectedTab] = useState<EARTICLE_CATEGORY>(EARTICLE_CATEGORY.FEATURES);
+const TopArticleDialog = ({
+  initialTab = EARTICLE_CATEGORY.FEATURES,
+  onSelect,
+}: ITopArticleDialogProps) => {
+  const [selectedTab, setSelectedTab] = useState<EARTICLE_CATEGORY>(initialTab);
   const [page, setPage] = useState<number>(1);
-  const { data, isPending } = useArticleListQuery({ page, category: selectedTab });
-  return isPending || !data ? (
-    <div>Loading...</div>
-  ) : (
-    <div>
-      <ArticleTabs initialTab={selectedTab} onTabChange={setSelectedTab} />
-      <ArticleTable
-        data={data.content}
-        mode={EARTICLE_TABLE_MODE.SELECT}
-        onSelect={props.onSelect}
-      />
-      <ArticleTablePagination
-        current={page}
-        total={data.totalPages}
-        onPrevClick={() => setPage(page - 1)}
-        onNextClick={() => setPage(page + 1)}
-      />
-    </div>
+  const { data } = useArticleListQuery({ page, category: selectedTab });
+  return (
+    data && (
+      <div>
+        <ArticleTabs initialTab={selectedTab} onTabChange={setSelectedTab} />
+        <ArticleTable data={data.content} mode={EARTICLE_TABLE_MODE.SELECT} onSelect={onSelect} />
+        <ArticleTablePagination
+          current={page}
+          total={data.totalPages}
+          onPrevClick={() => setPage(page - 1)}
+          onNextClick={() => setPage(page + 1)}
+        />
+      </div>
+    )
   );
 };
 export default TopArticleDialog;
