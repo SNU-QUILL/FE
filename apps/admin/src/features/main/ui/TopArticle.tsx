@@ -2,7 +2,7 @@ import { useGlobalDialogStore } from "@/shared/store/globalDialog";
 import { useRecentArticleQuery } from "@/entities/article/api/article";
 import { useTopArticleQuery } from "@/entities/topArticle/api/topArticle";
 import EditButton from "@/features/main/ui/EditButton";
-import TopArticleDialog from "@/features/main/ui/ArticleTableDialog";
+import ArticleTableDialog from "@/features/main/ui/ArticleTableDialog";
 
 const TopArticle = () => {
   const { openDialog } = useGlobalDialogStore();
@@ -13,7 +13,7 @@ const TopArticle = () => {
   const openTopArticleDialog = () => {
     openDialog({
       title: "Top Article",
-      contents: <TopArticleDialog onSelect={id => alert(id)} />,
+      contents: <ArticleTableDialog onSelect={id => alert(id)} />,
     });
   };
 

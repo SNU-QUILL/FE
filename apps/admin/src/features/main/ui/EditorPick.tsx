@@ -5,7 +5,7 @@ import {
 } from "@/entities/editorPick/api/editorPick";
 import { EARTICLE_CATEGORY } from "@/entities/article/model/article";
 import EditorsPickButton from "@/features/main/ui/EditorsPickButton";
-import TopArticleDialog from "@/features/main/ui/ArticleTableDialog";
+import ArticleTableDialog from "@/features/main/ui/ArticleTableDialog";
 
 const EditorPick = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
@@ -16,10 +16,11 @@ const EditorPick = () => {
     openDialog({
       title: "Editor's Pick",
       contents: (
-        <TopArticleDialog
+        <ArticleTableDialog
           initialTab={category}
-          onSelect={id => {
-            updateEditorPickAsync({ id, category }).then(() => {
+          showTab={false}
+          onSelect={(id, tab) => {
+            updateEditorPickAsync({ id, category: tab }).then(() => {
               refetch();
               closeDialog();
             });

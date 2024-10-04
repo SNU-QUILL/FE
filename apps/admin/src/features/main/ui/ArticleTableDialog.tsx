@@ -8,11 +8,13 @@ import { EARTICLE_TABLE_MODE } from "@/features/article/model/articleTable";
 
 interface ITopArticleDialogProps {
   initialTab?: EARTICLE_CATEGORY;
-  onSelect: (id: number) => void;
+  showTab?: boolean;
+  onSelect: (id: number, tab: EARTICLE_CATEGORY) => void;
 }
 
-const TopArticleDialog = ({
+const ArticleTableDialog = ({
   initialTab = EARTICLE_CATEGORY.FEATURES,
+  showTab = true,
   onSelect,
 }: ITopArticleDialogProps) => {
   const [selectedTab, setSelectedTab] = useState<EARTICLE_CATEGORY>(initialTab);
@@ -21,8 +23,13 @@ const TopArticleDialog = ({
   return (
     data && (
       <div>
-        <ArticleTabs initialTab={selectedTab} onTabChange={setSelectedTab} />
-        <ArticleTable data={data.content} mode={EARTICLE_TABLE_MODE.SELECT} onSelect={onSelect} />
+        {!showTab && <div className='text-primary text-2xl'>{selectedTab}</div>}
+        {showTab && <ArticleTabs initialTab={selectedTab} onTabChange={setSelectedTab} />}
+        <ArticleTable
+          data={data.content}
+          mode={EARTICLE_TABLE_MODE.SELECT}
+          onSelect={(articleId: number) => onSelect(articleId, selectedTab)}
+        />
         <ArticleTablePagination
           current={page}
           total={data.totalPages}
@@ -33,4 +40,4 @@ const TopArticleDialog = ({
     )
   );
 };
-export default TopArticleDialog;
+export default ArticleTableDialog;
