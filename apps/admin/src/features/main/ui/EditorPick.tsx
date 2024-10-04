@@ -6,6 +6,7 @@ import {
 import { EARTICLE_CATEGORY } from "@/entities/article/model/article";
 import EditorsPickButton from "@/features/main/ui/EditorsPickButton";
 import ArticleTableDialog from "@/features/main/ui/ArticleTableDialog";
+import { editorPickMapper } from "@/entities/editorPick/mapper/editorPick";
 
 const EditorPick = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
@@ -20,10 +21,12 @@ const EditorPick = () => {
           initialTab={category}
           showTab={false}
           onSelect={(id, tab) => {
-            updateEditorPickAsync({ id, category: tab }).then(() => {
-              refetch();
-              closeDialog();
-            });
+            updateEditorPickAsync({ id, category: editorPickMapper.categoryToLabel(tab) }).then(
+              () => {
+                refetch();
+                closeDialog();
+              },
+            );
           }}
         />
       ),

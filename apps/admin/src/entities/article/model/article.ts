@@ -45,5 +45,13 @@ export enum EARTICLE_CATEGORY {
   SNU_SOCIETY = "snu_society",
   ARTS_CULTURE = "arts_culture",
   OPINION = "opinion",
-  SHORT_ARTICELS = "short_articles",
+  SHORT_ARTICLES = "short_articles",
+}
+
+export enum EARTICLE_CATEGORY_LABEL {
+  FEATURES = "features",
+  SNU_SOCIETY = "snuSociety",
+  ARTS_CULTURE = "artsCulture",
+  OPINION = "opinion",
+  SHORT_ARTICLES = "shortArticles",
 }

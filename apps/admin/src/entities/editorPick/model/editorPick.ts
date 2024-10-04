@@ -1,4 +1,4 @@
-import { EARTICLE_CATEGORY } from "@/entities/article/model/article";
+import { EARTICLE_CATEGORY_LABEL } from "@/entities/article/model/article";
 
 export interface IEditorPickListResponse {
   featuresEditorPickList: IEditorPick[];
@@ -16,5 +16,5 @@ export interface IEditorPick {
 
 export interface IUpdateEdiorPickRequest {
   id: number;
-  category: EARTICLE_CATEGORY;
+  category: EARTICLE_CATEGORY_LABEL;
 }
