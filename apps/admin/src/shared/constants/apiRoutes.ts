@@ -11,6 +11,7 @@ const ARTICLE = {
 
 const TOP_ARTICLE = {
   get: "/topArticle",
+  update: "/topArticle",
 };
 
 const EDITOR_PICK = {

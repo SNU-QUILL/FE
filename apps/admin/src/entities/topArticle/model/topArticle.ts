@@ -4,3 +4,8 @@ export interface ITopArticle {
   title: string;
   summary: string;
 }
+
+export interface ITopArticleUpdateRequest {
+  id: number;
+  summary: string;
+}

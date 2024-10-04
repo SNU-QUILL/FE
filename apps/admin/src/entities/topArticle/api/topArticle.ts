@@ -1,15 +1,16 @@
 import { ApiRoutes } from "@/shared/constants/apiRoutes";
-import { ITopArticle } from "@/entities/topArticle/model/topArticle";
+import { ITopArticle, ITopArticleUpdateRequest } from "@/entities/topArticle/model/topArticle";
 import { api } from "@/shared/util/api";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const topArticleQueryKey = {
   all: ["topArticle"],
+  get: ["topArticle", "get"],
 };
 
 export const useTopArticleQuery = () => {
   return useQuery({
-    queryKey: topArticleQueryKey.all, // todo: topArticle api 추가 시 수정 필요
+    queryKey: topArticleQueryKey.get,
     queryFn: getTopArticles,
     gcTime: 0,
     staleTime: Infinity,
@@ -18,5 +19,16 @@ export const useTopArticleQuery = () => {
 
 const getTopArticles = async () => {
   const response = await api.get<ITopArticle>(ApiRoutes.TOP_ARTICLE.get);
+  return response.data;
+};
+
+export const useTopArticleUpdateMutation = () => {
+  return useMutation({
+    mutationFn: updateTopArticle,
+  });
+};
+
+const updateTopArticle = async (data: ITopArticleUpdateRequest) => {
+  const response = await api.post(ApiRoutes.TOP_ARTICLE.update, data);
   return response.data;
 };

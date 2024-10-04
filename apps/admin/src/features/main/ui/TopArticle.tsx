@@ -1,14 +1,18 @@
 import { useGlobalDialogStore } from "@/shared/store/globalDialog";
 import { useRecentArticleQuery } from "@/entities/article/api/article";
-import { useTopArticleQuery } from "@/entities/topArticle/api/topArticle";
+import {
+  useTopArticleQuery,
+  useTopArticleUpdateMutation,
+} from "@/entities/topArticle/api/topArticle";
 import EditButton from "@/features/main/ui/EditButton";
 import ArticleTableDialog from "@/features/main/ui/ArticleTableDialog";
 import LineInpuDialogContent from "@/features/main/ui/LineInpuDialogContent";
 
 const TopArticle = () => {
-  const { openDialog } = useGlobalDialogStore();
+  const { openDialog, closeDialog } = useGlobalDialogStore();
 
-  const { data: topArticleData } = useTopArticleQuery();
+  const { data: topArticleData, refetch: refetchTopArticle } = useTopArticleQuery();
+  const { mutateAsync: updateTopArticleAsync } = useTopArticleUpdateMutation();
   const { data: recentArticleData } = useRecentArticleQuery({ count: 3 });
 
   const openTopArticleDialog = () => {
@@ -21,8 +25,19 @@ const TopArticle = () => {
   const openSummaryInputDialog = (id: number) => {
     openDialog({
       title: "Summary",
-      contents: <LineInpuDialogContent placeholder='Type Summary' onSubmit={console.log} />,
+      contents: (
+        <LineInpuDialogContent
+          placeholder='Type Summary'
+          onSubmit={summary => handleUpdateTopArticle(id, summary)}
+        />
+      ),
     });
+  };
+
+  const handleUpdateTopArticle = async (id: number, summary: string) => {
+    await updateTopArticleAsync({ id, summary });
+    closeDialog();
+    refetchTopArticle();
   };
 
   return (
