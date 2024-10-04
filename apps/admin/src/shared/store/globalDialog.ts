@@ -1,28 +1,31 @@
 import { create } from "zustand";
 
 interface IGlobalDialogStore {
-  isOpen: boolean;
-  title: string;
-  contents: React.ReactNode;
-  contentsWrapperClassName: string;
+  dialogs: {
+    id: string;
+    title: string;
+    contents: React.ReactNode;
+    contentsWrapperClassName?: string;
+  }[];
   openDialog: ({
+    id,
     title,
     contents,
     contentsWrapperClassName,
   }: {
+    id: string;
     title: string;
     contents: React.ReactNode;
     contentsWrapperClassName?: string;
   }) => void;
-  closeDialog: () => void;
+  closeDialog: (id: string) => void;
 }
 
 export const useGlobalDialogStore = create<IGlobalDialogStore>()(set => ({
-  isOpen: false,
-  title: "",
-  contents: null,
-  contentsWrapperClassName: "",
-  openDialog: ({ title, contents, contentsWrapperClassName }) =>
-    set({ isOpen: true, title, contents, contentsWrapperClassName }),
-  closeDialog: () => set({ isOpen: false }),
+  dialogs: [],
+  openDialog: ({ id, title, contents, contentsWrapperClassName }) =>
+    set(state => ({
+      dialogs: [...state.dialogs, { id, title, contents, contentsWrapperClassName }],
+    })),
+  closeDialog: id => set(state => ({ dialogs: state.dialogs.filter(dialog => dialog.id !== id) })),
 }));

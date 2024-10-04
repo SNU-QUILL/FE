@@ -17,6 +17,7 @@ const TopArticle = () => {
 
   const openTopArticleDialog = () => {
     openDialog({
+      id: "top-article",
       title: "Top Article",
       contents: <ArticleTableDialog onSelect={id => openSummaryInputDialog(id)} />,
     });
@@ -24,6 +25,7 @@ const TopArticle = () => {
 
   const openSummaryInputDialog = (id: number) => {
     openDialog({
+      id: "top-article-summary",
       title: "Summary",
       contents: (
         <LineInpuDialogContent
@@ -36,7 +38,8 @@ const TopArticle = () => {
 
   const handleUpdateTopArticle = async (id: number, summary: string) => {
     await updateTopArticleAsync({ id, summary });
-    closeDialog();
+    closeDialog("top-article");
+    closeDialog("top-article-summary");
     refetchTopArticle();
   };
 

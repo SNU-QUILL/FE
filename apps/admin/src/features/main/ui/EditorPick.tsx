@@ -15,6 +15,7 @@ const EditorPick = () => {
 
   const openEditorPickDialog = (category: EARTICLE_CATEGORY) => {
     openDialog({
+      id: "editor-pick",
       title: "Editor's Pick",
       contents: (
         <ArticleTableDialog
@@ -24,7 +25,7 @@ const EditorPick = () => {
             updateEditorPickAsync({ id, category: editorPickMapper.categoryToLabel(tab) }).then(
               () => {
                 refetch();
-                closeDialog();
+                closeDialog("editor-pick");
               },
             );
           }}

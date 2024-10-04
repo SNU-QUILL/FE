@@ -2,9 +2,9 @@ import { Dialog, DialogContent, DialogHeader, DialogPortal, DialogTitle } from "
 import { useGlobalDialogStore } from "@/shared/store/globalDialog";
 
 const GlobalDialog = () => {
-  const { isOpen, title, contents, closeDialog, contentsWrapperClassName } = useGlobalDialogStore();
-  return (
-    <Dialog open={isOpen} onOpenChange={closeDialog}>
+  const { dialogs, closeDialog } = useGlobalDialogStore();
+  return dialogs.map(({ id, title, contents, contentsWrapperClassName }) => (
+    <Dialog open={true} onOpenChange={() => closeDialog(id)}>
       <DialogPortal>
         <DialogContent className={`${contentsWrapperClassName} flex flex-col max-w-[1100px]`}>
           <DialogHeader className='h-6'>
@@ -14,6 +14,6 @@ const GlobalDialog = () => {
         </DialogContent>
       </DialogPortal>
     </Dialog>
-  );
+  ));
 };
 export default GlobalDialog;

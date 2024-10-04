@@ -7,6 +7,7 @@ const VideoInfo = () => {
 
   const openEditQuillVideoDialog = () => {
     openDialog({
+      id: "quill-video",
       title: "Enter Youtube Link",
       contents: <EditQuillVideoForm />,
       contentsWrapperClassName: "w-3/5 h-fit",
