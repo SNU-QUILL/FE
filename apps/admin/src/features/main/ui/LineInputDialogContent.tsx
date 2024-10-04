@@ -1,13 +1,18 @@
 import { Button, Input } from "@repo/ui";
 import { useState } from "react";
 
-interface ILineInpuDialogContentProps {
+interface ILineInputDialogContentProps {
   placeholder?: string;
+  initialValue?: string;
   onSubmit: (line: string) => void;
 }
 
-const LineInpuDialogContent = ({ placeholder, onSubmit }: ILineInpuDialogContentProps) => {
-  const [line, setLine] = useState("");
+const LineInputDialogContent = ({
+  placeholder,
+  initialValue,
+  onSubmit,
+}: ILineInputDialogContentProps) => {
+  const [line, setLine] = useState(initialValue ?? "");
   return (
     <div className='flex flex-col gap-4'>
       <Input
@@ -21,4 +26,4 @@ const LineInpuDialogContent = ({ placeholder, onSubmit }: ILineInpuDialogContent
   );
 };
 
-export default LineInpuDialogContent;
+export default LineInputDialogContent;

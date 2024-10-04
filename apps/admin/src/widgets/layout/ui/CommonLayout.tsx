@@ -31,6 +31,11 @@ const CommonLayout = () => {
         route: "/article/features",
       },
       {
+        label: "Misc",
+        value: "misc",
+        route: "/misc",
+      },
+      {
         label: "Logout",
         value: "logout",
       },

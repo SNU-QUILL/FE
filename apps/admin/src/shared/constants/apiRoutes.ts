@@ -27,4 +27,16 @@ const PHOTO_JOURNAL = {
   list: "/photoJournal/lastVolume",
 };
 
-export const ApiRoutes = { AUTH, ARTICLE, TOP_ARTICLE, EDITOR_PICK, MAGAZINE, PHOTO_JOURNAL };
+const INTRODUCTION = {
+  get: "/introduction",
+};
+
+export const ApiRoutes = {
+  AUTH,
+  ARTICLE,
+  TOP_ARTICLE,
+  EDITOR_PICK,
+  MAGAZINE,
+  PHOTO_JOURNAL,
+  INTRODUCTION,
+};

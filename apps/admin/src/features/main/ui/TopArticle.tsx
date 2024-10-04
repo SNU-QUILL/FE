@@ -6,7 +6,7 @@ import {
 } from "@/entities/topArticle/api/topArticle";
 import EditButton from "@/features/main/ui/EditButton";
 import ArticleTableDialog from "@/features/main/ui/ArticleTableDialog";
-import LineInpuDialogContent from "@/features/main/ui/LineInpuDialogContent";
+import LineInputDialogContent from "@/features/main/ui/LineInputDialogContent";
 
 const TopArticle = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
@@ -28,7 +28,7 @@ const TopArticle = () => {
       id: "top-article-summary",
       title: "Summary",
       contents: (
-        <LineInpuDialogContent
+        <LineInputDialogContent
           placeholder='Type Summary'
           onSubmit={summary => handleUpdateTopArticle(id, summary)}
         />
