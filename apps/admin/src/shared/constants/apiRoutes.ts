@@ -29,6 +29,7 @@ const PHOTO_JOURNAL = {
 
 const INTRODUCTION = {
   get: "/introduction",
+  update: "/introduction",
 };
 
 export const ApiRoutes = {

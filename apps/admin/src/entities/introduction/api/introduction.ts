@@ -1,7 +1,10 @@
-import { IIntroductionGetResponse } from "@/entities/introduction/model/introduciton";
+import {
+  IIntroductionGetResponse,
+  IIntroductionUpdateRequest,
+} from "@/entities/introduction/model/introduciton";
 import { ApiRoutes } from "@/shared/constants/apiRoutes";
 import { api } from "@/shared/util/api";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const introductionQueryKey = {
   all: ["introduction"] as const,
@@ -17,5 +20,16 @@ export const useIntroductionGetQuery = () => {
 
 const getIntroduction = async () => {
   const response = await api.get<IIntroductionGetResponse>(ApiRoutes.INTRODUCTION.get);
+  return response.data;
+};
+
+export const useIntroductionUpdateMutation = () => {
+  return useMutation({
+    mutationFn: (request: IIntroductionUpdateRequest) => updateIntroduction(request),
+  });
+};
+
+const updateIntroduction = async (request: IIntroductionUpdateRequest) => {
+  const response = await api.post(ApiRoutes.INTRODUCTION.update, request);
   return response.data;
 };
