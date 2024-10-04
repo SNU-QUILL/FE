@@ -3,6 +3,7 @@ import { useRecentArticleQuery } from "@/entities/article/api/article";
 import { useTopArticleQuery } from "@/entities/topArticle/api/topArticle";
 import EditButton from "@/features/main/ui/EditButton";
 import ArticleTableDialog from "@/features/main/ui/ArticleTableDialog";
+import LineInpuDialogContent from "@/features/main/ui/LineInpuDialogContent";
 
 const TopArticle = () => {
   const { openDialog } = useGlobalDialogStore();
@@ -13,7 +14,14 @@ const TopArticle = () => {
   const openTopArticleDialog = () => {
     openDialog({
       title: "Top Article",
-      contents: <ArticleTableDialog onSelect={id => alert(id)} />,
+      contents: <ArticleTableDialog onSelect={id => openSummaryInputDialog(id)} />,
+    });
+  };
+
+  const openSummaryInputDialog = (id: number) => {
+    openDialog({
+      title: "Summary",
+      contents: <LineInpuDialogContent placeholder='Type Summary' onSubmit={console.log} />,
     });
   };
 
