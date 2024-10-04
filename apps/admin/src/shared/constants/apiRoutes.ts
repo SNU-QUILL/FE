@@ -32,6 +32,11 @@ const INTRODUCTION = {
   update: "/introduction",
 };
 
+const MISSION = {
+  get: "/mission",
+  update: "/mission",
+};
+
 export const ApiRoutes = {
   AUTH,
   ARTICLE,
@@ -40,4 +45,5 @@ export const ApiRoutes = {
   MAGAZINE,
   PHOTO_JOURNAL,
   INTRODUCTION,
+  MISSION,
 };
