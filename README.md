@@ -1,11 +1,8 @@
 <p align="center">
-  <img src="https://img.icons8.com/?size=512&id=55494&format=png" width="20%" alt="FE-logo">
+    <h1 align="center">SNU quill - admin</h1>
 </p>
 <p align="center">
-    <h1 align="center">FE</h1>
-</p>
-<p align="center">
-    <em><code>❯ REPLACE-ME</code></em>
+    <em><code>서울대학교 영자신문 동아리(SNU quill) 관리 페이지 개발 repository</code></em>
 </p>
 <p align="center">
 	<img src="https://img.shields.io/github/license/SNU-QUILL/FE?style=flat&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
@@ -17,20 +14,14 @@
 		<em>Built with the tools and technologies:</em>
 </p>
 <p align="center">
-	<img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=flat&logo=JavaScript&logoColor=black" alt="JavaScript">
-	<img src="https://img.shields.io/badge/Prettier-F7B93E.svg?style=flat&logo=Prettier&logoColor=black" alt="Prettier">
-	<img src="https://img.shields.io/badge/HTML5-E34F26.svg?style=flat&logo=HTML5&logoColor=white" alt="HTML5">
-	<img src="https://img.shields.io/badge/PostCSS-DD3A0A.svg?style=flat&logo=PostCSS&logoColor=white" alt="PostCSS">
-	<img src="https://img.shields.io/badge/Autoprefixer-DD3735.svg?style=flat&logo=Autoprefixer&logoColor=white" alt="Autoprefixer">
-	<img src="https://img.shields.io/badge/YAML-CB171E.svg?style=flat&logo=YAML&logoColor=white" alt="YAML">
-	<img src="https://img.shields.io/badge/datefns-770C56.svg?style=flat&logo=date-fns&logoColor=white" alt="datefns">
-	<br>
-	<img src="https://img.shields.io/badge/Vite-646CFF.svg?style=flat&logo=Vite&logoColor=white" alt="Vite">
-	<img src="https://img.shields.io/badge/React-61DAFB.svg?style=flat&logo=React&logoColor=black" alt="React">
-	<img src="https://img.shields.io/badge/Axios-5A29E4.svg?style=flat&logo=Axios&logoColor=white" alt="Axios">
-	<img src="https://img.shields.io/badge/ESLint-4B32C3.svg?style=flat&logo=ESLint&logoColor=white" alt="ESLint">
 	<img src="https://img.shields.io/badge/TypeScript-3178C6.svg?style=flat&logo=TypeScript&logoColor=white" alt="TypeScript">
-	<img src="https://img.shields.io/badge/JSON-000000.svg?style=flat&logo=JSON&logoColor=white" alt="JSON">
+	<img src="https://img.shields.io/badge/React-61DAFB.svg?style=flat&logo=React&logoColor=black" alt="React">
+	<img src="https://img.shields.io/badge/Vite-646CFF.svg?style=flat&logo=Vite&logoColor=white" alt="Vite">
+	<img src="https://img.shields.io/badge/Rabbitmq-FF6600.svg?style=flat&logo=rabbitmq&logoColor=white" alt="Radix-ui">
+	<br/>
+	<img src="https://img.shields.io/badge/-React%20Query-FF4154?style=flat&logo=react%20query&logoColor=white" alt="React-Query">
+	<img src="https://img.shields.io/badge/React%20Hook%20Form-%23EC5990.svg?style=flat&logo=reacthookform&logoColor=white" alt="React-Hook-Form">
+	<img src="https://img.shields.io/badge/zod-%233068b7.svg?style=flat&logo=zod&logoColor=white" alt="Zod">
 </p>
 
 <br>
