@@ -1,5 +1,5 @@
 <p align="center">
-    <h1 align="center">SNU quill - admin</h1>
+    <h1 align="center">SNU quill</h1>
 </p>
 <p align="center">
     <em><code>서울대학교 영자신문 동아리(SNU quill) 관리 페이지 개발 repository</code></em>
