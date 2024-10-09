@@ -37,6 +37,10 @@ const MISSION = {
   update: "/mission",
 };
 
+const FILE = {
+  upload: "/file/upload",
+};
+
 export const ApiRoutes = {
   AUTH,
   ARTICLE,
@@ -46,4 +50,5 @@ export const ApiRoutes = {
   PHOTO_JOURNAL,
   INTRODUCTION,
   MISSION,
+  FILE,
 };
