@@ -21,7 +21,9 @@ const LineInputDialogContent = ({
         value={line}
         onChange={e => setLine(e.target.value)}
       />
-      <Button onClick={() => onSubmit(line)}>Submit</Button>
+      <Button className='self-end' disabled={!line} onClick={() => onSubmit(line)}>
+        Submit
+      </Button>
     </div>
   );
 };
