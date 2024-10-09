@@ -1,5 +1,5 @@
 import { useGlobalDialogStore } from "@/shared/store/globalDialog";
-import LineInputDialogContent from "@/entities/dialog/ui/LineInputDialogContent";
+import LineInputDialogContent from "@/features/dialog/ui/LineInputDialogContent";
 
 interface UseLineInputDialogProps {
   title: string;

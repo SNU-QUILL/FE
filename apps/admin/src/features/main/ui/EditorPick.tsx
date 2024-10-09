@@ -7,7 +7,7 @@ import { EARTICLE_CATEGORY } from "@/entities/article/model/article";
 import EditorsPickButton from "@/features/main/ui/EditorsPickButton";
 import ArticleTableDialog from "@/features/main/ui/ArticleTableDialog";
 import { editorPickMapper } from "@/entities/editorPick/mapper/editorPick";
-import useConfirmDialog from "@/entities/dialog/hooks/useConfirmDialog";
+import useConfirmDialog from "@/features/dialog/hooks/useConfirmDialog";
 
 const EditorPick = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();

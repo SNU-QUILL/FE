@@ -2,8 +2,8 @@ import {
   useIntroductionGetQuery,
   useIntroductionUpdateMutation,
 } from "@/entities/introduction/api/introduction";
-import LineInputDialogContent from "@/entities/dialog/ui/LineInputDialogContent";
-import useConfirmDialog from "@/entities/dialog/hooks/useConfirmDialog";
+import LineInputDialogContent from "@/features/dialog/ui/LineInputDialogContent";
+import useConfirmDialog from "@/features/dialog/hooks/useConfirmDialog";
 
 interface IIntroductionDialogContentProps {
   onSubmit: () => void;

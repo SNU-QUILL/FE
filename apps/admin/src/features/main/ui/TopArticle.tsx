@@ -6,8 +6,8 @@ import {
 } from "@/entities/topArticle/api/topArticle";
 import EditButton from "@/features/main/ui/EditButton";
 import ArticleTableDialog from "@/features/main/ui/ArticleTableDialog";
-import useConfirmDialog from "@/entities/dialog/hooks/useConfirmDialog";
-import useLineInputDialog from "@/entities/dialog/hooks/useLineInputDialog";
+import useConfirmDialog from "@/features/dialog/hooks/useConfirmDialog";
+import useLineInputDialog from "@/features/dialog/hooks/useLineInputDialog";
 
 const TopArticle = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();

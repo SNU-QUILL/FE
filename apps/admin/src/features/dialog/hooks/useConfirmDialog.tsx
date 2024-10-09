@@ -1,6 +1,6 @@
 import { useGlobalDialogStore } from "@/shared/store/globalDialog";
 import { DIALOG_MESSAGE } from "@/shared/constants/message";
-import ConfirmDialogContent from "@/entities/dialog/ui/ConfirmDialogContent";
+import ConfirmDialogContent from "@/features/dialog/ui/ConfirmDialogContent";
 
 const useConfirmDialog = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
