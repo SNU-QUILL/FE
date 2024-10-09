@@ -3,12 +3,14 @@ import {
   useIntroductionUpdateMutation,
 } from "@/entities/introduction/api/introduction";
 import LineInputDialogContent from "@/entities/dialog/ui/LineInputDialogContent";
+import useConfirmDialog from "@/entities/dialog/hooks/useConfirmDialog";
 
 interface IIntroductionDialogContentProps {
   onSubmit: () => void;
 }
 
 const IntroductionDialogContent = ({ onSubmit }: IIntroductionDialogContentProps) => {
+  const { openConfirmDialog, closeConfirmDialog } = useConfirmDialog();
   const { data, isFetched, refetch } = useIntroductionGetQuery();
   const { mutateAsync: updateIntroductionAsync } = useIntroductionUpdateMutation();
   return (
@@ -16,7 +18,15 @@ const IntroductionDialogContent = ({ onSubmit }: IIntroductionDialogContentProps
       <LineInputDialogContent
         initialValue={data?.introduction}
         onSubmit={introduction =>
-          updateIntroductionAsync({ introduction }).then(refetch).then(onSubmit)
+          openConfirmDialog({
+            onConfirm: () =>
+              updateIntroductionAsync({ introduction })
+                .then(refetch)
+                .then(() => {
+                  closeConfirmDialog();
+                  onSubmit();
+                }),
+          })
         }
       />
     )

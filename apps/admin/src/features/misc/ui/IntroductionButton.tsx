@@ -4,13 +4,14 @@ import { useGlobalDialogStore } from "@/shared/store/globalDialog";
 
 const IntroductionButton = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
+  const dialogId = "edit-introduction";
   return (
     <EditButton
       onClick={() => {
         openDialog({
-          id: "edit-introduction",
+          id: dialogId,
           title: "Edit Introduction",
-          contents: <IntroductionDialogContent onSubmit={() => closeDialog("edit-introduction")} />,
+          contents: <IntroductionDialogContent onSubmit={() => closeDialog(dialogId)} />,
         });
       }}
     >
