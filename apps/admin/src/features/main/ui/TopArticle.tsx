@@ -7,11 +7,11 @@ import {
 import EditButton from "@/features/main/ui/EditButton";
 import ArticleTableDialog from "@/features/main/ui/ArticleTableDialog";
 import LineInputDialogContent from "@/entities/dialog/ui/LineInputDialogContent";
-import { DIALOG_MESSAGE } from "@/shared/constants/message";
-import ConfirmDialogContent from "@/entities/dialog/ui/ConfirmDialogContent";
+import useConfirmDialog from "@/entities/dialog/hooks/useConfirmDialog";
 
 const TopArticle = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
+  const { openConfirmDialog } = useConfirmDialog();
 
   const { data: topArticleData, refetch: refetchTopArticle } = useTopArticleQuery();
   const { mutateAsync: updateTopArticleAsync } = useTopArticleUpdateMutation();
@@ -32,23 +32,9 @@ const TopArticle = () => {
       contents: (
         <LineInputDialogContent
           placeholder='Type Summary'
-          onSubmit={summary => openConfirmUpdateDialog(id, summary)}
+          onSubmit={summary => openConfirmDialog(() => handleUpdateTopArticle(id, summary))}
         />
       ),
-    });
-  };
-
-  const openConfirmUpdateDialog = (id: number, summary: string) => {
-    openDialog({
-      id: "confirm-update",
-      title: DIALOG_MESSAGE.CONFIRM_UPDATE_TITLE,
-      contents: (
-        <ConfirmDialogContent
-          onCancel={() => closeDialog("confirm-update")}
-          onConfirm={() => handleUpdateTopArticle(id, summary)}
-        />
-      ),
-      contentsWrapperClassName: "w-[300px]",
     });
   };
 
