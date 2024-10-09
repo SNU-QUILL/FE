@@ -7,9 +7,11 @@ import { EARTICLE_CATEGORY } from "@/entities/article/model/article";
 import EditorsPickButton from "@/features/main/ui/EditorsPickButton";
 import ArticleTableDialog from "@/features/main/ui/ArticleTableDialog";
 import { editorPickMapper } from "@/entities/editorPick/mapper/editorPick";
+import useConfirmDialog from "@/entities/dialog/hooks/useConfirmDialog";
 
 const EditorPick = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
+  const { openConfirmDialog, closeConfirmDialog } = useConfirmDialog();
   const { data, refetch } = useEditorPickListQuery();
   const { mutateAsync: updateEditorPickAsync } = useEditorPickUpdateMutation();
 
@@ -22,12 +24,17 @@ const EditorPick = () => {
           initialTab={category}
           showTab={false}
           onSelect={(id, tab) => {
-            updateEditorPickAsync({ id, category: editorPickMapper.categoryToLabel(tab) }).then(
-              () => {
-                refetch();
-                closeDialog("editor-pick");
+            openConfirmDialog({
+              onConfirm: () => {
+                updateEditorPickAsync({ id, category: editorPickMapper.categoryToLabel(tab) }).then(
+                  () => {
+                    closeDialog("editor-pick");
+                    closeConfirmDialog();
+                    refetch();
+                  },
+                );
               },
-            );
+            });
           }}
         />
       ),
