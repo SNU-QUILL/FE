@@ -22,7 +22,7 @@ const ArticleTable = (props: IArticleTableProps) => {
     openDialog({
       id: "edit-article",
       title: "Edit Article",
-      contents: <ArticleEditor id={id} onChange={console.log} />,
+      contents: <ArticleEditor id={id} />,
       contentsWrapperClassName: "w-4/5 h-4/5",
     });
   };

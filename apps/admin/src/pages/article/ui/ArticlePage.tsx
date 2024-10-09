@@ -38,7 +38,7 @@ const ArticlePage = () => {
     openDialog({
       id: "new-article",
       title: "New Article",
-      contents: <ArticleEditor onChange={console.log} />,
+      contents: <ArticleEditor />,
       contentsWrapperClassName: "w-4/5 h-4/5",
     });
   };
