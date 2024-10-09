@@ -1,5 +1,5 @@
 import { useMissionGetQuery, useMissionUpdateMutation } from "@/entities/mission/api/mission";
-import LineInputDialogContent from "@/features/main/ui/LineInputDialogContent";
+import LineInputDialogContent from "@/entities/dialog/ui/LineInputDialogContent";
 
 interface IIntroductionDialogContentProps {
   onSubmit: () => void;

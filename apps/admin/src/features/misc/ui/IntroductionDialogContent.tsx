@@ -2,7 +2,7 @@ import {
   useIntroductionGetQuery,
   useIntroductionUpdateMutation,
 } from "@/entities/introduction/api/introduction";
-import LineInputDialogContent from "@/features/main/ui/LineInputDialogContent";
+import LineInputDialogContent from "@/entities/dialog/ui/LineInputDialogContent";
 
 interface IIntroductionDialogContentProps {
   onSubmit: () => void;

@@ -6,7 +6,9 @@ import {
 } from "@/entities/topArticle/api/topArticle";
 import EditButton from "@/features/main/ui/EditButton";
 import ArticleTableDialog from "@/features/main/ui/ArticleTableDialog";
-import LineInputDialogContent from "@/features/main/ui/LineInputDialogContent";
+import LineInputDialogContent from "@/entities/dialog/ui/LineInputDialogContent";
+import { DIALOG_MESSAGE } from "@/shared/constants/message";
+import ConfirmDialogContent from "@/entities/dialog/ui/ConfirmDialogContent";
 
 const TopArticle = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
@@ -30,9 +32,23 @@ const TopArticle = () => {
       contents: (
         <LineInputDialogContent
           placeholder='Type Summary'
-          onSubmit={summary => handleUpdateTopArticle(id, summary)}
+          onSubmit={summary => openConfirmUpdateDialog(id, summary)}
         />
       ),
+    });
+  };
+
+  const openConfirmUpdateDialog = (id: number, summary: string) => {
+    openDialog({
+      id: "confirm-update",
+      title: DIALOG_MESSAGE.CONFIRM_UPDATE_TITLE,
+      contents: (
+        <ConfirmDialogContent
+          onCancel={() => closeDialog("confirm-update")}
+          onConfirm={() => handleUpdateTopArticle(id, summary)}
+        />
+      ),
+      contentsWrapperClassName: "w-[300px]",
     });
   };
 
@@ -40,6 +56,7 @@ const TopArticle = () => {
     await updateTopArticleAsync({ id, summary });
     closeDialog("top-article");
     closeDialog("top-article-summary");
+    closeDialog("confirm-update");
     refetchTopArticle();
   };
 
