@@ -6,12 +6,13 @@ import {
 } from "@/entities/topArticle/api/topArticle";
 import EditButton from "@/features/main/ui/EditButton";
 import ArticleTableDialog from "@/features/main/ui/ArticleTableDialog";
-import LineInputDialogContent from "@/entities/dialog/ui/LineInputDialogContent";
 import useConfirmDialog from "@/entities/dialog/hooks/useConfirmDialog";
+import useLineInputDialog from "@/entities/dialog/hooks/useLineInputDialog";
 
 const TopArticle = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
-  const { openConfirmDialog } = useConfirmDialog();
+  const { openConfirmDialog, closeConfirmDialog } = useConfirmDialog();
+  const { openLineInputDialog, closeLineInputDialog } = useLineInputDialog();
 
   const { data: topArticleData, refetch: refetchTopArticle } = useTopArticleQuery();
   const { mutateAsync: updateTopArticleAsync } = useTopArticleUpdateMutation();
@@ -21,18 +22,18 @@ const TopArticle = () => {
     openDialog({
       id: "top-article",
       title: "Top Article",
-      contents: <ArticleTableDialog onSelect={id => openSummaryInputDialog(id)} />,
-    });
-  };
-
-  const openSummaryInputDialog = (id: number) => {
-    openDialog({
-      id: "top-article-summary",
-      title: "Summary",
       contents: (
-        <LineInputDialogContent
-          placeholder='Type Summary'
-          onSubmit={summary => openConfirmDialog(() => handleUpdateTopArticle(id, summary))}
+        <ArticleTableDialog
+          onSelect={id =>
+            openLineInputDialog({
+              title: "Summary",
+              placeholder: "Type Summary",
+              onSubmit: summary =>
+                openConfirmDialog({
+                  onConfirm: () => handleUpdateTopArticle(id, summary),
+                }),
+            })
+          }
         />
       ),
     });
@@ -41,8 +42,8 @@ const TopArticle = () => {
   const handleUpdateTopArticle = async (id: number, summary: string) => {
     await updateTopArticleAsync({ id, summary });
     closeDialog("top-article");
-    closeDialog("top-article-summary");
-    closeDialog("confirm-update");
+    closeConfirmDialog();
+    closeLineInputDialog();
     refetchTopArticle();
   };
 

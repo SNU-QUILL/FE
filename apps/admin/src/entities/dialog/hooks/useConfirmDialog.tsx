@@ -4,9 +4,9 @@ import ConfirmDialogContent from "@/entities/dialog/ui/ConfirmDialogContent";
 
 const useConfirmDialog = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
+  const dialogId = "confirm-dialog";
 
-  const openConfirmDialog = (onConfirm: () => void) => {
-    const dialogId = "confirm-dialog";
+  const openConfirmDialog = ({ onConfirm }: { onConfirm: () => void }) => {
     openDialog({
       id: dialogId,
       title: DIALOG_MESSAGE.CONFIRM_UPDATE_TITLE,
@@ -15,7 +15,6 @@ const useConfirmDialog = () => {
           onCancel={() => closeDialog(dialogId)}
           onConfirm={() => {
             onConfirm();
-            closeDialog(dialogId);
           }}
         />
       ),
@@ -23,7 +22,11 @@ const useConfirmDialog = () => {
     });
   };
 
-  return { openConfirmDialog };
+  const closeConfirmDialog = () => {
+    closeDialog("confirm-dialog");
+  };
+
+  return { openConfirmDialog, closeConfirmDialog };
 };
 
 export default useConfirmDialog;
