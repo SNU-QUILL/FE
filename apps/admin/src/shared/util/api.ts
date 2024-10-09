@@ -60,6 +60,7 @@ api.interceptors.response.use(
         const originalRequest = error.config!;
         return api(originalRequest);
       }
+      return Promise.reject(error.response);
     }
 
     /** TODO: 서버 에러 메시지 내려줘야함. */
