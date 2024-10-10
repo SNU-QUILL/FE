@@ -2,12 +2,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useGlobalDialogStore } from "@/shared/store/globalDialog";
 import ArticleEditor from "@/features/article/ui/ArticleEditor";
 import ArticleTable from "@/features/article/ui/ArticleTable";
-import ArticleTabletHead from "@/features/article/ui/ArticleTabletHead";
 import { EARTICLE_CATEGORY } from "@/entities/article/model/article";
 import { useArticleListQuery } from "@/entities/article/api/article";
 import ArticleTablePagination from "@/features/article/ui/ArticleTablePagination";
 import ArticleTabs from "@/features/article/ui/ArticleTabs";
 import { EARTICLE_TABLE_MODE } from "@/features/article/model/articleTable";
+import { Button } from "@repo/ui";
+import { Pencil1Icon } from "@radix-ui/react-icons";
 
 const ArticlePage = () => {
   const { category, page } = useParams() as { category: EARTICLE_CATEGORY; page: string };
@@ -19,20 +20,25 @@ const ArticlePage = () => {
   });
 
   const openWriteArticleDialog = () => {
+    const dialogId = "new-article";
     openDialog({
-      id: "new-article",
+      id: dialogId,
       title: "New Article",
       contents: (
         <ArticleEditor
           category={category}
           onSave={() => {
-            closeDialog("new-article");
+            closeDialog(dialogId);
             refetch();
           }}
         />
       ),
       contentsWrapperClassName: "w-4/5 h-4/5",
     });
+  };
+
+  const onArticleEdit = () => {
+    refetch();
   };
 
   const onPrevClick = () => {
@@ -55,12 +61,15 @@ const ArticlePage = () => {
           <div>Loading...</div>
         ) : (
           <div>
-            <ArticleTabletHead onWriteArticleClick={() => openWriteArticleDialog()} />
+            <Button className='mb-4' onClick={openWriteArticleDialog}>
+              <Pencil1Icon />
+            </Button>
             <hr />
             <ArticleTable
               data={data.content}
               mode={EARTICLE_TABLE_MODE.DEFAULT}
               category={category}
+              onArticleSave={onArticleEdit}
             />
             <ArticleTablePagination
               total={data.totalPages}

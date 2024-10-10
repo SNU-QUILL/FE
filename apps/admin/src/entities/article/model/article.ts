@@ -49,6 +49,10 @@ export interface IArticleSaveRequest {
   invisible: boolean;
 }
 
+export interface IArticleEditRequest extends IArticleSaveRequest {
+  id: number;
+}
+
 export enum EARTICLE_CATEGORY {
   FEATURES = "features",
   SNU_SOCIETY = "snu_society",

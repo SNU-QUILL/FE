@@ -1,4 +1,4 @@
-import { EARTICLE_CATEGORY, IArticleSaveRequest } from "../model/article";
+import { EARTICLE_CATEGORY, IArticleEditRequest, IArticleSaveRequest } from "../model/article";
 import { ApiRoutes } from "@/shared/constants/apiRoutes";
 import {
   IArticle,
@@ -9,6 +9,7 @@ import {
 } from "@/entities/article/model/article";
 import { api } from "@/shared/util/api";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { omit } from "lodash";
 
 const articleQueryKey = {
   all: ["article"],
@@ -73,5 +74,16 @@ export const useArticleSaveMutation = () => {
 
 const saveArticle = async (request: IArticleSaveRequest) => {
   const response = await api.post(ApiRoutes.ARTICLE.save, request);
+  return response.data;
+};
+
+export const useArticleEditMutation = () => {
+  return useMutation({
+    mutationFn: (request: IArticleEditRequest) => editArticle(request),
+  });
+};
+
+const editArticle = async (request: IArticleEditRequest) => {
+  const response = await api.post(`${ApiRoutes.ARTICLE.edit}/${request.id}`, omit(request, "id"));
   return response.data;
 };

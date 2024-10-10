@@ -1,7 +1,11 @@
 import { Editor } from "@toast-ui/react-editor";
 import { useCallback, useEffect, useRef, useState } from "react";
 import "@toast-ui/editor/dist/toastui-editor.css";
-import { useArticleDetailQuery, useArticleSaveMutation } from "@/entities/article/api/article";
+import {
+  useArticleDetailQuery,
+  useArticleEditMutation,
+  useArticleSaveMutation,
+} from "@/entities/article/api/article";
 import { useFileUploadMutation } from "@/entities/file/api/file";
 import { EFileType } from "@/entities/file/model/file";
 import { Button, Input } from "@repo/ui";
@@ -18,6 +22,7 @@ const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
   const { data, isFetching } = useArticleDetailQuery(id);
   const { mutateAsync: uploadFileAsync } = useFileUploadMutation();
   const { mutateAsync: saveArticleAsync } = useArticleSaveMutation();
+  const { mutateAsync: editArticleAsync } = useArticleEditMutation();
   const [title, setTitle] = useState<string>("");
   const [mainImage, setMainImage] = useState<string | null>(null);
   const editorRef = useRef<Editor>(null);
@@ -63,14 +68,26 @@ const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
 
   const onSubmit = async () => {
     const content = editorRef.current?.getInstance().getHTML();
-    await saveArticleAsync({
-      title: title,
-      pictureUrl: mainImage ?? "",
-      category: category.toUpperCase() as Uppercase<EARTICLE_CATEGORY>,
-      contents: content,
-      authorId: 1,
-      invisible: false,
-    });
+    if (id) {
+      await editArticleAsync({
+        id: id,
+        title: title,
+        pictureUrl: mainImage ?? "",
+        category: category.toUpperCase() as Uppercase<EARTICLE_CATEGORY>,
+        contents: content,
+        authorId: 1,
+        invisible: false,
+      });
+    } else {
+      await saveArticleAsync({
+        title: title,
+        pictureUrl: mainImage ?? "",
+        category: category.toUpperCase() as Uppercase<EARTICLE_CATEGORY>,
+        contents: content,
+        authorId: 1,
+        invisible: false,
+      });
+    }
     onSave?.();
   };
 

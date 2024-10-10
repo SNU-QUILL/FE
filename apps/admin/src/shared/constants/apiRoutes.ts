@@ -8,6 +8,7 @@ const ARTICLE = {
   detail: "/article",
   recent: "/article/recent",
   save: "/article",
+  edit: "/article",
 };
 
 const TOP_ARTICLE = {

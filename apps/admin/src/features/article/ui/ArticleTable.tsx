@@ -15,17 +15,30 @@ interface IArticleTableProps {
 }
 
 const ArticleTable = (props: IArticleTableProps) => {
-  const { openDialog } = useGlobalDialogStore();
+  const { openDialog, closeDialog } = useGlobalDialogStore();
 
-  const openWriteArticleDialog = (id?: number) => {
+  const openEditArticleDialog = (id?: number) => {
+    const dialogId = "edit-article";
     openDialog({
-      id: "edit-article",
+      id: dialogId,
       title: "Edit Article",
       contents: (
-        <ArticleEditor id={id} category={props.category} onSave={() => props.onArticleSave?.()} />
+        <ArticleEditor
+          id={id}
+          category={props.category}
+          onSave={() => {
+            closeDialog(dialogId);
+            props.onArticleSave?.();
+          }}
+        />
       ),
       contentsWrapperClassName: "w-4/5 h-4/5",
     });
+  };
+
+  const extractTextFromHtml = (html: string) => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent || "";
   };
 
   return (
@@ -51,7 +64,9 @@ const ArticleTable = (props: IArticleTableProps) => {
             >
               <TableCell>{article.id}</TableCell>
               <TableCell className='max-w-[200px] truncate'>{article.articleTitle}</TableCell>
-              <TableCell className='max-w-[400px] truncate'>{article.articleSummary}</TableCell>
+              <TableCell className='max-w-[400px] truncate'>
+                {extractTextFromHtml(article.articleSummary)}
+              </TableCell>
               <TableCell>{article.authorName}</TableCell>
               {/* <TableCell>
                 {format(new Date(article.publishDate), "yyyy-MM-dd'\n'hh:mm:ss")}
@@ -61,7 +76,7 @@ const ArticleTable = (props: IArticleTableProps) => {
               </TableCell> */}
               {props.mode === EARTICLE_TABLE_MODE.DEFAULT && (
                 <TableCell className='flex gap-2'>
-                  <Button variant='outline' onClick={() => openWriteArticleDialog(article.id)}>
+                  <Button variant='outline' onClick={() => openEditArticleDialog(article.id)}>
                     <Pencil2Icon />
                   </Button>
                   <Button variant='destructive'>
