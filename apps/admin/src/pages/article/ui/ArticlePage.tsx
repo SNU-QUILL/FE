@@ -61,9 +61,11 @@ const ArticlePage = () => {
           <div>Loading...</div>
         ) : (
           <div>
-            <Button className='mb-4' onClick={openWriteArticleDialog}>
-              <Pencil1Icon />
-            </Button>
+            <div className='flex justify-end pb-4'>
+              <Button onClick={openWriteArticleDialog}>
+                <Pencil1Icon />
+              </Button>
+            </div>
             <hr />
             <ArticleTable
               data={data.content}
