@@ -1,4 +1,4 @@
-import { EARTICLE_CATEGORY, IArticleEditRequest, IArticleSaveRequest } from "../model/article";
+import { EARTICLE_CATEGORY, IArticleSaveRequest } from "../model/article";
 import { ApiRoutes } from "@/shared/constants/apiRoutes";
 import {
   IArticle,
@@ -9,7 +9,6 @@ import {
 } from "@/entities/article/model/article";
 import { api } from "@/shared/util/api";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { omit } from "lodash";
 
 const articleQueryKey = {
   all: ["article"],
@@ -66,9 +65,15 @@ const getRecentArticle = async (request: IArticleRecentRequest) => {
   return response.data;
 };
 
-export const useArticleSaveMutation = () => {
+export const useArticleSaveMutation = (id?: number) => {
   return useMutation({
-    mutationFn: (request: IArticleSaveRequest) => saveArticle(request),
+    mutationFn: (request: IArticleSaveRequest) => {
+      if (id) {
+        return editArticle(id, request);
+      } else {
+        return saveArticle(request);
+      }
+    },
   });
 };
 
@@ -77,13 +82,7 @@ const saveArticle = async (request: IArticleSaveRequest) => {
   return response.data;
 };
 
-export const useArticleEditMutation = () => {
-  return useMutation({
-    mutationFn: (request: IArticleEditRequest) => editArticle(request),
-  });
-};
-
-const editArticle = async (request: IArticleEditRequest) => {
-  const response = await api.post(`${ApiRoutes.ARTICLE.edit}/${request.id}`, omit(request, "id"));
+const editArticle = async (id: number, request: IArticleSaveRequest) => {
+  const response = await api.post(`${ApiRoutes.ARTICLE.edit}/${id}`, request);
   return response.data;
 };
