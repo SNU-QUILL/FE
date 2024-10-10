@@ -14,7 +14,8 @@ function AppRouter() {
           <Route element={<CommonLayout />}>
             <Route path='/main' element={<Page.MainPage />} />
             <Route path='/article'>
-              <Route path=':category' element={<Navigate to='1' />} />
+              <Route index element={<Navigate to='features/1' replace />} />
+              <Route path=':category' element={<Navigate to='1' replace />} />
               <Route path=':category/:page' element={<Page.ArticlePage />} />
             </Route>
             <Route path='/misc' element={<Page.MiscPage />} />
