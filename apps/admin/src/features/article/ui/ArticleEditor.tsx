@@ -69,7 +69,7 @@ const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
       category: category.toUpperCase() as Uppercase<EARTICLE_CATEGORY>,
       contents: content,
       authorId: 1,
-      invisible: false,
+      invisible: true,
     });
     onSave?.();
   };
