@@ -7,6 +7,7 @@ const ARTICLE = {
   list: "/article",
   detail: "/article",
   recent: "/article/recent",
+  save: "/article",
 };
 
 const TOP_ARTICLE = {

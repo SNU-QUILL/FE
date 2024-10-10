@@ -40,6 +40,15 @@ export interface IArticleRecentRequest {
   count: number;
 }
 
+export interface IArticleSaveRequest {
+  title: string;
+  pictureUrl: string;
+  category: Uppercase<EARTICLE_CATEGORY>;
+  contents: string;
+  authorId: number;
+  invisible: boolean;
+}
+
 export enum EARTICLE_CATEGORY {
   FEATURES = "features",
   SNU_SOCIETY = "snu_society",

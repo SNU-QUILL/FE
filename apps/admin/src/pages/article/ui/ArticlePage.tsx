@@ -3,9 +3,7 @@ import { useGlobalDialogStore } from "@/shared/store/globalDialog";
 import ArticleEditor from "@/features/article/ui/ArticleEditor";
 import ArticleTable from "@/features/article/ui/ArticleTable";
 import ArticleTabletHead from "@/features/article/ui/ArticleTabletHead";
-import { useArticleSelectStore } from "@/shared/store/articleSelectStore";
 import { EARTICLE_CATEGORY } from "@/entities/article/model/article";
-import { useEffect } from "react";
 import { useArticleListQuery } from "@/entities/article/api/article";
 import ArticleTablePagination from "@/features/article/ui/ArticleTablePagination";
 import ArticleTabs from "@/features/article/ui/ArticleTabs";
@@ -14,31 +12,25 @@ import { EARTICLE_TABLE_MODE } from "@/features/article/model/articleTable";
 const ArticlePage = () => {
   const { category, page } = useParams() as { category: EARTICLE_CATEGORY; page: string };
   const navigate = useNavigate();
-  const { openDialog } = useGlobalDialogStore();
-  const { selectedArticles, setSelectedArticles } = useArticleSelectStore();
-  const { data, isPending } = useArticleListQuery({
+  const { openDialog, closeDialog } = useGlobalDialogStore();
+  const { data, isPending, refetch } = useArticleListQuery({
     page: parseInt(page),
     category: category,
   });
-
-  const onSelectedChange = (articleId: number) => {
-    setSelectedArticles(
-      selectedArticles.includes(articleId)
-        ? selectedArticles.filter(id => id !== articleId)
-        : [...selectedArticles, articleId],
-    );
-  };
-
-  useEffect(() => {
-    setSelectedArticles([]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category]);
 
   const openWriteArticleDialog = () => {
     openDialog({
       id: "new-article",
       title: "New Article",
-      contents: <ArticleEditor />,
+      contents: (
+        <ArticleEditor
+          category={category}
+          onSave={() => {
+            closeDialog("new-article");
+            refetch();
+          }}
+        />
+      ),
       contentsWrapperClassName: "w-4/5 h-4/5",
     });
   };
@@ -68,8 +60,7 @@ const ArticlePage = () => {
             <ArticleTable
               data={data.content}
               mode={EARTICLE_TABLE_MODE.DEFAULT}
-              selectedArticles={selectedArticles}
-              onSelectedChange={onSelectedChange}
+              category={category}
             />
             <ArticleTablePagination
               total={data.totalPages}

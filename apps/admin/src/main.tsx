@@ -11,8 +11,8 @@ import AppRouter from "@/app/routes/AppRouter";
 
 const worker = setupWorker();
 if (import.meta.env.MODE === "development") {
-  worker.use(...handlers);
-  worker.start({ onUnhandledRequest: "bypass" });
+  // worker.use(...handlers);
+  // worker.start({ onUnhandledRequest: "bypass" });
 }
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

@@ -1,18 +1,17 @@
 import { Button } from "@repo/ui";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@repo/ui";
 import { Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
-import { Checkbox } from "@repo/ui";
 import { useGlobalDialogStore } from "@/shared/store/globalDialog";
 import ArticleEditor from "@/features/article/ui/ArticleEditor";
-import { IArticle } from "@/entities/article/model/article";
+import { EARTICLE_CATEGORY, IArticle } from "@/entities/article/model/article";
 import { EARTICLE_TABLE_MODE } from "@/features/article/model/articleTable";
 
 interface IArticleTableProps {
+  category: EARTICLE_CATEGORY;
   data: IArticle[];
   mode: EARTICLE_TABLE_MODE;
-  selectedArticles?: number[];
-  onSelectedChange?: (articleId: number) => void;
   onSelect?: (articleId: number) => void;
+  onArticleSave?: () => void;
 }
 
 const ArticleTable = (props: IArticleTableProps) => {
@@ -22,7 +21,9 @@ const ArticleTable = (props: IArticleTableProps) => {
     openDialog({
       id: "edit-article",
       title: "Edit Article",
-      contents: <ArticleEditor id={id} />,
+      contents: (
+        <ArticleEditor id={id} category={props.category} onSave={() => props.onArticleSave?.()} />
+      ),
       contentsWrapperClassName: "w-4/5 h-4/5",
     });
   };
@@ -32,7 +33,6 @@ const ArticleTable = (props: IArticleTableProps) => {
       <Table className='w-full'>
         <TableHeader>
           <TableRow>
-            {props.mode === EARTICLE_TABLE_MODE.DEFAULT && <TableHead>Select</TableHead>}
             <TableHead>No.</TableHead>
             <TableHead>Title</TableHead>
             <TableHead>Contents</TableHead>
@@ -49,14 +49,6 @@ const ArticleTable = (props: IArticleTableProps) => {
               onClick={() => props.onSelect?.(article.id)}
               className={props.mode === EARTICLE_TABLE_MODE.SELECT ? "cursor-pointer" : ""}
             >
-              {props.mode === EARTICLE_TABLE_MODE.DEFAULT && (
-                <TableCell>
-                  <Checkbox
-                    checked={props.selectedArticles?.includes(article.id)}
-                    onCheckedChange={() => props.onSelectedChange?.(article.id)}
-                  />
-                </TableCell>
-              )}
               <TableCell>{article.id}</TableCell>
               <TableCell className='max-w-[200px] truncate'>{article.articleTitle}</TableCell>
               <TableCell className='max-w-[400px] truncate'>{article.articleSummary}</TableCell>

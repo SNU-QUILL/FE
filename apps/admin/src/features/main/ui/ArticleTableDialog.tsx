@@ -26,6 +26,7 @@ const ArticleTableDialog = ({
         {!showTab && <div className='text-primary text-2xl'>{selectedTab}</div>}
         {showTab && <ArticleTabs initialTab={selectedTab} onTabChange={setSelectedTab} />}
         <ArticleTable
+          category={selectedTab}
           data={data.content}
           mode={EARTICLE_TABLE_MODE.SELECT}
           onSelect={(articleId: number) => onSelect(articleId, selectedTab)}

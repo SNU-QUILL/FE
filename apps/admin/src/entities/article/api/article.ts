@@ -1,4 +1,4 @@
-import { EARTICLE_CATEGORY } from "../model/article";
+import { EARTICLE_CATEGORY, IArticleSaveRequest } from "../model/article";
 import { ApiRoutes } from "@/shared/constants/apiRoutes";
 import {
   IArticle,
@@ -8,7 +8,7 @@ import {
   IArticleResponse,
 } from "@/entities/article/model/article";
 import { api } from "@/shared/util/api";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const articleQueryKey = {
   all: ["article"],
@@ -62,5 +62,16 @@ const getRecentArticle = async (request: IArticleRecentRequest) => {
   const response = await api.get<IArticle[]>(ApiRoutes.ARTICLE.recent, {
     params: request,
   });
+  return response.data;
+};
+
+export const useArticleSaveMutation = () => {
+  return useMutation({
+    mutationFn: (request: IArticleSaveRequest) => saveArticle(request),
+  });
+};
+
+const saveArticle = async (request: IArticleSaveRequest) => {
+  const response = await api.post(ApiRoutes.ARTICLE.save, request);
   return response.data;
 };
