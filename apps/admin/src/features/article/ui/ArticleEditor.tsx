@@ -1,12 +1,19 @@
 import { Editor } from "@toast-ui/react-editor";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { useArticleDetailQuery, useArticleSaveMutation } from "@/entities/article/api/article";
 import { useFileUploadMutation } from "@/entities/file/api/file";
 import { EFileType } from "@/entities/file/model/file";
-import { Button, Input } from "@repo/ui";
+import { Button, Form, FormField, FormItem, FormMessage, Input } from "@repo/ui";
 import { Label } from "@repo/ui/src/components/ui/label";
 import { EARTICLE_CATEGORY } from "@/entities/article/model/article";
+import { useForm, useFormContext } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  articleSchema,
+  ArticleSchema,
+  defaultArticleSchema,
+} from "@/entities/article/schema/article";
 
 interface IArticleEditorProps {
   id?: number;
@@ -14,23 +21,9 @@ interface IArticleEditorProps {
   onSave: () => void;
 }
 
-const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
-  const { data, isFetching } = useArticleDetailQuery(id);
+const ArticleMainImageController = () => {
+  const form = useFormContext();
   const { mutateAsync: uploadFileAsync } = useFileUploadMutation();
-  const { mutateAsync: saveArticleAsync } = useArticleSaveMutation(id);
-  const [title, setTitle] = useState<string>("");
-  const [mainImage, setMainImage] = useState<string | null>(null);
-  const editorRef = useRef<Editor>(null);
-  const imagePreviewRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (data?.pictureUrl) {
-      setMainImage(data.pictureUrl);
-    }
-    if (data?.title) {
-      setTitle(data.title);
-    }
-  }, [data]);
 
   const handleFileUpload = useCallback(
     async (blob: Blob, callback: (url: string) => void) => {
@@ -44,31 +37,141 @@ const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (file) {
-        const reader = new FileReader();
-        reader.onload = event => {
-          const img = document.createElement("img");
-          img.src = event.target?.result as string;
-          img.style.maxWidth = "200px";
-          img.style.maxHeight = "200px";
-          imagePreviewRef.current?.appendChild(img);
-        };
-        reader.readAsDataURL(file);
         handleFileUpload(file, url => {
-          setMainImage(url);
+          form.setValue("pictureUrl", url);
         });
       }
     },
-    [handleFileUpload],
+    [handleFileUpload, form],
   );
 
-  const onSubmit = async () => {
-    const content = editorRef.current?.getInstance().getHTML();
+  return (
+    <FormField
+      control={form.control}
+      name='pictureUrl'
+      render={({ field }) => (
+        <FormItem className='m-1 mb-4'>
+          <Label
+            htmlFor='mainImage'
+            className='flex items-center justify-center w-[300px] h-[300px] outline-dashed outline-primary bg-secondary hover:animate-pulse hover:bg-primary/30 hover:cursor-pointer rounded-md '
+          >
+            {field.value ? (
+              <img src={field.value} alt='main' className='w-[300px] h-[300px]' />
+            ) : (
+              <div>Upload Main Image</div>
+            )}
+          </Label>
+          <Input
+            id='mainImage'
+            type='file'
+            accept='image/*'
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              handleMainImageChange(e);
+              field.onChange(e);
+            }}
+            className='hidden'
+          />
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+};
+
+const ArticleTitleController = () => {
+  const form = useFormContext();
+  return (
+    <FormField
+      control={form.control}
+      name='title'
+      render={({ field }) => (
+        <FormItem className='mb-4 mr-1 ml-1'>
+          <Input {...field} />
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+};
+
+const ArticleContentsController = () => {
+  const editorRef = useRef<Editor>(null);
+  const form = useFormContext();
+  const { mutateAsync: uploadFileAsync } = useFileUploadMutation();
+
+  const handleFileUpload = useCallback(
+    async (blob: Blob, callback: (url: string) => void) => {
+      const response = await uploadFileAsync({ file: blob, fileType: EFileType.ARTICLE });
+      callback(response.endPoint);
+    },
+    [uploadFileAsync],
+  );
+
+  useEffect(() => {
+    editorRef.current?.getInstance().setHTML(form.watch("contents"));
+  }, [form.watch("contents")]);
+
+  return (
+    <FormField
+      control={form.control}
+      name='contents'
+      render={({ field }) => (
+        <FormItem className='h-full'>
+          <Editor
+            ref={editorRef}
+            toolbarItems={[
+              ["heading", "bold", "italic", "strike"],
+              ["hr", "quote"],
+              ["ul", "ol", "task", "indent", "outdent"],
+              ["table", "image", "link"],
+            ]}
+            initialEditType='wysiwyg'
+            hideModeSwitch
+            height='100%'
+            initialValue={field.value}
+            onChange={() => field.onChange(editorRef.current?.getInstance().getHTML())}
+            hooks={{
+              addImageBlobHook: (blob: Blob, callback: (url: string) => void) => {
+                handleFileUpload(blob, callback);
+                return true;
+              },
+            }}
+          />
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+};
+
+const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
+  const { data, isFetching } = useArticleDetailQuery(id);
+  const { mutateAsync: saveArticleAsync } = useArticleSaveMutation(id);
+
+  const form = useForm<ArticleSchema>({
+    resolver: zodResolver(articleSchema),
+    defaultValues: { ...defaultArticleSchema, category },
+  });
+
+  useEffect(() => {
+    if (data?.pictureUrl) {
+      form.setValue("pictureUrl", data.pictureUrl);
+    }
+    if (data?.titleString) {
+      form.setValue("title", data.titleString);
+    }
+    if (data?.contents) {
+      form.setValue("contents", data.contents.join("\n"));
+    }
+  }, [data, form]);
+
+  const onSubmit = async (values: ArticleSchema) => {
     await saveArticleAsync({
-      title: title,
-      pictureUrl: mainImage ?? "",
+      title: values.title,
+      contents: values.contents,
       category: category.toUpperCase() as Uppercase<EARTICLE_CATEGORY>,
-      contents: content,
       authorId: 1,
+      pictureUrl: values.pictureUrl ?? "",
       invisible: true,
     });
     onSave?.();
@@ -77,51 +180,19 @@ const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
   if (isFetching) return null;
 
   return (
-    <div className='w-full h-full overflow-y-auto scrollbar-hide'>
-      <Label
-        htmlFor='mainImage'
-        className='flex items-center justify-center w-[200px] h-[200px] m-4 outline-dashed outline-primary bg-secondary hover:animate-pulse hover:bg-primary/30 hover:cursor-pointer rounded-md '
+    <Form {...form}>
+      <form
+        className='w-full h-full overflow-y-auto scrollbar-hide'
+        onSubmit={form.handleSubmit(onSubmit)}
       >
-        {!mainImage && <div>Upload Main Image</div>}
-        {mainImage && <img src={mainImage} alt='main' className='w-[200px] h-[200px]' />}
-      </Label>
-      <Input
-        id='mainImage'
-        type='file'
-        accept='image/*'
-        onChange={handleMainImageChange}
-        className='hidden'
-      />
-      <Input
-        id='title'
-        type='text'
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-        className='mb-4'
-      />
-      <Editor
-        ref={editorRef}
-        toolbarItems={[
-          ["heading", "bold", "italic", "strike"],
-          ["hr", "quote"],
-          ["ul", "ol", "task", "indent", "outdent"],
-          ["table", "image", "link"],
-        ]}
-        initialEditType='wysiwyg'
-        hideModeSwitch
-        height='100%'
-        initialValue={data?.contents?.join("\n") ?? " "}
-        hooks={{
-          addImageBlobHook: (blob: Blob, callback: (url: string) => void) => {
-            handleFileUpload(blob, callback);
-            return true;
-          },
-        }}
-      />
-      <div className='flex justify-end pt-4'>
-        <Button onClick={onSubmit}>Save</Button>
-      </div>
-    </div>
+        <ArticleMainImageController />
+        <ArticleTitleController />
+        <ArticleContentsController />
+        <div className='flex justify-end pt-4'>
+          <Button>Save</Button>
+        </div>
+      </form>
+    </Form>
   );
 };
 export default ArticleEditor;
