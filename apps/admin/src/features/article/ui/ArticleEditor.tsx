@@ -4,7 +4,19 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { useArticleDetailQuery, useArticleSaveMutation } from "@/entities/article/api/article";
 import { useFileUploadMutation } from "@/entities/file/api/file";
 import { EFileType } from "@/entities/file/model/file";
-import { Button, Form, FormField, FormItem, FormMessage, Input } from "@repo/ui";
+import {
+  Button,
+  Form,
+  FormField,
+  FormItem,
+  FormMessage,
+  Input,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@repo/ui";
 import { Label } from "@repo/ui/src/components/ui/label";
 import { EARTICLE_CATEGORY } from "@/entities/article/model/article";
 import { useForm, useFormContext } from "react-hook-form";
@@ -71,6 +83,33 @@ const ArticleMainImageController = () => {
             }}
             className='hidden'
           />
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+};
+
+const ArticleCategoryController = () => {
+  const form = useFormContext();
+  return (
+    <FormField
+      control={form.control}
+      name='category'
+      render={({ field }) => (
+        <FormItem className='mb-4 mr-1 ml-1'>
+          <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <SelectTrigger>
+              <SelectValue placeholder='Select a category' />
+            </SelectTrigger>
+            <SelectContent>
+              {Object.values(EARTICLE_CATEGORY).map(category => (
+                <SelectItem key={category} value={category}>
+                  {category}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           <FormMessage />
         </FormItem>
       )}
@@ -169,7 +208,7 @@ const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
     await saveArticleAsync({
       title: values.title,
       contents: values.contents,
-      category: category.toUpperCase() as Uppercase<EARTICLE_CATEGORY>,
+      category: values.category.toUpperCase() as Uppercase<EARTICLE_CATEGORY>,
       authorId: 1,
       pictureUrl: values.pictureUrl ?? "",
       invisible: true,
@@ -186,6 +225,7 @@ const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <ArticleMainImageController />
+        <ArticleCategoryController />
         <ArticleTitleController />
         <ArticleContentsController />
         <div className='flex justify-end pt-4'>
