@@ -5,6 +5,7 @@ import { useGlobalDialogStore } from "@/shared/store/globalDialog";
 import ArticleEditor from "@/features/article/ui/ArticleEditor";
 import { EARTICLE_CATEGORY, IArticle } from "@/entities/article/model/article";
 import { EARTICLE_TABLE_MODE } from "@/features/article/model/articleTable";
+import useConfirmDialog from "@/features/dialog/hooks/useConfirmDialog";
 
 interface IArticleTableProps {
   category: EARTICLE_CATEGORY;
@@ -16,6 +17,7 @@ interface IArticleTableProps {
 
 const ArticleTable = (props: IArticleTableProps) => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
+  const { openConfirmDialog, closeConfirmDialog } = useConfirmDialog();
 
   const openEditArticleDialog = (id?: number) => {
     const dialogId = "edit-article";
@@ -27,8 +29,13 @@ const ArticleTable = (props: IArticleTableProps) => {
           id={id}
           category={props.category}
           onSave={() => {
-            closeDialog(dialogId);
-            props.onArticleSave?.();
+            openConfirmDialog({
+              onConfirm: () => {
+                closeDialog(dialogId);
+                closeConfirmDialog();
+                props.onArticleSave?.();
+              },
+            });
           }}
         />
       ),

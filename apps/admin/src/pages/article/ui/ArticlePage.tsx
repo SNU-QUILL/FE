@@ -9,11 +9,13 @@ import ArticleTabs from "@/features/article/ui/ArticleTabs";
 import { EARTICLE_TABLE_MODE } from "@/features/article/model/articleTable";
 import { Button } from "@repo/ui";
 import { Pencil1Icon } from "@radix-ui/react-icons";
+import useConfirmDialog from "@/features/dialog/hooks/useConfirmDialog";
 
 const ArticlePage = () => {
   const { category, page } = useParams() as { category: EARTICLE_CATEGORY; page: string };
   const navigate = useNavigate();
   const { openDialog, closeDialog } = useGlobalDialogStore();
+  const { openConfirmDialog, closeConfirmDialog } = useConfirmDialog();
   const { data, isPending, refetch } = useArticleListQuery({
     page: parseInt(page),
     category: category,
@@ -28,8 +30,13 @@ const ArticlePage = () => {
         <ArticleEditor
           category={category}
           onSave={() => {
-            closeDialog(dialogId);
-            refetch();
+            openConfirmDialog({
+              onConfirm: () => {
+                closeDialog(dialogId);
+                closeConfirmDialog();
+                refetch();
+              },
+            });
           }}
         />
       ),
