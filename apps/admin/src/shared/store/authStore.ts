@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { jwtDecode } from "jwt-decode";
 
 interface IAuthStore {
   accessToken?: string;
@@ -10,6 +11,13 @@ interface IAuthStore {
   logout: () => void;
   getName: () => string;
   getRole: () => string;
+  getId: () => number;
+}
+
+interface ITokenPayload {
+  name: string;
+  role: string;
+  id: number;
 }
 
 export const useAuthStore = create<IAuthStore>()(
@@ -23,10 +31,22 @@ export const useAuthStore = create<IAuthStore>()(
       logout: () => {
         set({ accessToken: undefined, refreshToken: undefined });
       },
-      /** TODO: JWT에서 name, role 뽑아오기 */
-      getName: () => "name",
-      getRole: () => "role",
+      getName: () => {
+        const token = get().accessToken;
+        const decoded = jwtDecode<ITokenPayload>(token!);
+        return decoded.name;
+      },
+      getRole: () => {
+        const token = get().accessToken;
+        const decoded = jwtDecode<ITokenPayload>(token!);
+        return decoded.role;
+      },
+      getId: () => {
+        const token = get().accessToken;
+        const decoded = jwtDecode<ITokenPayload>(token!);
+        return decoded.id;
+      },
     }),
-    { name: "auth", storage: createJSONStorage(() => localStorage) }
-  )
+    { name: "auth", storage: createJSONStorage(() => localStorage) },
+  ),
 );

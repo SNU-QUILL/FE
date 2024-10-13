@@ -26,6 +26,7 @@ import {
   ArticleSchema,
   defaultArticleSchema,
 } from "@/entities/article/schema/article";
+import { useAuthStore } from "@/shared/store/authStore";
 
 interface IArticleEditorProps {
   id?: number;
@@ -186,7 +187,7 @@ const ArticleContentsController = () => {
 const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
   const { data, isFetching } = useArticleDetailQuery(id);
   const { mutateAsync: saveArticleAsync } = useArticleSaveMutation(id);
-
+  const authStore = useAuthStore();
   const form = useForm<ArticleSchema>({
     resolver: zodResolver(articleSchema),
     defaultValues: { ...defaultArticleSchema, category },
@@ -209,9 +210,9 @@ const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
       title: values.title,
       contents: values.contents,
       category: values.category.toUpperCase() as Uppercase<EARTICLE_CATEGORY>,
-      authorId: 1,
+      authorId: authStore.getId(),
       pictureUrl: values.pictureUrl ?? "",
-      invisible: true,
+      invisible: false,
     });
     onSave?.();
   };
