@@ -197,8 +197,8 @@ const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
     if (data?.pictureUrl) {
       form.setValue("pictureUrl", data.pictureUrl);
     }
-    if (data?.titleString) {
-      form.setValue("title", data.titleString);
+    if (data?.title) {
+      form.setValue("title", data.title);
     }
     if (data?.contents) {
       form.setValue("contents", data.contents);

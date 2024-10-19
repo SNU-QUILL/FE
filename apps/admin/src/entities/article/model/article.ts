@@ -24,7 +24,6 @@ export interface IArticle {
 
 export interface IArticleDetailResponse {
   title: string;
-  titleString: string;
   pictureUrl: string;
   category: Uppercase<EARTICLE_CATEGORY>;
   contents: string;
