@@ -19,7 +19,12 @@ const ArticleTableDialog = ({
 }: ITopArticleDialogProps) => {
   const [selectedTab, setSelectedTab] = useState<EARTICLE_CATEGORY>(initialTab);
   const [page, setPage] = useState<number>(1);
-  const { data } = useArticleListQuery({ page, category: selectedTab });
+  const { data } = useArticleListQuery({
+    page,
+    pageSize: 10,
+    category: selectedTab,
+    containInvisible: false,
+  });
   return (
     data && (
       <div>

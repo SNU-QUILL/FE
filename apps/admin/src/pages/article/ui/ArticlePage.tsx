@@ -18,7 +18,9 @@ const ArticlePage = () => {
   const { openConfirmDialog, closeConfirmDialog } = useConfirmDialog();
   const { data, isPending, refetch } = useArticleListQuery({
     page: parseInt(page),
+    pageSize: 10,
     category: category,
+    containInvisible: false,
   });
 
   const openWriteArticleDialog = () => {

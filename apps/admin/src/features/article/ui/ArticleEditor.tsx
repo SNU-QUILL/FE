@@ -201,7 +201,7 @@ const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
       form.setValue("title", data.titleString);
     }
     if (data?.contents) {
-      form.setValue("contents", data.contents.join("\n"));
+      form.setValue("contents", data.contents);
     }
   }, [data, form]);
 

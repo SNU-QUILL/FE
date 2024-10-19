@@ -30,6 +30,9 @@ export const useArticleListQuery = (data: IArticleRequest) => {
 const getArticles = async (data: IArticleRequest) => {
   const response = await api.get<IArticleResponse>(
     `${ApiRoutes.ARTICLE.list}/${data.category}/${data.page}`,
+    {
+      params: { containInvisible: data.containInvisible, pageSize: data.pageSize },
+    },
   );
   return response.data;
 };

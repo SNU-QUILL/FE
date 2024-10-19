@@ -1,8 +1,10 @@
 export interface IArticleRequest {
   category: EARTICLE_CATEGORY;
   page: number;
+  pageSize: number;
   title?: string;
   authorName?: string;
+  containInvisible: boolean;
 }
 
 export interface IArticleResponse {
@@ -25,7 +27,7 @@ export interface IArticleDetailResponse {
   titleString: string;
   pictureUrl: string;
   category: Uppercase<EARTICLE_CATEGORY>;
-  contents: string[];
+  contents: string;
   author: IAuthorDetail;
 }
 
