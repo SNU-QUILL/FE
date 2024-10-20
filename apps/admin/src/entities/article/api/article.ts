@@ -1,4 +1,8 @@
-import { EARTICLE_CATEGORY, IArticleSaveRequest } from "../model/article";
+import {
+  EARTICLE_CATEGORY,
+  IArticleSaveRequest,
+  IArticleVisibilityRequest,
+} from "../model/article";
 import { ApiRoutes } from "@/shared/constants/apiRoutes";
 import {
   IArticle,
@@ -87,5 +91,23 @@ const saveArticle = async (request: IArticleSaveRequest) => {
 
 const editArticle = async (id: number, request: IArticleSaveRequest) => {
   const response = await api.post(`${ApiRoutes.ARTICLE.edit}/${id}`, request);
+  return response.data;
+};
+
+export const useArticleVisibilityMutation = () => {
+  return useMutation({
+    mutationFn: (request: IArticleVisibilityRequest) => {
+      return updateArticleVisibility(request);
+    },
+  });
+};
+
+const updateArticleVisibility = async (request: IArticleVisibilityRequest) => {
+  const response = await api.post(
+    ApiRoutes.ARTICLE.visibility.replace("{id}", request.id.toString()),
+    {
+      invisible: request.invisible,
+    },
+  );
   return response.data;
 };

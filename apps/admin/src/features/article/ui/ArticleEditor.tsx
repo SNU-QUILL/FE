@@ -212,7 +212,7 @@ const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
       category: values.category.toUpperCase() as Uppercase<EARTICLE_CATEGORY>,
       authorId: authStore.getId(),
       pictureUrl: values.pictureUrl ?? "",
-      invisible: false,
+      invisible: true,
     });
     onSave?.();
   };

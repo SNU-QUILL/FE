@@ -20,7 +20,7 @@ const ArticlePage = () => {
     page: parseInt(page),
     pageSize: 10,
     category: category,
-    containInvisible: false,
+    containInvisible: true,
   });
 
   const openWriteArticleDialog = () => {

@@ -1,11 +1,12 @@
 import { Button } from "@repo/ui";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@repo/ui";
-import { Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
+import { EyeClosedIcon, EyeOpenIcon, Pencil2Icon } from "@radix-ui/react-icons";
 import { useGlobalDialogStore } from "@/shared/store/globalDialog";
 import ArticleEditor from "@/features/article/ui/ArticleEditor";
 import { EARTICLE_CATEGORY, IArticle } from "@/entities/article/model/article";
 import { EARTICLE_TABLE_MODE } from "@/features/article/model/articleTable";
 import useConfirmDialog from "@/features/dialog/hooks/useConfirmDialog";
+import { useArticleVisibilityMutation } from "@/entities/article/api/article";
 
 interface IArticleTableProps {
   category: EARTICLE_CATEGORY;
@@ -18,6 +19,7 @@ interface IArticleTableProps {
 const ArticleTable = (props: IArticleTableProps) => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
   const { openConfirmDialog, closeConfirmDialog } = useConfirmDialog();
+  const { mutateAsync: updateArticleVisibilityAsync } = useArticleVisibilityMutation();
 
   const openEditArticleDialog = (id?: number) => {
     const dialogId = "edit-article";
@@ -43,6 +45,14 @@ const ArticleTable = (props: IArticleTableProps) => {
     });
   };
 
+  const toggleInvisible = async (id: number, invisible: boolean) => {
+    await updateArticleVisibilityAsync({
+      id,
+      invisible,
+    });
+    props.onArticleSave?.();
+  };
+
   const extractTextFromHtml = (html: string) => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent || "";
@@ -57,8 +67,6 @@ const ArticleTable = (props: IArticleTableProps) => {
             <TableHead>Title</TableHead>
             <TableHead>Contents</TableHead>
             <TableHead>Author</TableHead>
-            {/* <TableHead>Published At</TableHead>
-            <TableHead>Modified At</TableHead> */}
             {props.mode === EARTICLE_TABLE_MODE.DEFAULT && <TableHead>Actions</TableHead>}
           </TableRow>
         </TableHeader>
@@ -75,19 +83,17 @@ const ArticleTable = (props: IArticleTableProps) => {
                 {extractTextFromHtml(article.articleSummary)}
               </TableCell>
               <TableCell>{article.authorName}</TableCell>
-              {/* <TableCell>
-                {format(new Date(article.publishDate), "yyyy-MM-dd'\n'hh:mm:ss")}
-              </TableCell>
-              <TableCell>
-                {format(new Date(article.modifiedDate), "yyyy-MM-dd'\n'hh:mm:ss")}
-              </TableCell> */}
               {props.mode === EARTICLE_TABLE_MODE.DEFAULT && (
                 <TableCell className='flex gap-2'>
-                  <Button variant='outline' onClick={() => openEditArticleDialog(article.id)}>
+                  <Button variant='default' onClick={() => openEditArticleDialog(article.id)}>
                     <Pencil2Icon />
                   </Button>
-                  <Button variant='destructive'>
-                    <TrashIcon />
+                  <Button
+                    variant='outline'
+                    className={`${article.invisible ? "bg-gray-100" : ""}`}
+                    onClick={() => toggleInvisible(article.id, !article.invisible)}
+                  >
+                    {article.invisible ? <EyeClosedIcon /> : <EyeOpenIcon />}
                   </Button>
                 </TableCell>
               )}

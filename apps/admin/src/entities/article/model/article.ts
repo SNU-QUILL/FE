@@ -20,6 +20,7 @@ export interface IArticle {
   articleSummary: string;
   articlePictureUrl: string;
   authorName: string;
+  invisible: boolean;
 }
 
 export interface IArticleDetailResponse {
@@ -48,6 +49,11 @@ export interface IArticleSaveRequest {
   category: Uppercase<EARTICLE_CATEGORY>;
   contents: string;
   authorId: number;
+  invisible: boolean;
+}
+
+export interface IArticleVisibilityRequest {
+  id: number;
   invisible: boolean;
 }
 

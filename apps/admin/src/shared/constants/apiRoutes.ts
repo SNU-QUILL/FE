@@ -9,6 +9,7 @@ const ARTICLE = {
   recent: "/article/recent",
   save: "/article",
   edit: "/article",
+  visibility: "/article/{id}/visibility",
 };
 
 const TOP_ARTICLE = {
