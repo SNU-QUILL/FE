@@ -46,11 +46,15 @@ const ArticleTable = (props: IArticleTableProps) => {
   };
 
   const toggleInvisible = async (id: number, invisible: boolean) => {
-    await updateArticleVisibilityAsync({
-      id,
-      invisible,
+    openConfirmDialog({
+      onConfirm: () => {
+        updateArticleVisibilityAsync({
+          id,
+          invisible,
+        });
+        props.onArticleSave?.();
+      },
     });
-    props.onArticleSave?.();
   };
 
   const extractTextFromHtml = (html: string) => {
