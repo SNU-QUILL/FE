@@ -7,6 +7,7 @@ export const articleData: IArticle[] = [
     articleSummary: "125grHyJpyHLNZf9LmYSkQQgTft2yqUWs5",
     articlePictureUrl: "http://dummyimage.com/209x100.png/dddddd/000000",
     authorName: "Tiffany Rigge",
+    invisible: false,
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ export const articleData: IArticle[] = [
     articleSummary: "1GHRJoUt4EG8rEEEQ6aTNn5JowLYi1bGTU",
     articlePictureUrl: "http://dummyimage.com/210x100.png/5fa2dd/ffffff",
     authorName: "Terra Flaherty",
+    invisible: false,
   },
   {
     id: 3,
@@ -21,6 +23,7 @@ export const articleData: IArticle[] = [
     articleSummary: "1MwgC8zAhUMbLqK4ZCu9aJUkPeermEbsgb",
     articlePictureUrl: "http://dummyimage.com/213x100.png/5fa2dd/ffffff",
     authorName: "Budd Jeavon",
+    invisible: false,
   },
   {
     id: 4,
@@ -28,6 +31,7 @@ export const articleData: IArticle[] = [
     articleSummary: "1NWCqmaFhQNFXkwwWrSAcSuwUTffsU4Xjt",
     articlePictureUrl: "http://dummyimage.com/129x100.png/dddddd/000000",
     authorName: "Arri Hellier",
+    invisible: false,
   },
   {
     id: 5,
@@ -35,6 +39,7 @@ export const articleData: IArticle[] = [
     articleSummary: "1CAd9Xx8zzm74SbcWn8NBJPtCRYopQT8xu",
     articlePictureUrl: "http://dummyimage.com/249x100.png/ff4444/ffffff",
     authorName: "Hamel Nower",
+    invisible: false,
   },
   {
     id: 6,
@@ -42,6 +47,7 @@ export const articleData: IArticle[] = [
     articleSummary: "1BeqEfutZikRTmwVcrszzMutNrbBbfi7gv",
     articlePictureUrl: "http://dummyimage.com/171x100.png/ff4444/ffffff",
     authorName: "Thebault Dyka",
+    invisible: false,
   },
   {
     id: 7,
@@ -49,6 +55,7 @@ export const articleData: IArticle[] = [
     articleSummary: "1B4X4gevDqY2K6wThzm1iNwvfgmwz6dWbm",
     articlePictureUrl: "http://dummyimage.com/232x100.png/ff4444/ffffff",
     authorName: "Annis Jaggers",
+    invisible: false,
   },
   {
     id: 8,
@@ -56,6 +63,7 @@ export const articleData: IArticle[] = [
     articleSummary: "1PjjUjA3gwYP77LexBZnvfH38H2ULMtNuh",
     articlePictureUrl: "http://dummyimage.com/172x100.png/dddddd/000000",
     authorName: "Richmond Ximenez",
+    invisible: false,
   },
   {
     id: 9,
@@ -63,6 +71,7 @@ export const articleData: IArticle[] = [
     articleSummary: "1CUvQjVhgugNJBKd7VKwSK2QEZvE8E4Bkf",
     articlePictureUrl: "http://dummyimage.com/117x100.png/5fa2dd/ffffff",
     authorName: "Netta Gurley",
+    invisible: false,
   },
   {
     id: 10,
@@ -70,6 +79,7 @@ export const articleData: IArticle[] = [
     articleSummary: "15EHfVngckJnZtpywYEKWVBs4TA59RVeHE",
     articlePictureUrl: "http://dummyimage.com/139x100.png/5fa2dd/ffffff",
     authorName: "Adams MacCourt",
+    invisible: false,
   },
   {
     id: 11,
@@ -77,5 +87,6 @@ export const articleData: IArticle[] = [
     articleSummary: "1PSJcCwM4gwrdmjBSkncTLhWTmczA2UZrJ",
     articlePictureUrl: "http://dummyimage.com/201x100.png/5fa2dd/ffffff",
     authorName: "Blancha O'Sheils",
+    invisible: false,
   },
 ];
