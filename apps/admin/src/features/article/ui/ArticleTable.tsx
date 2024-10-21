@@ -58,11 +58,6 @@ const ArticleTable = (props: IArticleTableProps) => {
     });
   };
 
-  const extractTextFromHtml = (html: string) => {
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    return doc.body.textContent || "";
-  };
-
   return (
     <div>
       <Table className='w-full'>
@@ -84,9 +79,7 @@ const ArticleTable = (props: IArticleTableProps) => {
             >
               <TableCell>{article.id}</TableCell>
               <TableCell className='max-w-[200px] truncate'>{article.articleTitle}</TableCell>
-              <TableCell className='max-w-[400px] truncate'>
-                {extractTextFromHtml(article.articleSummary)}
-              </TableCell>
+              <TableCell className='max-w-[400px] truncate'>{article.articleSummary}</TableCell>
               <TableCell>{article.authorName}</TableCell>
               {props.mode === EARTICLE_TABLE_MODE.DEFAULT && (
                 <TableCell className='flex gap-2'>
