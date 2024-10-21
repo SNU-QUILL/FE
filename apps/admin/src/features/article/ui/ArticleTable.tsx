@@ -47,8 +47,8 @@ const ArticleTable = (props: IArticleTableProps) => {
 
   const toggleInvisible = async (id: number, invisible: boolean) => {
     openConfirmDialog({
-      onConfirm: () => {
-        updateArticleVisibilityAsync({
+      onConfirm: async () => {
+        await updateArticleVisibilityAsync({
           id,
           invisible,
         });
