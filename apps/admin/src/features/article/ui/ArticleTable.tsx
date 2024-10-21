@@ -52,6 +52,7 @@ const ArticleTable = (props: IArticleTableProps) => {
           id,
           invisible,
         });
+        closeConfirmDialog();
         props.onArticleSave?.();
       },
     });
