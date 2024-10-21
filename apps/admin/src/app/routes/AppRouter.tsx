@@ -1,29 +1,50 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, useRoutes, Navigate } from "react-router-dom";
 import { ProtectedRoute } from "@/app/routes/ProtectedRoute";
 import CommonLayout from "@/widgets/layout/ui/CommonLayout";
 import { Page } from "@/pages";
 
-function AppRouter() {
+const routes = [
+  {
+    path: "/",
+    element: <Navigate to='/main' replace />,
+  },
+  {
+    path: "/login",
+    element: <Page.LoginPage />,
+  },
+  {
+    element: <ProtectedRoute />,
+    children: [
+      {
+        element: <CommonLayout />,
+        children: [
+          { path: "/main", element: <Page.MainPage /> },
+          {
+            path: "/article",
+            children: [
+              { index: true, element: <Navigate to='features/1' replace /> },
+              { path: ":category", element: <Navigate to='1' replace /> },
+              { path: ":category/:page", element: <Page.ArticlePage /> },
+            ],
+          },
+          { path: "/misc", element: <Page.MiscPage /> },
+        ],
+      },
+    ],
+  },
+];
+
+const AppRoutes = () => {
+  const element = useRoutes(routes);
+  return element;
+};
+
+const AppRouter = () => {
   return (
     <Router>
-      <Routes>
-        <Route path='/*' element={<Navigate to='/main' />} />
-        <Route path='/login' element={<Page.LoginPage />} />
-
-        <Route element={<ProtectedRoute />}>
-          <Route element={<CommonLayout />}>
-            <Route path='/main' element={<Page.MainPage />} />
-            <Route path='/article'>
-              <Route index element={<Navigate to='features/1' replace />} />
-              <Route path=':category' element={<Navigate to='1' replace />} />
-              <Route path=':category/:page' element={<Page.ArticlePage />} />
-            </Route>
-            <Route path='/misc' element={<Page.MiscPage />} />
-          </Route>
-        </Route>
-      </Routes>
+      <AppRoutes />
     </Router>
   );
-}
+};
 
 export default AppRouter;
