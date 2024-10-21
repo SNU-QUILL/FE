@@ -32,6 +32,10 @@ const routes = [
       },
     ],
   },
+  {
+    path: "*",
+    element: <Navigate to='/main' replace />,
+  },
 ];
 
 const AppRoutes = () => {
