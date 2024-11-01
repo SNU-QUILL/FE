@@ -134,7 +134,7 @@ const ArticleTitleController = () => {
   );
 };
 
-const ArticleContentsController = () => {
+const ArticleContentsController = ({ initialValue }: { initialValue: string }) => {
   const editorRef = useRef<Editor>(null);
   const form = useFormContext();
   const { mutateAsync: uploadFileAsync } = useFileUploadMutation();
@@ -146,10 +146,6 @@ const ArticleContentsController = () => {
     },
     [uploadFileAsync],
   );
-
-  useEffect(() => {
-    editorRef.current?.getInstance().setHTML(form.watch("contents"));
-  }, [form.watch("contents")]);
 
   return (
     <FormField
@@ -168,7 +164,7 @@ const ArticleContentsController = () => {
             initialEditType='wysiwyg'
             hideModeSwitch
             height='100%'
-            initialValue={field.value}
+            initialValue={initialValue}
             onChange={() => field.onChange(editorRef.current?.getInstance().getHTML())}
             hooks={{
               addImageBlobHook: (blob: Blob, callback: (url: string) => void) => {
@@ -228,7 +224,7 @@ const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
         <ArticleMainImageController />
         <ArticleCategoryController />
         <ArticleTitleController />
-        <ArticleContentsController />
+        <ArticleContentsController initialValue={data!.contents} />
         <div className='flex justify-end pt-4'>
           <Button>Save</Button>
         </div>
