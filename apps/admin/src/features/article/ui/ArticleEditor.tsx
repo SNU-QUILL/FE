@@ -30,6 +30,7 @@ import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 
 interface IArticleEditorProps {
   id?: number;
+  invisible?: boolean;
   category: EARTICLE_CATEGORY;
   onSave: () => void;
 }
@@ -214,7 +215,7 @@ const ArticleContentsController = () => {
   );
 };
 
-const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
+const ArticleEditor = ({ id, invisible, category, onSave }: IArticleEditorProps) => {
   const { data, isFetching } = useArticleDetailQuery(id);
   const { mutateAsync: saveArticleAsync } = useArticleSaveMutation(id);
   const authStore = useAuthStore();
@@ -242,7 +243,7 @@ const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
       category: values.category.toUpperCase() as Uppercase<EARTICLE_CATEGORY>,
       authorId: authStore.getId(),
       pictureUrl: values.pictureUrl ?? "",
-      invisible: true,
+      invisible: invisible ?? true,
     });
     onSave?.();
   };

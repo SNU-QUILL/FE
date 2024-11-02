@@ -30,6 +30,7 @@ const ArticleTable = (props: IArticleTableProps) => {
         <ArticleEditor
           id={id}
           category={props.category}
+          invisible={props.data.find(article => article.id === id)?.invisible}
           onSave={() => {
             openConfirmDialog({
               onConfirm: () => {
