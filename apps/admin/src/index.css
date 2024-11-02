@@ -72,3 +72,38 @@ body,
 * {
   font-family: "Jost", sans-serif;
 }
+
+.ck-content h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+.ck-content h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0.83em 0;
+}
+
+.ck-content h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+  margin: 0.67em 0;
+}
+
+.ck-content a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+}
+
+.ck-content ul,
+.ck-content ol {
+  list-style: revert;
+  margin: revert;
+  padding: revert;
+}
+
+.ck.ck-content.ck-editor__editable {
+  min-height: 300px;
+  max-height: 500px;
+}

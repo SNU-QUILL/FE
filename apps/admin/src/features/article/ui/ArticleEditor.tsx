@@ -1,6 +1,4 @@
-import { Editor } from "@toast-ui/react-editor";
-import { useCallback, useEffect, useRef } from "react";
-import "@toast-ui/editor/dist/toastui-editor.css";
+import { useCallback, useEffect } from "react";
 import { useArticleDetailQuery, useArticleSaveMutation } from "@/entities/article/api/article";
 import { useFileUploadMutation } from "@/entities/file/api/file";
 import { EFileType } from "@/entities/file/model/file";
@@ -27,6 +25,8 @@ import {
   defaultArticleSchema,
 } from "@/entities/article/schema/article";
 import { useAuthStore } from "@/shared/store/authStore";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 
 interface IArticleEditorProps {
   id?: number;
@@ -126,7 +126,7 @@ const ArticleTitleController = () => {
       name='title'
       render={({ field }) => (
         <FormItem className='mb-4 mr-1 ml-1'>
-          <Input {...field} />
+          <Input {...field} placeholder='Title' />
           <FormMessage />
         </FormItem>
       )}
@@ -134,45 +134,79 @@ const ArticleTitleController = () => {
   );
 };
 
-const ArticleContentsController = ({ initialValue }: { initialValue: string }) => {
-  const editorRef = useRef<Editor>(null);
+const ArticleContentsController = () => {
   const form = useFormContext();
   const { mutateAsync: uploadFileAsync } = useFileUploadMutation();
 
   const handleFileUpload = useCallback(
-    async (blob: Blob, callback: (url: string) => void) => {
+    async (blob: Blob) => {
       const response = await uploadFileAsync({ file: blob, fileType: EFileType.ARTICLE });
-      callback(response.endPoint);
+      return response.endPoint;
     },
     [uploadFileAsync],
   );
+
+  const customUploadAdapter = (loader: any) => ({
+    upload: async () => {
+      const file = await loader.file;
+      const url = await handleFileUpload(file);
+      return { default: url };
+    },
+  });
+
+  function uploadPlugin(editor: any) {
+    editor.plugins.get("FileRepository").createUploadAdapter = (loader: any) =>
+      customUploadAdapter(loader);
+  }
 
   return (
     <FormField
       control={form.control}
       name='contents'
       render={({ field }) => (
-        <FormItem className='h-full'>
-          <Editor
-            ref={editorRef}
-            toolbarItems={[
-              ["heading", "bold", "italic", "strike"],
-              ["hr", "quote"],
-              ["ul", "ol", "task", "indent", "outdent"],
-              ["table", "image", "link"],
-            ]}
-            initialEditType='wysiwyg'
-            hideModeSwitch
-            height='100%'
-            initialValue={initialValue}
-            onChange={() => field.onChange(editorRef.current?.getInstance().getHTML())}
-            hooks={{
-              addImageBlobHook: (blob: Blob, callback: (url: string) => void) => {
-                handleFileUpload(blob, callback);
-                return true;
-              },
-            }}
-          />
+        <FormItem className='mb-4 mr-1 ml-1'>
+          <div className='document-editor'>
+            <div className='document-editor__toolbar'></div>
+            <div className='document-editor__editable'>
+              <CKEditor
+                editor={DecoupledEditor}
+                onReady={editor => {
+                  const toolbarContainer = document.querySelector(".document-editor__toolbar");
+                  if (toolbarContainer) {
+                    toolbarContainer.appendChild(editor.ui.view.toolbar.element!);
+                  }
+                }}
+                config={{
+                  extraPlugins: [uploadPlugin],
+                  toolbar: [
+                    "heading",
+                    "|",
+                    "bold",
+                    "italic",
+                    "underline",
+                    "strikethrough",
+                    "|",
+                    "link",
+                    "imageUpload",
+                    "|",
+                    "bulletedList",
+                    "numberedList",
+                    "|",
+                    "indent",
+                    "outdent",
+                    "|",
+                    "undo",
+                    "redo",
+                  ],
+                }}
+                data={field.value}
+                onChange={(_, editor) => {
+                  const data = editor.getData();
+                  field.onChange(data);
+                }}
+              />
+            </div>
+          </div>
           <FormMessage />
         </FormItem>
       )}
@@ -224,8 +258,8 @@ const ArticleEditor = ({ id, category, onSave }: IArticleEditorProps) => {
         <ArticleMainImageController />
         <ArticleCategoryController />
         <ArticleTitleController />
-        <ArticleContentsController initialValue={data!.contents} />
-        <div className='flex justify-end pt-4'>
+        <ArticleContentsController />
+        <div className='flex justify-end'>
           <Button>Save</Button>
         </div>
       </form>
