@@ -73,6 +73,10 @@ body,
   font-family: "Jost", sans-serif;
 }
 
+:root {
+  --ck-border-radius: calc(var(--radius) - 2px) !important;
+}
+
 .ck-content h1 {
   font-size: 2em;
   font-weight: bold;
@@ -106,4 +110,16 @@ body,
 .ck.ck-content.ck-editor__editable {
   min-height: 300px;
   max-height: 500px;
+  border: 1px solid hsl(var(--border));
+  border-bottom-left-radius: var(--ck-border-radius) !important;
+  border-bottom-right-radius: var(--ck-border-radius) !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.ck.ck-toolbar.ck-rounded-corners {
+  border-top-left-radius: var(--ck-border-radius) !important;
+  border-top-right-radius: var(--ck-border-radius) !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
