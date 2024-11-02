@@ -8,6 +8,7 @@ import EditorsPickButton from "@/features/main/ui/EditorsPickButton";
 import ArticleTableDialog from "@/features/main/ui/ArticleTableDialog";
 import { editorPickMapper } from "@/entities/editorPick/mapper/editorPick";
 import useConfirmDialog from "@/features/dialog/hooks/useConfirmDialog";
+import { DIALOG_MESSAGE } from "@/shared/constants/message";
 
 const EditorPick = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
@@ -25,6 +26,8 @@ const EditorPick = () => {
           showTab={false}
           onSelect={(id, tab) => {
             openConfirmDialog({
+              title: DIALOG_MESSAGE.CONFIRM_UPDATE_EDITOR_PICK_TITLE,
+              contents: DIALOG_MESSAGE.CONFIRM_UPDATE_EDITOR_PICK_MESSAGE,
               onConfirm: () => {
                 updateEditorPickAsync({ id, category: editorPickMapper.categoryToLabel(tab) }).then(
                   () => {

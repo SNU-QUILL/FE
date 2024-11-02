@@ -1,15 +1,15 @@
-import { DIALOG_MESSAGE } from "@/shared/constants/message";
 import { Button } from "@repo/ui";
 
 interface IConfirmDialogContentProps {
   onConfirm: () => void;
   onCancel: () => void;
+  contents: string;
 }
 
-const ConfirmDialogContent = ({ onConfirm, onCancel }: IConfirmDialogContentProps) => {
+const ConfirmDialogContent = ({ onConfirm, onCancel, contents }: IConfirmDialogContentProps) => {
   return (
     <div className='flex flex-col gap-4'>
-      <div className='text-sm'>{DIALOG_MESSAGE.CONFIRM_UPDATE_MESSAGE}</div>
+      <div className='text-sm'>{contents}</div>
       <div className='flex gap-4 self-end'>
         <Button variant='secondary' onClick={onCancel}>
           Cancel

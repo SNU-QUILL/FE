@@ -10,6 +10,7 @@ import { EARTICLE_TABLE_MODE } from "@/features/article/model/articleTable";
 import { Button } from "@repo/ui";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import useConfirmDialog from "@/features/dialog/hooks/useConfirmDialog";
+import { DIALOG_MESSAGE } from "@/shared/constants/message";
 
 const ArticlePage = () => {
   const { category, page } = useParams() as { category: EARTICLE_CATEGORY; page: string };
@@ -33,6 +34,8 @@ const ArticlePage = () => {
           category={category}
           onSave={() => {
             openConfirmDialog({
+              title: DIALOG_MESSAGE.CONFIRM_WRITE_ARTICLE_TITLE,
+              contents: DIALOG_MESSAGE.CONFIRM_WRITE_ARTICLE_MESSAGE,
               onConfirm: () => {
                 closeDialog(dialogId);
                 closeConfirmDialog();

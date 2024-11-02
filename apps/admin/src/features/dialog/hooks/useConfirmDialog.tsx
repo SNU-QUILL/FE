@@ -6,12 +6,21 @@ const useConfirmDialog = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
   const dialogId = "confirm-dialog";
 
-  const openConfirmDialog = ({ onConfirm }: { onConfirm: () => void }) => {
+  const openConfirmDialog = ({
+    onConfirm,
+    title,
+    contents,
+  }: {
+    onConfirm: () => void;
+    title?: string;
+    contents?: string;
+  }) => {
     openDialog({
       id: dialogId,
-      title: DIALOG_MESSAGE.CONFIRM_UPDATE_TITLE,
+      title: title ?? DIALOG_MESSAGE.CONFIRM_UPDATE_TITLE,
       contents: (
         <ConfirmDialogContent
+          contents={contents ?? DIALOG_MESSAGE.CONFIRM_UPDATE_MESSAGE}
           onCancel={() => closeDialog(dialogId)}
           onConfirm={() => {
             onConfirm();

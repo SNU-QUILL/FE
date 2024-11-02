@@ -7,6 +7,7 @@ import { EARTICLE_CATEGORY, IArticle } from "@/entities/article/model/article";
 import { EARTICLE_TABLE_MODE } from "@/features/article/model/articleTable";
 import useConfirmDialog from "@/features/dialog/hooks/useConfirmDialog";
 import { useArticleVisibilityMutation } from "@/entities/article/api/article";
+import { DIALOG_MESSAGE } from "@/shared/constants/message";
 
 interface IArticleTableProps {
   category: EARTICLE_CATEGORY;
@@ -33,6 +34,8 @@ const ArticleTable = (props: IArticleTableProps) => {
           invisible={props.data.find(article => article.id === id)?.invisible}
           onSave={() => {
             openConfirmDialog({
+              title: DIALOG_MESSAGE.CONFIRM_EDIT_ARTICLE_TITLE,
+              contents: DIALOG_MESSAGE.CONFIRM_EDIT_ARTICLE_MESSAGE,
               onConfirm: () => {
                 closeDialog(dialogId);
                 closeConfirmDialog();
@@ -48,6 +51,10 @@ const ArticleTable = (props: IArticleTableProps) => {
 
   const toggleInvisible = async (id: number, invisible: boolean) => {
     openConfirmDialog({
+      title: DIALOG_MESSAGE.CONFIRM_UPDATE_ARTICLE_VISIBILITY_TITLE,
+      contents: invisible
+        ? DIALOG_MESSAGE.CONFIRM_UPDATE_ARTICLE_VISIBILITY_TO_INVISIBLE_MESSAGE
+        : DIALOG_MESSAGE.CONFIRM_UPDATE_ARTICLE_VISIBILITY_TO_VISIBLE_MESSAGE,
       onConfirm: async () => {
         await updateArticleVisibilityAsync({
           id,

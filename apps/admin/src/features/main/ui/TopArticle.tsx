@@ -8,6 +8,7 @@ import EditButton from "@/features/main/ui/EditButton";
 import ArticleTableDialog from "@/features/main/ui/ArticleTableDialog";
 import useConfirmDialog from "@/features/dialog/hooks/useConfirmDialog";
 import useLineInputDialog from "@/features/dialog/hooks/useLineInputDialog";
+import { DIALOG_MESSAGE } from "@/shared/constants/message";
 
 const TopArticle = () => {
   const { openDialog, closeDialog } = useGlobalDialogStore();
@@ -30,6 +31,8 @@ const TopArticle = () => {
               placeholder: "Type Summary",
               onSubmit: summary =>
                 openConfirmDialog({
+                  title: DIALOG_MESSAGE.CONFIRM_UPDATE_TOP_ARTICLE_TITLE,
+                  contents: DIALOG_MESSAGE.CONFIRM_UPDATE_TOP_ARTICLE_MESSAGE,
                   onConfirm: () => handleUpdateTopArticle(id, summary),
                 }),
             })
