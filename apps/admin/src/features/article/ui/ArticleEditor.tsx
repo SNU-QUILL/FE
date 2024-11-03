@@ -27,6 +27,8 @@ import {
 import { useAuthStore } from "@/shared/store/authStore";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
+import { useGlobalDialogStore } from "@/shared/store/globalDialog";
+import { MemberList } from "@/features/member/ui/MemberList";
 
 interface IArticleEditorProps {
   id?: number;
@@ -36,7 +38,7 @@ interface IArticleEditorProps {
 }
 
 const ArticleMainImageController = () => {
-  const form = useFormContext();
+  const form = useFormContext<ArticleSchema>();
   const { mutateAsync: uploadFileAsync } = useFileUploadMutation();
 
   const handleFileUpload = useCallback(
@@ -93,14 +95,14 @@ const ArticleMainImageController = () => {
 };
 
 const ArticleCategoryController = () => {
-  const form = useFormContext();
+  const form = useFormContext<ArticleSchema>();
   return (
     <FormField
       control={form.control}
       name='category'
       render={({ field }) => (
         <FormItem className='mb-4 mr-1 ml-1'>
-          <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <Select onValueChange={field.onChange} value={field.value}>
             <SelectTrigger>
               <SelectValue placeholder='Select a category' />
             </SelectTrigger>
@@ -119,8 +121,41 @@ const ArticleCategoryController = () => {
   );
 };
 
+const ArticleAuthorController = () => {
+  const form = useFormContext<ArticleSchema>();
+  const { openDialog, closeDialog } = useGlobalDialogStore();
+  const dialogId = "author-select";
+  return (
+    <FormField
+      control={form.control}
+      name='authorId'
+      render={({ field }) => (
+        <Button
+          type='button'
+          onClick={() =>
+            openDialog({
+              id: dialogId,
+              title: "Select Author",
+              contents: (
+                <MemberList
+                  onSelect={member => {
+                    field.onChange(member.id);
+                    closeDialog(dialogId);
+                  }}
+                />
+              ),
+            })
+          }
+        >
+          {field.value}
+        </Button>
+      )}
+    />
+  );
+};
+
 const ArticleTitleController = () => {
-  const form = useFormContext();
+  const form = useFormContext<ArticleSchema>();
   return (
     <FormField
       control={form.control}
@@ -136,7 +171,7 @@ const ArticleTitleController = () => {
 };
 
 const ArticleContentsController = () => {
-  const form = useFormContext();
+  const form = useFormContext<ArticleSchema>();
   const { mutateAsync: uploadFileAsync } = useFileUploadMutation();
 
   const handleFileUpload = useCallback(
@@ -258,6 +293,7 @@ const ArticleEditor = ({ id, invisible, category, onSave }: IArticleEditorProps)
       >
         <ArticleMainImageController />
         <ArticleCategoryController />
+        <ArticleAuthorController />
         <ArticleTitleController />
         <ArticleContentsController />
         <div className='flex justify-end'>

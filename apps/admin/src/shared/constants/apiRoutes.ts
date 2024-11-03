@@ -44,6 +44,10 @@ const FILE = {
   upload: "/file/upload",
 };
 
+const MEMBER = {
+  list: "/member",
+};
+
 export const ApiRoutes = {
   AUTH,
   ARTICLE,
@@ -54,4 +58,5 @@ export const ApiRoutes = {
   INTRODUCTION,
   MISSION,
   FILE,
+  MEMBER,
 };
