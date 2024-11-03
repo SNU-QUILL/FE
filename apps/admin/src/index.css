@@ -95,11 +95,6 @@ body,
   margin: 0.67em 0;
 }
 
-.ck-content a {
-  color: hsl(var(--primary));
-  text-decoration: underline;
-}
-
 .ck-content ul,
 .ck-content ol {
   list-style: revert;

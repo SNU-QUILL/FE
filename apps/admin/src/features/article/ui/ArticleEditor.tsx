@@ -251,7 +251,6 @@ const ArticleContentsController = () => {
                     "underline",
                     "strikethrough",
                     "|",
-                    "link",
                     "imageUpload",
                     "|",
                     "bulletedList",
