@@ -33,15 +33,8 @@ const ArticleTable = (props: IArticleTableProps) => {
           category={props.category}
           invisible={props.data.find(article => article.id === id)?.invisible}
           onSave={() => {
-            openConfirmDialog({
-              title: DIALOG_MESSAGE.CONFIRM_EDIT_ARTICLE_TITLE,
-              contents: DIALOG_MESSAGE.CONFIRM_EDIT_ARTICLE_MESSAGE,
-              onConfirm: () => {
-                closeDialog(dialogId);
-                closeConfirmDialog();
-                props.onArticleSave?.();
-              },
-            });
+            closeDialog(dialogId);
+            props.onArticleSave?.();
           }}
         />
       ),

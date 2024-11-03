@@ -29,6 +29,8 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import { useGlobalDialogStore } from "@/shared/store/globalDialog";
 import { MemberList } from "@/features/member/ui/MemberList";
+import useConfirmDialog from "@/features/dialog/hooks/useConfirmDialog";
+import { DIALOG_MESSAGE } from "@/shared/constants/message";
 
 interface IArticleEditorProps {
   id?: number;
@@ -253,6 +255,7 @@ const ArticleContentsController = () => {
 const ArticleEditor = ({ id, invisible, category, onSave }: IArticleEditorProps) => {
   const { data, isFetching } = useArticleDetailQuery(id);
   const { mutateAsync: saveArticleAsync } = useArticleSaveMutation(id);
+  const { openConfirmDialog, closeConfirmDialog } = useConfirmDialog();
   const authStore = useAuthStore();
   const form = useForm<ArticleSchema>({
     resolver: zodResolver(articleSchema),
@@ -272,15 +275,22 @@ const ArticleEditor = ({ id, invisible, category, onSave }: IArticleEditorProps)
   }, [data, form]);
 
   const onSubmit = async (values: ArticleSchema) => {
-    await saveArticleAsync({
-      title: values.title,
-      contents: values.contents,
-      category: values.category.toUpperCase() as Uppercase<EARTICLE_CATEGORY>,
-      authorId: authStore.getId(),
-      pictureUrl: values.pictureUrl ?? "",
-      invisible: invisible ?? true,
+    openConfirmDialog({
+      title: DIALOG_MESSAGE.CONFIRM_EDIT_ARTICLE_TITLE,
+      contents: DIALOG_MESSAGE.CONFIRM_EDIT_ARTICLE_MESSAGE,
+      onConfirm: async () => {
+        await saveArticleAsync({
+          title: values.title,
+          contents: values.contents,
+          category: values.category.toUpperCase() as Uppercase<EARTICLE_CATEGORY>,
+          authorId: authStore.getId(),
+          pictureUrl: values.pictureUrl ?? "",
+          invisible: invisible ?? true,
+        });
+        closeConfirmDialog();
+        onSave?.();
+      },
     });
-    onSave?.();
   };
 
   if (isFetching) return null;
