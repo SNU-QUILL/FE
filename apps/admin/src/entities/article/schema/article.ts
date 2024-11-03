@@ -12,7 +12,7 @@ export const articleSchema = z.object({
     },
     { message: "Contents is required" },
   ),
-  authorId: z.number().positive("Author ID must be a positive number"),
+  authorId: z.number().positive("Author is required"),
   category: z.nativeEnum(EARTICLE_CATEGORY, {
     errorMap: () => ({ message: "Invalid category" }),
   }),
@@ -23,7 +23,7 @@ export type ArticleSchema = z.infer<typeof articleSchema>;
 export const defaultArticleSchema: ArticleSchema = {
   title: "",
   contents: "",
-  authorId: 1,
+  authorId: 0,
   category: EARTICLE_CATEGORY.FEATURES,
   pictureUrl: "",
 };

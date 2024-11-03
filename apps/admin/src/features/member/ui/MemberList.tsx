@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/src/components/ui/select";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface IMemberListProps {
   onSelect?: (member: IMember) => void;
@@ -15,7 +15,7 @@ interface IMemberListProps {
 
 export const MemberList = ({ onSelect }: IMemberListProps) => {
   const { data: memberMap, isFetching } = useMemberListQuery();
-  const teams = Object.keys(memberMap ?? {});
+  const teams = useMemo(() => Object.keys(memberMap ?? {}), [memberMap]);
   const [selectedTeam, setSelectedTeam] = useState<string>(teams[0]);
 
   useEffect(() => {

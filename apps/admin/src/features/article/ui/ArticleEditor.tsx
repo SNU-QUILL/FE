@@ -24,13 +24,13 @@ import {
   ArticleSchema,
   defaultArticleSchema,
 } from "@/entities/article/schema/article";
-import { useAuthStore } from "@/shared/store/authStore";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import { useGlobalDialogStore } from "@/shared/store/globalDialog";
 import { MemberList } from "@/features/member/ui/MemberList";
 import useConfirmDialog from "@/features/dialog/hooks/useConfirmDialog";
 import { DIALOG_MESSAGE } from "@/shared/constants/message";
+import { useMemberListQuery } from "@/entities/member/api/member";
 
 interface IArticleEditorProps {
   id?: number;
@@ -127,31 +127,58 @@ const ArticleAuthorController = () => {
   const form = useFormContext<ArticleSchema>();
   const { openDialog, closeDialog } = useGlobalDialogStore();
   const dialogId = "author-select";
+
+  const { data: memberMap } = useMemberListQuery();
+  const members = Object.values(memberMap ?? {}).flat();
+
   return (
     <FormField
       control={form.control}
       name='authorId'
-      render={({ field }) => (
-        <Button
-          type='button'
-          onClick={() =>
-            openDialog({
-              id: dialogId,
-              title: "Select Author",
-              contents: (
-                <MemberList
-                  onSelect={member => {
-                    field.onChange(member.id);
-                    closeDialog(dialogId);
-                  }}
-                />
-              ),
-            })
-          }
-        >
-          {field.value}
-        </Button>
-      )}
+      render={({ field }) => {
+        const member = members.find(member => member.id === field.value);
+        return (
+          <FormItem className='mb-4 mr-1 ml-1'>
+            <Button
+              type='button'
+              variant='outline'
+              className='h-fit'
+              onClick={() =>
+                openDialog({
+                  id: dialogId,
+                  title: "Select Author",
+                  contents: (
+                    <MemberList
+                      onSelect={member => {
+                        field.onChange(member.id);
+                        closeDialog(dialogId);
+                      }}
+                    />
+                  ),
+                })
+              }
+            >
+              {!member ? (
+                <div>Select Author</div>
+              ) : (
+                <>
+                  <img
+                    src={member.memberPictureUrl}
+                    alt='author'
+                    className='w-10 h-10 rounded-full mr-2'
+                  />
+                  <div>
+                    <div className='text-sm font-bold'>{member.name}</div>
+                    <div className='text-xs text-gray-500'>{member.role}</div>
+                    <div className='text-xs text-gray-500'>{member.email}</div>
+                  </div>
+                </>
+              )}
+            </Button>
+            <FormMessage />
+          </FormItem>
+        );
+      }}
     />
   );
 };
@@ -256,7 +283,6 @@ const ArticleEditor = ({ id, invisible, category, onSave }: IArticleEditorProps)
   const { data, isFetching } = useArticleDetailQuery(id);
   const { mutateAsync: saveArticleAsync } = useArticleSaveMutation(id);
   const { openConfirmDialog, closeConfirmDialog } = useConfirmDialog();
-  const authStore = useAuthStore();
   const form = useForm<ArticleSchema>({
     resolver: zodResolver(articleSchema),
     defaultValues: { ...defaultArticleSchema, category },
@@ -268,6 +294,9 @@ const ArticleEditor = ({ id, invisible, category, onSave }: IArticleEditorProps)
     }
     if (data?.title) {
       form.setValue("title", data.title);
+    }
+    if (data?.author.id) {
+      form.setValue("authorId", data.author.id);
     }
     if (data?.contents) {
       form.setValue("contents", data.contents);
@@ -283,7 +312,7 @@ const ArticleEditor = ({ id, invisible, category, onSave }: IArticleEditorProps)
           title: values.title,
           contents: values.contents,
           category: values.category.toUpperCase() as Uppercase<EARTICLE_CATEGORY>,
-          authorId: authStore.getId(),
+          authorId: values.authorId,
           pictureUrl: values.pictureUrl ?? "",
           invisible: invisible ?? true,
         });
@@ -302,8 +331,8 @@ const ArticleEditor = ({ id, invisible, category, onSave }: IArticleEditorProps)
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <ArticleMainImageController />
-        <ArticleCategoryController />
         <ArticleAuthorController />
+        <ArticleCategoryController />
         <ArticleTitleController />
         <ArticleContentsController />
         <div className='flex justify-end'>
