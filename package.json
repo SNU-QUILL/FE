@@ -5,6 +5,7 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "dev:admin": "turbo dev --filter=admin",
+    "dev:user": "turbo dev --filter=user",
     "dev:ui": "turbo dev --filter=@repo/ui",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
