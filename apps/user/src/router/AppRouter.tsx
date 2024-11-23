@@ -1,8 +1,27 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import MainPage from "@/pages/main/MainPage";
+import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
+import GlobalLayout from "@/layouts/GlobalLayout";
+import HomePage from "@/pages/home/HomePage";
+import GlobalHeader from "@/layouts/GlobalHeader";
 
 const router = createBrowserRouter([
-  { path: "/", element: <MainPage /> },
+  {
+    path: "/",
+    element: <GlobalLayout header={<GlobalHeader />} footer={<div>footer</div>} />,
+    children: [
+      {
+        path: "/",
+        element: <Navigate to='/home' replace />,
+      },
+      {
+        path: "/home",
+        element: <HomePage />,
+      },
+      {
+        path: "/:category",
+        element: <HomePage />,
+      },
+    ],
+  },
 ]);
 
 export default function AppRouter() {
