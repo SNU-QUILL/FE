@@ -2,11 +2,12 @@ import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom"
 import GlobalLayout from "@/layouts/GlobalLayout";
 import HomePage from "@/pages/home/HomePage";
 import GlobalHeader from "@/layouts/GlobalHeader";
+import GlobalFooter from "@/layouts/GlobalFooter";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <GlobalLayout header={<GlobalHeader />} footer={<div>footer</div>} />,
+    element: <GlobalLayout header={<GlobalHeader />} footer={<GlobalFooter />} />,
     children: [
       {
         path: "/",
