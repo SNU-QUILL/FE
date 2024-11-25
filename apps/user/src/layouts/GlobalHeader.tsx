@@ -5,14 +5,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 export default function GlobalHeader() {
   const navigate = useNavigate();
   const location = useLocation();
-  const selectedCategory = location.pathname.split("/")[1];
+  const selectedCategory = location.pathname.split("/")[2];
 
   const goToHome = () => {
     navigate("/home");
   };
 
   const goToCategory = (category: string) => {
-    navigate(`/${category}`);
+    navigate(`/article/${category}`);
   };
 
   return (

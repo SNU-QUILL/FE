@@ -3,6 +3,7 @@ import GlobalLayout from "@/layouts/GlobalLayout";
 import HomePage from "@/pages/home/HomePage";
 import GlobalHeader from "@/layouts/GlobalHeader";
 import GlobalFooter from "@/layouts/GlobalFooter";
+import ArticleListPage from "@/pages/articleList/ArticleListPage";
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,8 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/:category",
-        element: <HomePage />,
+        path: "article/:category",
+        element: <ArticleListPage />,
       },
     ],
   },
