@@ -24,7 +24,7 @@ export default function GlobalHeader() {
       </div>
       <div className='self-end flex items-center gap-2 border-b-primary border-b-4 w-60'>
         <MagnifyingGlassIcon className='text-primary w-8 h-8' />
-        <Input className='border-none focus-visible:ring-0 ' />
+        <Input className='border-none focus-visible:ring-0 shadow-none' />
       </div>
       <div className='w-full h-10 flex justify-center items-center gap-2 bg-primary'>
         {CATEGORIES.map(category => (

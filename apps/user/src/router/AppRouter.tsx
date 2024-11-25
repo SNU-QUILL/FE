@@ -1,8 +1,8 @@
 import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
 import GlobalLayout from "@/layouts/GlobalLayout";
 import HomePage from "@/pages/home/HomePage";
-import GlobalHeader from "@/layouts/GlobalHeader";
-import GlobalFooter from "@/layouts/GlobalFooter";
+import GlobalHeader from "@/components/GlobalHeader";
+import GlobalFooter from "@/components/GlobalFooter";
 import ArticleListPage from "@/pages/articleList/ArticleListPage";
 
 const router = createBrowserRouter([
