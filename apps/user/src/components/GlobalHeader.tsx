@@ -12,7 +12,7 @@ export default function GlobalHeader() {
   };
 
   const goToCategory = (category: string) => {
-    navigate(`/article/${category}`);
+    navigate(`/article/${category}/1`);
   };
 
   return (

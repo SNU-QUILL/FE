@@ -1,5 +1,11 @@
+import TopArticle from "./component/TopArticle";
+
 const HomePage = () => {
-  return <div className='bg-black'>HomePage</div>;
+  return (
+    <section className='mt-4'>
+      <TopArticle />
+    </section>
+  );
 };
 
 export default HomePage;

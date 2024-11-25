@@ -23,8 +23,8 @@ const router = createBrowserRouter([
         element: <Navigate to='/home' replace />,
       },
       {
-        path: "/article/:category",
-        element: <Navigate to='1' replace />,
+        path: "/article/:id",
+        element: <div>article</div>,
       },
       {
         path: "/article/:category/:page",
