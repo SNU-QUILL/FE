@@ -1,88 +1,91 @@
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ArticleListItem from "./component/ArticleListItem";
 import { CATEGORIES } from "@/constants/category";
 import ArticleListRecentAndMost from "./component/ArticleListRecentAndMost";
 
 const ArticleListPage = () => {
-  const selectedCategory = useLocation().pathname.split("/")[2];
+  const selectedCategory = useParams().category!;
   const selectedCategoryLabel = CATEGORIES.find(
     category => category.value === selectedCategory,
   )?.label;
+  const currentPage = Number(useParams().page!);
+
+  const maxPages = 10;
   const articles = [
     {
       imgSrc: "/images/article1.jpg",
-      subject: "첫 번째 기사 제목입니다",
-      author: "홍길동",
+      subject: "Special Series Exploring Solutions to Various Problems in Modern Society",
+      author: "John Smith",
       description:
-        "첫 번째 기사의 내용입니다. 여기에는 기사의 간단한 설명이 들어갑니다. 독자들에게 유익한 정보를 전달하고자 합니다. 이 기사는 다양한 관점에서 주제를 다루고 있으며, 깊이 있는 통찰을 제공합니다.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.",
     },
     {
       imgSrc: "/images/article2.jpg",
-      subject: "두 번째 기사 제목입니다",
-      author: "김철수",
+      subject: "The Future of Living: AI and Big Data in the Fourth Industrial Revolution",
+      author: "Emma Wilson",
       description:
-        "두 번째 기사의 내용입니다. 흥미로운 주제에 대한 설명이 포함됩니다. 최신 트렌드와 함께 실용적인 조언을 제공하는 내용으로 구성되어 있습니다. 독자들의 일상생활에 도움이 될 만한 팁들을 소개합니다.",
+        "Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.",
     },
     {
       imgSrc: "/images/article3.jpg",
-      subject: "세 번째 기사 제목입니다",
-      author: "이영희",
+      subject: "Expert Guidelines for Eco-friendly Living in the Climate Crisis Era",
+      author: "Michael Green",
       description:
-        "세 번째 기사의 내용입니다. 독자들이 관심을 가질만한 내용을 담고 있습니다. 전문가들의 의견과 함께 심층적인 분석을 제공합니다. 다양한 사례를 통해 주제에 대한 이해를 돕고 있습니다.",
+        "Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero sed dignissim lacinia nunc.",
     },
     {
       imgSrc: "/images/article4.jpg",
-      subject: "네 번째 기사 제목입니다",
-      author: "박민수",
+      subject: "New Professional Competencies Required in the Digital Transformation Era",
+      author: "Sarah Johnson",
       description:
-        "네 번째 기사의 내용입니다. 현대 사회의 중요한 이슈를 다루고 있습니다. 다양한 관점에서 문제를 분석하고 해결책을 제시합니다. 독자들에게 새로운 시각을 제공하는 것을 목표로 합니다.",
+        "Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra.",
     },
     {
       imgSrc: "/images/article5.jpg",
-      subject: "다섯 번째 기사 제목입니다",
-      author: "정수진",
+      subject: "Changed Daily Life and New Lifestyle Trends in the Post-COVID Era",
+      author: "David Chen",
       description:
-        "다섯 번째 기사에서는 혁신적인 아이디어를 소개합니다. 미래 기술과 그 영향에 대해 심도있게 다루고 있습니다. 독자들에게 미래를 준비하는 통찰력을 제공하고자 합니다.",
+        "Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. Proin sodales libero eget ante. Nulla quam. Aenean laoreet. Vestibulum nisi lectus.",
     },
     {
       imgSrc: "/images/article6.jpg",
-      subject: "여섯 번째 기사 제목입니다",
-      author: "강민준",
+      subject: "Sustainable Development and Environmental Protection for Future Generations",
+      author: "Rachel Brown",
       description:
-        "여섯 번째 기사는 환경 문제에 대해 다룹니다. 지속가능한 발전을 위한 다양한 방안을 제시하고 있습니다. 우리 모두가 실천할 수 있는 구체적인 방법들을 소개합니다.",
+        "Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu.",
     },
     {
       imgSrc: "/images/article7.jpg",
-      subject: "일곱 번째 기사 제목입니다",
-      author: "윤서연",
+      subject: "Expert's Customized Wellbeing Life Guide for Modern People",
+      author: "James Wilson",
       description:
-        "일곱 번째 기사에서는 건강한 라이프스타일을 제안합니다. 전문가들의 조언과 함께 실천 가능한 방법들을 소개합니다. 일상에서 쉽게 적용할 수 있는 건강관리 팁들을 다룹니다.",
+        "Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis.",
     },
     {
       imgSrc: "/images/article8.jpg",
-      subject: "여덟 번째 기사 제목입니다",
-      author: "임재현",
+      subject: "New Cultural Arts Trends and the Future Direction of Art in the Digital Age",
+      author: "Lisa Park",
       description:
-        "여덟 번째 기사는 문화예술 분야의 최신 동향을 다룹니다. 다양한 예술가들의 작품과 그들의 이야기를 소개합니다. 현대 예술의 새로운 흐름과 의미를 분석합니다.",
+        "Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus magna.",
     },
     {
       imgSrc: "/images/article9.jpg",
-      subject: "아홉 번째 기사 제목입니다",
-      author: "송지원",
+      subject: "Expert Investment Strategies for Individual Investors in Global Economic Crisis",
+      author: "Robert Lee",
       description:
-        "아홉 번째 기사에서는 경제 트렌드를 분석합니다. 글로벌 시장의 변화와 그 영향에 대해 설명합니다. 독자들의 재테크에 도움이 될 만한 정보를 제공합니다.",
+        "Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis.",
     },
     {
       imgSrc: "/images/article10.jpg",
-      subject: "열 번째 기사 제목입니다",
-      author: "조현우",
+      subject: "In-depth Analysis of Innovative Changes in Future Education",
+      author: "Emily Davis",
       description:
-        "열 번째 기사는 교육의 미래에 대해 탐구합니다. 새로운 학습 방법과 교육 트렌드를 소개합니다. 미래 세대를 위한 교육 방향을 제시하고 있습니다.",
+        "Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam.",
     },
   ];
   return (
     <section className='flex p-4 gap-10'>
-      <div className='flex-grow'>
+      <div className='flex-grow overflow-hidden'>
         <div className='text-primary text-[25px] font-medium'>{selectedCategoryLabel}</div>
         <div className='flex flex-col gap-4'>
           {articles.map(article => (

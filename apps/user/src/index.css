@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap");
 @import "@repo/ui/src/index.css";
 
 @tailwind base;
@@ -6,8 +7,7 @@
 
 body,
 #root {
-  width: 100vw;
-  min-width: 1140px;
+  width: 100%;
 }
 
 @font-face {
