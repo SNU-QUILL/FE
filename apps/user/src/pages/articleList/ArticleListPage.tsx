@@ -1,16 +1,26 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import ArticleListItem from "./component/ArticleListItem";
 import { CATEGORIES } from "@/constants/category";
 import ArticleListRecentAndMost from "./component/ArticleListRecentAndMost";
+import ArticleListPagination from "./component/ArticleListPagination";
 
 const ArticleListPage = () => {
+  const navigate = useNavigate();
   const selectedCategory = useParams().category!;
   const selectedCategoryLabel = CATEGORIES.find(
     category => category.value === selectedCategory,
   )?.label;
   const currentPage = Number(useParams().page!);
 
-  const maxPages = 10;
+  const goToPreviousPage = () => {
+    navigate(`/article/${selectedCategory}/${currentPage - 1}`);
+  };
+
+  const goToNextPage = () => {
+    navigate(`/article/${selectedCategory}/${currentPage + 1}`);
+  };
+
+  const maxPages = 2;
   const articles = [
     {
       imgSrc: "/images/article1.jpg",
@@ -83,6 +93,11 @@ const ArticleListPage = () => {
         "Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam.",
     },
   ];
+
+  if (currentPage > maxPages) {
+    return <Navigate to={`/article/${selectedCategory}/1`} replace />;
+  }
+
   return (
     <section className='flex p-4 gap-10'>
       <div className='flex-grow overflow-hidden'>
@@ -92,6 +107,12 @@ const ArticleListPage = () => {
             <ArticleListItem key={article.imgSrc} {...article} />
           ))}
         </div>
+        <ArticleListPagination
+          currentPage={currentPage}
+          totalPages={maxPages}
+          onPreviousClick={goToPreviousPage}
+          onNextClick={goToNextPage}
+        />
       </div>
       <ArticleListRecentAndMost selectedCategory={selectedCategory} />
     </section>

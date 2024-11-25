@@ -19,7 +19,15 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "article/:category/:page",
+        path: "/article",
+        element: <Navigate to='/home' replace />,
+      },
+      {
+        path: "/article/:category",
+        element: <Navigate to='1' replace />,
+      },
+      {
+        path: "/article/:category/:page",
         element: <ArticleListPage />,
       },
     ],
