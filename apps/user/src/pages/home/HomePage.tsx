@@ -1,4 +1,5 @@
 import EditorsPick from "./component/EditorsPick";
+import Magazine from "./component/Magazine";
 import TopArticle from "./component/TopArticle";
 
 const HomePage = () => {
@@ -6,6 +7,7 @@ const HomePage = () => {
     <section className='mt-4 flex flex-col gap-10'>
       <TopArticle />
       <EditorsPick />
+      <Magazine />
     </section>
   );
 };
