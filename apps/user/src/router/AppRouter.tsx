@@ -30,6 +30,14 @@ const router = createBrowserRouter([
         path: "/article/:category/:page",
         element: <ArticleListPage />,
       },
+      {
+        path: "/article/archives",
+        element: <div>archive</div>,
+      },
+      {
+        path: "/article/archives/:page",
+        element: <Navigate to='/article/archives' replace />,
+      },
     ],
   },
 ]);
