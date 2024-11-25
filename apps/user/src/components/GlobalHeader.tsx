@@ -22,9 +22,11 @@ export default function GlobalHeader() {
         <div className='text-primary text-xl tracking-[2.8px]'>THE SNU QUILL</div>
         <div className='text-primary text-sm tracking-[0.28px]'>since 2005</div>
       </div>
-      <div className='self-end flex items-center gap-2 border-b-primary border-b-4 w-60'>
-        <MagnifyingGlassIcon className='text-primary w-8 h-8' />
-        <Input className='border-none focus-visible:ring-0 shadow-none' />
+      <div className='flex w-[1140px] justify-end'>
+        <div className='flex items-center gap-2 border-b-primary border-b-4 w-60'>
+          <MagnifyingGlassIcon className='text-primary w-8 h-8' />
+          <Input className='border-none focus-visible:ring-0 shadow-none' />
+        </div>
       </div>
       <div className='w-full h-10 flex justify-center items-center gap-2 bg-primary'>
         {CATEGORIES.map(category => (
