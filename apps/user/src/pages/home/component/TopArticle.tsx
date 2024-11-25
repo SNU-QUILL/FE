@@ -60,7 +60,7 @@ const TopArticle = () => {
         {recentArticles.map((article, index) => (
           <div
             key={article.subject}
-            className={`flex-1 flex flex-col justify-center border-b border-gray-200 cursor-pointer hover:rounded-lg hover:bg-gray-100 ${index === recentArticles.length - 1 ? "border-b-0" : ""}`}
+            className={`flex-1 flex flex-col justify-center p-2 border-b border-gray-200 cursor-pointer hover:rounded-lg hover:bg-gray-100 ${index === recentArticles.length - 1 ? "border-b-0" : ""}`}
             onClick={() => onArticleClick(article.id)}
           >
             <p className='text-text text-xl font-[450] line-clamp-1'>{article.subject}</p>

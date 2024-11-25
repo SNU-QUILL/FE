@@ -54,38 +54,34 @@ const ArticleListRecentAndMost = ({ selectedCategory }: IArticleListRecentAndMos
   ];
 
   return (
-    <div className='w-[280px] tracking-normal'>
-      <div className='text-primary text-right text-[32px] font-centaur w-[210px] ml-[70px] leading-[30px]'>
+    <div className='w-[280px] tracking-normal shrink-0'>
+      <p className='text-primary text-right text-[32px] font-centaur w-[210px] ml-[70px] leading-[30px]'>
         {ARTICLE_INTROS[selectedCategory]}
-      </div>
+      </p>
       <hr className='border-primary border-[1px] mt-[4.375rem]' />
       <div className='sticky top-10'>
         <div className='mt-10'>
-          <div className='text-primary font-semibold'>Recent Articles</div>
+          <p className='text-primary font-semibold'>Recent Articles</p>
           <ul>
             {recentArticles.map(article => (
               <li
                 key={article.id}
                 className='text-[13px] font-medium text-text w-full overflow-hidden whitespace-nowrap text-ellipsis'
               >
-                <a href={`/article/${article.id}`} className=''>
-                  {article.subject}
-                </a>
+                <a href={`/article/${article.id}`}>{article.subject}</a>
               </li>
             ))}
           </ul>
         </div>
         <div className='mt-10'>
-          <div className='text-primary font-semibold'>Most Read</div>
+          <p className='text-primary font-semibold'>Most Read</p>
           <ul>
             {mostReadArticles.map(article => (
               <li
                 key={article.id}
                 className='text-[13px] font-medium text-text w-full overflow-hidden whitespace-nowrap text-ellipsis'
               >
-                <a href={`/article/${article.id}`} className=''>
-                  {article.subject}
-                </a>
+                <a href={`/article/${article.id}`}>{article.subject}</a>
               </li>
             ))}
           </ul>

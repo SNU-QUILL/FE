@@ -99,7 +99,7 @@ const ArticleListPage = () => {
   }
 
   return (
-    <section className='flex p-4 gap-10'>
+    <div className='w-full flex p-4 gap-10'>
       <div className='flex-grow overflow-hidden'>
         <div className='text-primary text-[25px] font-medium'>{selectedCategoryLabel}</div>
         <div className='flex flex-col gap-4'>
@@ -115,7 +115,7 @@ const ArticleListPage = () => {
         />
       </div>
       <ArticleListRecentAndMost selectedCategory={selectedCategory} />
-    </section>
+    </div>
   );
 };
 

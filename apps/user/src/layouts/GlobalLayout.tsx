@@ -10,7 +10,7 @@ export default function GlobalLayout({ header, footer }: IGlobalLayoutProps) {
   return (
     <>
       {header}
-      <main className='w-[1140px] m-auto overflow-hidden'>
+      <main className='w-[1140px] m-auto'>
         <Outlet />
       </main>
       {footer}

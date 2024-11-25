@@ -33,7 +33,7 @@ const EditorsPick = () => {
         {editorsPick.map(article => (
           <div
             key={article.id}
-            className='flex flex-col justify-start w-[240px] gap-[5px] mt-[25px] cursor-pointer hover:rounded-lg hover:bg-gray-100'
+            className='flex flex-col justify-start w-[240px] gap-[5px] mt-[25px] p-2 cursor-pointer hover:rounded-lg hover:bg-gray-100'
           >
             <p className='text-primary text-[15px] font-[450]'>
               {CATEGORIES.find(category => category.value === article.category)?.label}
