@@ -1,24 +1,15 @@
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import ArticleListItem from "./component/ArticleListItem";
 import { CATEGORIES } from "@/constants/category";
 import ArticleListRecentAndMost from "./component/ArticleListRecentAndMost";
 import ArticleListPagination from "./component/ArticleListPagination";
 
 const ArticleListPage = () => {
-  const navigate = useNavigate();
   const selectedCategory = useParams().category!;
   const selectedCategoryLabel = CATEGORIES.find(
     category => category.value === selectedCategory,
   )?.label;
   const currentPage = Number(useParams().page!);
-
-  const goToPreviousPage = () => {
-    navigate(`/article/${selectedCategory}/${currentPage - 1}`);
-  };
-
-  const goToNextPage = () => {
-    navigate(`/article/${selectedCategory}/${currentPage + 1}`);
-  };
 
   const maxPages = 2;
   const articles = [
@@ -110,8 +101,7 @@ const ArticleListPage = () => {
         <ArticleListPagination
           currentPage={currentPage}
           totalPages={maxPages}
-          onPreviousClick={goToPreviousPage}
-          onNextClick={goToNextPage}
+          selectedCategory={selectedCategory}
         />
       </div>
       <ArticleListRecentAndMost selectedCategory={selectedCategory} />

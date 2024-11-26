@@ -1,5 +1,6 @@
 import { ARTICLE_INTROS } from "@/constants/article";
 import { CATEGORIES } from "@/constants/category";
+import { Link } from "react-router-dom";
 
 interface IArticleListRecentAndMostProps {
   selectedCategory: (typeof CATEGORIES)[number]["value"];
@@ -68,7 +69,7 @@ const ArticleListRecentAndMost = ({ selectedCategory }: IArticleListRecentAndMos
                 key={article.id}
                 className='text-[13px] font-medium text-text w-full overflow-hidden whitespace-nowrap text-ellipsis hover:opacity-50'
               >
-                <a href={`/article/${article.id}`}>{article.subject}</a>
+                <Link to={`/article/${article.id}`}>{article.subject}</Link>
               </li>
             ))}
           </ul>
@@ -81,7 +82,7 @@ const ArticleListRecentAndMost = ({ selectedCategory }: IArticleListRecentAndMos
                 key={article.id}
                 className='text-[13px] font-medium text-text w-full overflow-hidden whitespace-nowrap text-ellipsis hover:opacity-50'
               >
-                <a href={`/article/${article.id}`}>{article.subject}</a>
+                <Link to={`/article/${article.id}`}>{article.subject}</Link>
               </li>
             ))}
           </ul>

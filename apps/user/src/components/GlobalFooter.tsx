@@ -1,34 +1,22 @@
 import { Button } from "@repo/ui";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const GlobalFooter = () => {
-  const navigate = useNavigate();
-
-  const goToHome = () => {
-    navigate("/home");
-  };
-
-  const goToIntroduction = () => {
-    navigate("/introduction");
-  };
-
-  const goToMission = () => {
-    navigate("/mission");
-  };
-
   return (
     <footer className='w-full bg-primary flex flex-col items-center text-white font-light text-lg'>
       <div className='grid grid-cols-3 w-full py-10'>
         <div className='m-auto flex justify-center gap-20'>
           <p className='font-medium'>About SNU QUILL</p>
           <div className='font-light'>
-            <p className='cursor-pointer hover:opacity-50' onClick={goToIntroduction}>
-              Who We Are
-            </p>
-            <p className='cursor-pointer hover:opacity-50' onClick={goToMission}>
-              Our Mission
-            </p>
-            <p>Meet the Staff</p>
+            <Link to='/introduction' className='hover:opacity-50'>
+              <p>Who We Are</p>
+            </Link>
+            <Link to='/mission' className='hover:opacity-50'>
+              <p>Our Mission</p>
+            </Link>
+            <Link to='/members' className='hover:opacity-50'>
+              <p>Meet the Staff</p>
+            </Link>
           </div>
         </div>
 
@@ -46,13 +34,14 @@ const GlobalFooter = () => {
           }
         </p>
       </div>
-      <Button
-        variant='outline'
-        className='bg-primary mb-10 text-xl font-medium tracking-[2.8px] px-12 py-7'
-        onClick={goToHome}
-      >
-        The SNU QUILL
-      </Button>
+      <Link to='/home'>
+        <Button
+          variant='outline'
+          className='bg-primary mb-10 text-xl font-medium tracking-[2.8px] px-12 py-7'
+        >
+          The SNU QUILL
+        </Button>
+      </Link>
     </footer>
   );
 };

@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const TopArticle = () => {
-  const navigate = useNavigate();
-
   const topArticle = {
     id: 1,
     imgSrc: "https://picsum.photos/740/420",
@@ -33,20 +31,16 @@ const TopArticle = () => {
     },
   ];
 
-  const onArticleClick = (id: number) => {
-    navigate(`/article/${id}`);
-  };
-
   return (
     <div className='flex gap-8'>
-      <div
-        className='flex flex-col justify-end w-[740px] h-[420px] shrink-0 cursor-pointer rounded-lg'
+      <Link
+        className='flex flex-col justify-end w-[740px] h-[420px] shrink-0 rounded-lg'
         style={{
           backgroundImage: `url(${topArticle.imgSrc})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-        onClick={() => onArticleClick(topArticle.id)}
+        to={`/article/${topArticle.id}`}
       >
         <div className='bg-gradient-to-t from-black/100 to-transparent rounded-b-lg'>
           <p className='text-white text-[32px] font-medium my-[10px] mx-[30px]'>
@@ -54,18 +48,18 @@ const TopArticle = () => {
           </p>
           <p className='text-white m-[10px_30px_40px_30px]'>{topArticle.summary}</p>
         </div>
-      </div>
+      </Link>
 
       <div className='flex flex-col gap-4 justify-between'>
         {recentArticles.map((article, index) => (
-          <div
+          <Link
             key={article.subject}
-            className={`flex-1 flex flex-col justify-center p-2 border-b border-gray-200 cursor-pointer hover:rounded-lg hover:bg-gray-100 ${index === recentArticles.length - 1 ? "border-b-0" : ""}`}
-            onClick={() => onArticleClick(article.id)}
+            className={`flex-1 flex flex-col justify-center p-2 border-b border-gray-200 hover:rounded-lg hover:bg-gray-100 ${index === recentArticles.length - 1 ? "border-b-0" : ""}`}
+            to={`/article/${article.id}`}
           >
             <p className='text-text text-xl font-[450] line-clamp-1'>{article.subject}</p>
             <p className='text-text text-[15px] line-clamp-1'>{article.summary}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

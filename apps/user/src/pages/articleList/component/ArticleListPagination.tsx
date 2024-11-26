@@ -1,3 +1,4 @@
+import { CATEGORIES } from "@/constants/category";
 import {
   Pagination,
   PaginationContent,
@@ -11,18 +12,19 @@ import {
 interface IArticleListPaginationProps {
   currentPage: number;
   totalPages: number;
-  onPreviousClick: () => void;
-  onNextClick: () => void;
+  selectedCategory: (typeof CATEGORIES)[number]["value"];
 }
 
 const ArticleListPagination = ({
   currentPage,
   totalPages,
-  onPreviousClick,
-  onNextClick,
+  selectedCategory,
 }: IArticleListPaginationProps) => {
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === totalPages;
+
+  const previousPageLink = `/article/${selectedCategory}/${currentPage - 1}`;
+  const nextPageLink = `/article/${selectedCategory}/${currentPage + 1}`;
 
   const renderPageNumbers = () => {
     const items = [];
@@ -30,12 +32,7 @@ const ArticleListPagination = ({
     // 첫 페이지
     items.push(
       <PaginationItem key={1}>
-        <PaginationLink
-          isActive={currentPage === 1}
-          onClick={() => {
-            if (currentPage !== 1) onPreviousClick();
-          }}
-        >
+        <PaginationLink isActive={currentPage === 1} href={`/article/${selectedCategory}/1`}>
           1
         </PaginationLink>
       </PaginationItem>,
@@ -54,7 +51,7 @@ const ArticleListPagination = ({
     if (currentPage - 1 > 1) {
       items.push(
         <PaginationItem key={currentPage - 1}>
-          <PaginationLink onClick={onPreviousClick}>{currentPage - 1}</PaginationLink>
+          <PaginationLink href={previousPageLink}>{currentPage - 1}</PaginationLink>
         </PaginationItem>,
       );
     }
@@ -72,7 +69,7 @@ const ArticleListPagination = ({
     if (currentPage + 1 < totalPages) {
       items.push(
         <PaginationItem key={currentPage + 1}>
-          <PaginationLink onClick={onNextClick}>{currentPage + 1}</PaginationLink>
+          <PaginationLink href={nextPageLink}>{currentPage + 1}</PaginationLink>
         </PaginationItem>,
       );
     }
@@ -92,9 +89,7 @@ const ArticleListPagination = ({
         <PaginationItem key={totalPages}>
           <PaginationLink
             isActive={currentPage === totalPages}
-            onClick={() => {
-              if (currentPage !== totalPages) onNextClick();
-            }}
+            href={`/article/${selectedCategory}/${totalPages}`}
           >
             {totalPages}
           </PaginationLink>
@@ -112,7 +107,7 @@ const ArticleListPagination = ({
           <PaginationPrevious
             className={isFirstPage ? "opacity-50" : ""}
             size='default'
-            onClick={isFirstPage ? undefined : onPreviousClick}
+            href={previousPageLink}
           />
         </PaginationItem>
 
@@ -122,7 +117,7 @@ const ArticleListPagination = ({
           <PaginationNext
             className={isLastPage ? "opacity-50" : ""}
             size='default'
-            onClick={isLastPage ? undefined : onNextClick}
+            href={nextPageLink}
           />
         </PaginationItem>
       </PaginationContent>
