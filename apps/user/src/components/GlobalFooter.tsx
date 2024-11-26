@@ -34,7 +34,7 @@ const GlobalFooter = () => {
           }
         </p>
       </div>
-      <Link to='/home'>
+      <Link to='/'>
         <Button
           variant='outline'
           className='bg-primary mb-10 text-xl font-medium tracking-[2.8px] px-12 py-7'
