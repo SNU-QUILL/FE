@@ -7,8 +7,10 @@ import { QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
-const { worker } = await import("@/mocks/browser");
-worker.start();
+if (import.meta.env.MODE === "development" || import.meta.env.MODE === "build") {
+  const { worker } = await import("@/mocks/browser");
+  await worker.start();
+}
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
