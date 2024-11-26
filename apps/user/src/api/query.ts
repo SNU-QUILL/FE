@@ -7,7 +7,7 @@ export const useGetQuery = <T extends keyof IOperations>(
   params: IOperations[T]["request"],
 ) => {
   return useQuery({
-    queryKey: [...path.split("/"), ...params],
+    queryKey: [...path.split("/"), params && { ...params }],
     queryFn: async () => {
       const response = await api.get<IOperations[T]["response"]>(path, {
         params,

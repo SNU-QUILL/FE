@@ -1,14 +1,8 @@
+import { useGetQuery } from "@/api/query";
 import { Link } from "react-router-dom";
 
 const TopArticle = () => {
-  const topArticle = {
-    id: 1,
-    imgSrc: "https://picsum.photos/740/420",
-    subject:
-      "Dummy Article Title That Is Much Longer And More Descriptive About The Content Within",
-    summary:
-      "This is a much longer dummy article summary that provides more detailed information about what readers can expect from the full article. It goes into greater depth about the key points and main arguments, while still maintaining reader interest. The summary should give enough context for readers to understand the article's scope and decide if they want to read more.",
-  };
+  const { data: topArticle } = useGetQuery("/topArticle", {});
 
   const recentArticles = [
     {
@@ -36,17 +30,17 @@ const TopArticle = () => {
       <Link
         className='flex flex-col justify-end w-[740px] h-[420px] shrink-0 rounded-lg'
         style={{
-          backgroundImage: `url(${topArticle.imgSrc})`,
+          backgroundImage: `url(${topArticle?.pictureUrl})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-        to={`/article/${topArticle.id}`}
+        to={`/article/${topArticle?.articleId}`}
       >
         <div className='bg-gradient-to-t from-black/100 to-transparent rounded-b-lg'>
           <p className='text-white text-[32px] font-medium my-[10px] mx-[30px]'>
-            {topArticle.subject}
+            {topArticle?.title}
           </p>
-          <p className='text-white m-[10px_30px_40px_30px]'>{topArticle.summary}</p>
+          <p className='text-white m-[10px_30px_40px_30px]'>{topArticle?.summary}</p>
         </div>
       </Link>
 
