@@ -7,6 +7,7 @@ import ArticleListPage from "@/pages/articleList/ArticleListPage";
 import IntroductiontPage from "@/pages/introduction/IntroductiontPage";
 import MissionPage from "@/pages/mission/MissionPage";
 import ScrollToTop from "@/components/ScrollToTop";
+import NotFoundPage from "@/pages/NotFoundPage";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
         element: <MissionPage />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 
