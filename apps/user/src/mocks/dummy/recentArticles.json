@@ -1,17 +1,17 @@
 [
   {
     "id": 1,
-    "articleTitle": "About Cherry",
-    "articleSummary": "Laceration of intrinsic muscle and tendon at ankle and foot level, left foot, initial encounter"
+    "title": "About Cherry",
+    "summary": "Laceration of intrinsic muscle and tendon at ankle and foot level, left foot, initial encounter"
   },
   {
     "id": 2,
-    "articleTitle": "Sacrifice (Zhao shi gu er)",
-    "articleSummary": "Nondisplaced fracture of distal phalanx of right thumb, initial encounter for closed fracture"
+    "title": "Sacrifice (Zhao shi gu er)",
+    "summary": "Nondisplaced fracture of distal phalanx of right thumb, initial encounter for closed fracture"
   },
   {
     "id": 3,
-    "articleTitle": "Thousand Acres, A",
-    "articleSummary": "Subluxation of proximal interphalangeal joint of right little finger, sequela"
+    "title": "Thousand Acres, A",
+    "summary": "Subluxation of proximal interphalangeal joint of right little finger, sequela"
   }
 ]

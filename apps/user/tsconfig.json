@@ -8,5 +8,5 @@
     "declarationMap": false
   },
   "extends": "@repo/typescript-config/vite.json",
-  "include": ["src"]
+  "include": ["src", "public/mockServiceWorker.js"]
 }
