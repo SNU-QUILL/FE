@@ -3,7 +3,7 @@ export interface IArticleRecentRequest {
 }
 
 export interface IRecentArticleResponse {
-  articleSummary: string;
-  articleTitle: string;
+  summary: string;
+  title: string;
   id: number;
 }

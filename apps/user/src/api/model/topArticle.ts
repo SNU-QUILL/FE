@@ -1,5 +1,5 @@
 export interface ITopArticleResponse {
-  articleId: number;
+  id: number;
   pictureUrl: string;
   title: string;
   summary: string;

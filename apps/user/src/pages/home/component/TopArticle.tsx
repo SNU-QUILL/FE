@@ -14,7 +14,7 @@ const TopArticle = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-        to={`/article/${topArticle?.articleId}`}
+        to={`/article/${topArticle?.id}`}
       >
         <div className='bg-gradient-to-t from-black/100 to-transparent rounded-b-lg'>
           <p className='text-white text-[32px] font-medium my-[10px] mx-[30px]'>
@@ -31,8 +31,8 @@ const TopArticle = () => {
             className={`flex-1 flex flex-col justify-center p-2 border-b border-border rounded-lg hover:animate-hover-opacity ${index === recentArticles.length - 1 ? "border-b-0" : ""}`}
             to={`/article/${article.id}`}
           >
-            <p className='text-text text-xl font-[450] line-clamp-1'>{article.articleTitle}</p>
-            <p className='text-text text-[15px] line-clamp-1'>{article.articleSummary}</p>
+            <p className='text-text text-xl font-[450] line-clamp-1'>{article.title}</p>
+            <p className='text-text text-[15px] line-clamp-1'>{article.summary}</p>
           </Link>
         ))}
       </div>
