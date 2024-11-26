@@ -3,27 +3,7 @@ import { Link } from "react-router-dom";
 
 const TopArticle = () => {
   const { data: topArticle } = useGetQuery("/topArticle", {});
-
-  const recentArticles = [
-    {
-      id: 2,
-      subject: "Breaking News: Major Scientific Breakthrough in Renewable Energy Research",
-      summary:
-        "Scientists have made a groundbreaking discovery in solar cell technology that could revolutionize renewable energy. The new method increases efficiency by 40% while reducing production costs significantly. This development could accelerate the global transition to sustainable energy sources and combat climate change more effectively.",
-    },
-    {
-      id: 3,
-      subject: "Local Community Initiative Transforms Urban Spaces Into Green Havens",
-      summary:
-        "A grassroots movement in the city has successfully converted abandoned lots into thriving community gardens. The project not only beautifies neighborhoods but also provides fresh produce to local residents. Community leaders report increased social cohesion and environmental awareness among participants.",
-    },
-    {
-      id: 4,
-      subject: "Tech Giants Announce Collaborative Effort to Advance AI Ethics",
-      summary:
-        "Leading technology companies have joined forces to establish new ethical guidelines for artificial intelligence development. The initiative aims to address concerns about AI bias, privacy, and transparency. Industry experts believe this collaboration could set new standards for responsible AI innovation.",
-    },
-  ];
+  const { data: recentArticles } = useGetQuery("/article/recent", { count: 3 });
 
   return (
     <div className='flex gap-8'>
@@ -45,14 +25,14 @@ const TopArticle = () => {
       </Link>
 
       <div className='flex flex-col gap-4 justify-between'>
-        {recentArticles.map((article, index) => (
+        {recentArticles?.map((article, index) => (
           <Link
-            key={article.subject}
+            key={article.id}
             className={`flex-1 flex flex-col justify-center p-2 border-b border-border rounded-lg hover:animate-hover-opacity ${index === recentArticles.length - 1 ? "border-b-0" : ""}`}
             to={`/article/${article.id}`}
           >
-            <p className='text-text text-xl font-[450] line-clamp-1'>{article.subject}</p>
-            <p className='text-text text-[15px] line-clamp-1'>{article.summary}</p>
+            <p className='text-text text-xl font-[450] line-clamp-1'>{article.articleTitle}</p>
+            <p className='text-text text-[15px] line-clamp-1'>{article.articleSummary}</p>
           </Link>
         ))}
       </div>

@@ -1,12 +1,9 @@
-import { CATEGORIES } from "@/constants/category";
-
 export interface IArticleRecentRequest {
   count: number;
 }
 
-export interface IArticleResponse {
+export interface IRecentArticleResponse {
+  articleSummary: string;
+  articleTitle: string;
   id: number;
-  title: string;
-  pictureUrl: string;
-  category: (typeof CATEGORIES)[number]["value"];
 }

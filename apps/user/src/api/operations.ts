@@ -1,4 +1,4 @@
-import { IArticleRecentRequest, IArticleResponse } from "@/api/model/article";
+import { IArticleRecentRequest, IRecentArticleResponse } from "@/api/model/article";
 import { ITopArticleResponse } from "@/api/model/topArticle";
 
 export interface IOperations {
@@ -8,6 +8,6 @@ export interface IOperations {
   };
   "/article/recent": {
     request: IArticleRecentRequest;
-    response: IArticleResponse[];
+    response: IRecentArticleResponse[];
   };
 }
