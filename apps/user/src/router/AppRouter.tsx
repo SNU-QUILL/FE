@@ -6,11 +6,17 @@ import GlobalFooter from "@/components/GlobalFooter";
 import ArticleListPage from "@/pages/articleList/ArticleListPage";
 import IntroductiontPage from "@/pages/introduction/IntroductiontPage";
 import MissionPage from "@/pages/mission/MissionPage";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <GlobalLayout header={<GlobalHeader />} footer={<GlobalFooter />} />,
+    element: (
+      <>
+        <ScrollToTop />
+        <GlobalLayout header={<GlobalHeader />} footer={<GlobalFooter />} />
+      </>
+    ),
     children: [
       {
         path: "/",
