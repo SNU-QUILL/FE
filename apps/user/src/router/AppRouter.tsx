@@ -4,6 +4,8 @@ import HomePage from "@/pages/home/HomePage";
 import GlobalHeader from "@/components/GlobalHeader";
 import GlobalFooter from "@/components/GlobalFooter";
 import ArticleListPage from "@/pages/articleList/ArticleListPage";
+import IntroductiontPage from "@/pages/introduction/IntroductiontPage";
+import MissionPage from "@/pages/mission/MissionPage";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: "/article/archives/:page",
         element: <Navigate to='/article/archives' replace />,
+      },
+      {
+        path: "/introduction",
+        element: <IntroductiontPage />,
+      },
+      {
+        path: "/mission",
+        element: <MissionPage />,
       },
     ],
   },

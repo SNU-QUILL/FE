@@ -8,14 +8,26 @@ const GlobalFooter = () => {
     navigate("/home");
   };
 
+  const goToIntroduction = () => {
+    navigate("/introduction");
+  };
+
+  const goToMission = () => {
+    navigate("/mission");
+  };
+
   return (
     <footer className='w-full bg-primary flex flex-col items-center text-white font-light text-lg'>
       <div className='grid grid-cols-3 w-full py-10'>
         <div className='m-auto flex justify-center gap-20'>
           <p className='font-medium'>About SNU QUILL</p>
           <div className='font-light'>
-            <p>Who We Are</p>
-            <p>Our Mission</p>
+            <p className='cursor-pointer hover:opacity-50' onClick={goToIntroduction}>
+              Who We Are
+            </p>
+            <p className='cursor-pointer hover:opacity-50' onClick={goToMission}>
+              Our Mission
+            </p>
             <p>Meet the Staff</p>
           </div>
         </div>
