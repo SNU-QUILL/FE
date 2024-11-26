@@ -32,7 +32,7 @@ const ArticleListPagination = ({
     // 첫 페이지
     items.push(
       <PaginationItem key={1}>
-        <PaginationLink isActive={currentPage === 1} href={`/article/${selectedCategory}/1`}>
+        <PaginationLink isActive={currentPage === 1} to={`/article/${selectedCategory}/1`}>
           1
         </PaginationLink>
       </PaginationItem>,
@@ -51,7 +51,7 @@ const ArticleListPagination = ({
     if (currentPage - 1 > 1) {
       items.push(
         <PaginationItem key={currentPage - 1}>
-          <PaginationLink href={previousPageLink}>{currentPage - 1}</PaginationLink>
+          <PaginationLink to={previousPageLink}>{currentPage - 1}</PaginationLink>
         </PaginationItem>,
       );
     }
@@ -60,7 +60,9 @@ const ArticleListPagination = ({
     if (currentPage !== 1 && currentPage !== totalPages) {
       items.push(
         <PaginationItem key={currentPage}>
-          <PaginationLink isActive={true}>{currentPage}</PaginationLink>
+          <PaginationLink isActive={true} to={`/article/${selectedCategory}/${currentPage}`}>
+            {currentPage}
+          </PaginationLink>
         </PaginationItem>,
       );
     }
@@ -69,7 +71,7 @@ const ArticleListPagination = ({
     if (currentPage + 1 < totalPages) {
       items.push(
         <PaginationItem key={currentPage + 1}>
-          <PaginationLink href={nextPageLink}>{currentPage + 1}</PaginationLink>
+          <PaginationLink to={nextPageLink}>{currentPage + 1}</PaginationLink>
         </PaginationItem>,
       );
     }
@@ -89,7 +91,7 @@ const ArticleListPagination = ({
         <PaginationItem key={totalPages}>
           <PaginationLink
             isActive={currentPage === totalPages}
-            href={`/article/${selectedCategory}/${totalPages}`}
+            to={`/article/${selectedCategory}/${totalPages}`}
           >
             {totalPages}
           </PaginationLink>
@@ -107,7 +109,7 @@ const ArticleListPagination = ({
           <PaginationPrevious
             className={isFirstPage ? "opacity-50" : ""}
             size='default'
-            href={previousPageLink}
+            to={previousPageLink}
           />
         </PaginationItem>
 
@@ -117,7 +119,7 @@ const ArticleListPagination = ({
           <PaginationNext
             className={isLastPage ? "opacity-50" : ""}
             size='default'
-            href={nextPageLink}
+            to={nextPageLink}
           />
         </PaginationItem>
       </PaginationContent>
