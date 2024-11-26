@@ -15,6 +15,24 @@ export default defineConfig({
     ],
   },
 
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, "index.html"),
+      },
+    },
+    copyPublicDir: true,
+  },
+
+  worker: {
+    format: "es",
+    rollupOptions: {
+      output: {
+        entryFileNames: "[name].js",
+      },
+    },
+  },
+
   server: {
     proxy: {
       "/api": {

@@ -7,15 +7,19 @@ import { QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
-if (import.meta.env.MODE === "development" || import.meta.env.MODE === "build") {
-  const { worker } = await import("@/mocks/browser");
-  await worker.start();
+async function enableMocking() {
+  const { worker } = await import("./mocks/browser");
+  return worker.start({
+    onUnhandledRequest: "bypass", // 모킹되지 않은 요청은 그대로 통과
+  });
 }
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <AppRouter />
-    </QueryClientProvider>
-  </StrictMode>,
-);
+enableMocking().then(() => {
+  createRoot(document.getElementById("root")!).render(
+    <StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <AppRouter />
+      </QueryClientProvider>
+    </StrictMode>,
+  );
+});
