@@ -6,11 +6,25 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@repo/ui/src/components/ui/carousel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const PhotoJournal = () => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (!carouselApi) return;
+
+    const interval = setInterval(() => {
+      if (currentIndex === carouselApi.scrollSnapList().length - 1) {
+        carouselApi.scrollTo(0);
+      } else {
+        carouselApi.scrollNext();
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [carouselApi, currentIndex]);
 
   carouselApi?.on("scroll", evt => {
     setCurrentIndex(evt.selectedScrollSnap());

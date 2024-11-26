@@ -28,19 +28,21 @@ export default function GlobalHeader() {
           <Input className='border-none focus-visible:ring-0 shadow-none' />
         </div>
       </div>
-      <div className='w-full h-10 flex justify-center items-center gap-2 bg-primary'>
-        {CATEGORIES.map(category => (
-          <Button
-            key={category.value}
-            variant='ghost'
-            className={`text-white text-[16px] font-normal tracking-[0.8px] hover:bg-transparent ${
-              selectedCategory === category.value ? "border-b-2 rounded-none border-b-white" : ""
-            }`}
-            onClick={() => goToCategory(category.value)}
-          >
-            {category.label}
-          </Button>
-        ))}
+      <div className='flex justify-center w-full h-10 bg-primary'>
+        <div className='flex justify-evenly items-center gap-2 w-[1140px]'>
+          {CATEGORIES.map(category => (
+            <Button
+              key={category.value}
+              variant='ghost'
+              className={`text-white text-[16px] font-normal tracking-[0.8px] hover:bg-transparent ${
+                selectedCategory === category.value ? "border-b-2 rounded-none border-b-white" : ""
+              }`}
+              onClick={() => goToCategory(category.value)}
+            >
+              {category.label}
+            </Button>
+          ))}
+        </div>
       </div>
     </header>
   );

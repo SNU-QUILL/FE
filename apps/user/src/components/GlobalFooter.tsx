@@ -11,7 +11,7 @@ const GlobalFooter = () => {
   return (
     <footer className='w-full bg-primary flex flex-col items-center text-white font-light text-lg'>
       <div className='grid grid-cols-3 w-full py-10'>
-        <div className='flex justify-center gap-20'>
+        <div className='m-auto flex justify-center gap-20'>
           <p className='font-medium'>About SNU QUILL</p>
           <div className='font-light'>
             <p>Who We Are</p>
@@ -20,7 +20,7 @@ const GlobalFooter = () => {
           </div>
         </div>
 
-        <div className='flex justify-center gap-20'>
+        <div className='m-auto flex justify-center gap-20'>
           <p className='font-medium'>Contact Us</p>
           <div className='font-light'>
             <p>Feedback & Complains</p>
@@ -28,7 +28,7 @@ const GlobalFooter = () => {
             <p>Letter to the Editor</p>
           </div>
         </div>
-        <p className='font-light whitespace-pre-wrap'>
+        <p className='m-auto font-light whitespace-pre-wrap'>
           {
             "Gwanak-ro, Gwanak-gu, Seoul\nCopyright 2023 The SNU QUILL.\nAll rights reserved.\nmail to snuquill@gmail.com"
           }
