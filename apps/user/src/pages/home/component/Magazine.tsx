@@ -22,7 +22,7 @@ const Magazine = () => {
         {magzines.map(magazine => (
           <Link
             key={magazine.url}
-            className='w-[270px] h-[380px] transition-transform duration-300 hover:scale-105'
+            className='w-[270px] h-[380px] hover:animate-hover-scale'
             style={{
               backgroundImage: `url(${magazine.imgSrc})`,
               backgroundSize: "cover",

@@ -11,7 +11,7 @@ const ArticleListItem = ({ imgSrc, subject, author, description }: IArticleListI
       <img
         src={imgSrc}
         alt={"img"}
-        className='w-[220px] h-[145px] object-cover rounded-md shrink-0'
+        className='w-[220px] h-[145px] object-cover rounded-lg shrink-0'
       />
       <div className='flex flex-col overflow-hidden'>
         <p className='text-lg font-semibold overflow-hidden text-ellipsis text-nowrap'>{subject}</p>

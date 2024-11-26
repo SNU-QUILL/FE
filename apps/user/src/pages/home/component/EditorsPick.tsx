@@ -34,7 +34,7 @@ const EditorsPick = () => {
         {editorsPick.map(article => (
           <Link
             key={article.id}
-            className='flex flex-col justify-start w-[240px] gap-[5px] mt-[25px] p-2 hover:rounded-lg hover:bg-gray-100'
+            className='flex flex-col justify-start w-[240px] gap-[5px] mt-[25px] p-2 rounded-lg hover:animate-hover-opacity'
             to={`/article/${article.id}`}
           >
             <p className='text-primary text-[15px] font-[450]'>

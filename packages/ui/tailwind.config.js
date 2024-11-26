@@ -56,6 +56,20 @@ export default {
       fontFamily: {
         centaur: ["Centaur", "serif"],
       },
+      keyframes: {
+        "hover-scale": {
+          "0%": { transform: "scale(1)" },
+          "100%": { transform: "scale(1.05)" },
+        },
+        "hover-opacity": {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0.5" },
+        },
+      },
+      animation: {
+        "hover-scale": "hover-scale 0.3s ease forwards",
+        "hover-opacity": "hover-opacity 0.3s ease forwards",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

@@ -8,13 +8,13 @@ const GlobalFooter = () => {
         <div className='m-auto flex justify-center gap-20'>
           <p className='font-medium'>About SNU QUILL</p>
           <div className='font-light'>
-            <Link to='/introduction' className='hover:opacity-50'>
+            <Link to='/introduction' className='hover:animate-hover-opacity'>
               <p>Who We Are</p>
             </Link>
-            <Link to='/mission' className='hover:opacity-50'>
+            <Link to='/mission' className='hover:animate-hover-opacity'>
               <p>Our Mission</p>
             </Link>
-            <Link to='/members' className='hover:opacity-50'>
+            <Link to='/members' className='hover:animate-hover-opacity'>
               <p>Meet the Staff</p>
             </Link>
           </div>
