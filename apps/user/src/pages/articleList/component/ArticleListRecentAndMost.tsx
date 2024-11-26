@@ -66,7 +66,7 @@ const ArticleListRecentAndMost = ({ selectedCategory }: IArticleListRecentAndMos
             {recentArticles.map(article => (
               <li
                 key={article.id}
-                className='text-[13px] font-medium text-text w-full overflow-hidden whitespace-nowrap text-ellipsis'
+                className='text-[13px] font-medium text-text w-full overflow-hidden whitespace-nowrap text-ellipsis hover:opacity-50'
               >
                 <a href={`/article/${article.id}`}>{article.subject}</a>
               </li>
@@ -79,7 +79,7 @@ const ArticleListRecentAndMost = ({ selectedCategory }: IArticleListRecentAndMos
             {mostReadArticles.map(article => (
               <li
                 key={article.id}
-                className='text-[13px] font-medium text-text w-full overflow-hidden whitespace-nowrap text-ellipsis'
+                className='text-[13px] font-medium text-text w-full overflow-hidden whitespace-nowrap text-ellipsis hover:opacity-50'
               >
                 <a href={`/article/${article.id}`}>{article.subject}</a>
               </li>
