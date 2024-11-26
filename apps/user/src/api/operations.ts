@@ -1,5 +1,6 @@
 import { IArticleRecentRequest, IRecentArticleResponse } from "@/api/model/article";
 import { IEditorsPickListResponse } from "@/api/model/editorsPick";
+import { IMagazineResponse } from "@/api/model/magazine";
 import { ITopArticleResponse } from "@/api/model/topArticle";
 
 export interface IOperations {
@@ -14,5 +15,9 @@ export interface IOperations {
   "/editorPick": {
     request: any;
     response: IEditorsPickListResponse;
+  };
+  "/magazine/recent": {
+    request: any;
+    response: IMagazineResponse[];
   };
 }

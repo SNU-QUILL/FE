@@ -1,34 +1,23 @@
+import { useGetQuery } from "@/api/query";
 import { ArrowRightIcon, Button } from "@repo/ui";
 import { Link } from "react-router-dom";
 
 const Magazine = () => {
-  const magzines = [
-    {
-      imgSrc: "https://picsum.photos/270/380",
-      url: "/magazine/1",
-    },
-    {
-      imgSrc: "https://picsum.photos/270/380",
-      url: "/magazine/2",
-    },
-    {
-      imgSrc: "https://picsum.photos/270/380",
-      url: "/magazine/3",
-    },
-  ];
+  const { data: magazines } = useGetQuery("/magazine/recent", {});
   return (
     <div className='bg-subPrimary h-[450px] w-[calc(max(100vw,1140px))] translate-x-[calc(570px-max(50vw,570px))] flex flex-col justify-center items-center gap-4'>
       <div className='flex gap-4'>
-        {magzines.map(magazine => (
-          <Link
-            key={magazine.url}
+        {magazines?.map(magazine => (
+          <a
+            key={magazine.volumeNumber}
             className='w-[270px] h-[380px] hover:animate-hover-scale'
             style={{
-              backgroundImage: `url(${magazine.imgSrc})`,
+              backgroundImage: `url(${magazine.volumeCoverLink})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
-            to={magazine.url}
+            href={magazine.fileLink}
+            target='_blank'
           />
         ))}
         <div className='flex justify-center items-center w-[270px] h-[380px]'>
