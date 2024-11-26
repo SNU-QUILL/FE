@@ -43,7 +43,9 @@ const PhotoJournal = () => {
           {photoJournals?.map((item, index) => (
             <CarouselItem key={index}>
               <img src={item.photoLink} alt={item.description} className='rounded-lg' />
-              <p className='text-center text-2xl text-primary tracking-[1px]'>{item.description}</p>
+              <p className='flex justify-center items-center text-2xl text-primary tracking-[1px]'>
+                {item.description}
+              </p>
             </CarouselItem>
           ))}
         </CarouselContent>
