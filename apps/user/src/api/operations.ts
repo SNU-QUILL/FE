@@ -1,6 +1,7 @@
 import { IArticleRecentRequest, IRecentArticleResponse } from "@/api/model/article";
 import { IEditorsPickListResponse } from "@/api/model/editorsPick";
 import { IMagazineResponse } from "@/api/model/magazine";
+import { IPhotoJournalResponse } from "@/api/model/photoJournal";
 import { ITopArticleResponse } from "@/api/model/topArticle";
 
 export interface IOperations {
@@ -19,5 +20,9 @@ export interface IOperations {
   "/magazine/recent": {
     request: any;
     response: IMagazineResponse[];
+  };
+  "/photoJournal/recent": {
+    request: any;
+    response: IPhotoJournalResponse[];
   };
 }

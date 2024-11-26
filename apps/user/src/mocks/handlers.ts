@@ -3,12 +3,14 @@ import topArticle from "./dummy/topArticle.json";
 import recentArticles from "./dummy/recentArticles.json";
 import { IEditorsPickListResponse } from "@/api/model/editorsPick";
 import { IMagazineResponse } from "@/api/model/magazine";
+import { IPhotoJournalResponse } from "@/api/model/photoJournal";
 
 export const handlers = [
   http.get("/api/topArticle", () => HttpResponse.json(topArticle)),
   http.get("/api/article/recent", () => HttpResponse.json(recentArticles)),
   http.get("/api/editorPick", () => HttpResponse.json(mockEditorsPick)),
   http.get("/api/magazine/recent", () => HttpResponse.json(mockMagazine)),
+  http.get("/api/photoJournal/recent", () => HttpResponse.json(mockPhotoJournal)),
 ];
 
 const mockEditorsPick: IEditorsPickListResponse = {
@@ -62,5 +64,26 @@ const mockMagazine: IMagazineResponse[] = [
     publishDate: "2024-03-15",
     volumeCoverLink: "https://picsum.photos/740/420",
     fileLink: "https://picsum.photos/740/420",
+  },
+];
+
+const mockPhotoJournal: IPhotoJournalResponse[] = [
+  {
+    volumeNumber: 1,
+    photoLink: "https://picsum.photos/1140/640",
+    description: "Lorem ipsum dolor sit amet",
+    photographerId: 123,
+  },
+  {
+    volumeNumber: 2,
+    photoLink: "https://picsum.photos/1140/640",
+    description: "Consectetur adipiscing elit",
+    photographerId: 124,
+  },
+  {
+    volumeNumber: 3,
+    photoLink: "https://picsum.photos/1140/640",
+    description: "Sed do eiusmod tempor incididunt",
+    photographerId: 125,
   },
 ];
