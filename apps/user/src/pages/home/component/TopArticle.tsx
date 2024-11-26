@@ -40,7 +40,7 @@ const TopArticle = () => {
   return (
     <div className='flex gap-8'>
       <div
-        className='flex flex-col justify-end w-[740px] h-[420px] shrink-0 cursor-pointer'
+        className='flex flex-col justify-end w-[740px] h-[420px] shrink-0 cursor-pointer rounded-lg'
         style={{
           backgroundImage: `url(${topArticle.imgSrc})`,
           backgroundSize: "cover",
@@ -48,7 +48,7 @@ const TopArticle = () => {
         }}
         onClick={() => onArticleClick(topArticle.id)}
       >
-        <div className='bg-gradient-to-t from-black/100 to-transparent'>
+        <div className='bg-gradient-to-t from-black/100 to-transparent rounded-b-lg'>
           <p className='text-white text-[32px] font-medium my-[10px] mx-[30px]'>
             {topArticle.subject}
           </p>

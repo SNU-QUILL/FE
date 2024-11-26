@@ -16,7 +16,7 @@ const Magazine = () => {
     },
   ];
   return (
-    <div className='bg-subPrimary h-[450px] w-screen translate-x-[calc(570px-50vw)] flex flex-col justify-center items-center gap-4'>
+    <div className='bg-subPrimary h-[450px] w-[calc(max(100vw,1140px))] translate-x-[calc(570px-max(50vw,570px))] flex flex-col justify-center items-center gap-4'>
       <div className='flex gap-4'>
         {magzines.map(magazine => (
           <div
