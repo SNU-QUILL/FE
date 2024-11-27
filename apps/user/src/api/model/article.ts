@@ -1,3 +1,5 @@
+import { CATEGORIES } from "@/constants/category";
+
 export interface IArticleRecentRequest {
   count: number;
 }
@@ -33,4 +35,16 @@ export interface IArticlesResponse {
 export interface IArticlesResponseWithPage {
   totalPages: number;
   content: IArticlesResponse[];
+}
+
+export interface IArticleResponse {
+  id: number;
+  pictureUrl: string;
+  title: string;
+  content: string;
+  category: (typeof CATEGORIES)[number]["value"];
+  authorName: string;
+  authorRole: string;
+  authorEmail: string;
+  authorPictureUrl: string;
 }
