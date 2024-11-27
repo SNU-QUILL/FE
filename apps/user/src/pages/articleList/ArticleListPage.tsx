@@ -18,7 +18,7 @@ const ArticleListPage = () => {
     { category: selectedCategory, page: currentPage },
   );
 
-  if (currentPage > (data?.totalPages ?? 0)) {
+  if (data && currentPage > data.totalPages) {
     return <Navigate to={`/article/${selectedCategory}/1`} replace />;
   }
 
@@ -31,7 +31,7 @@ const ArticleListPage = () => {
         </div>
         <ArticleListPagination
           currentPage={currentPage}
-          totalPages={data?.totalPages ?? 0}
+          totalPages={data?.totalPages ?? 1}
           selectedCategory={selectedCategory}
         />
       </div>

@@ -107,7 +107,7 @@ const ArticleListPagination = ({
       <PaginationContent className='flex items-center gap-4 select-none mt-4'>
         <PaginationItem>
           <PaginationPrevious
-            className={isFirstPage ? "opacity-50" : ""}
+            className={isFirstPage ? "pointer-events-none opacity-50" : ""}
             size='default'
             to={previousPageLink}
           />
@@ -117,7 +117,7 @@ const ArticleListPagination = ({
 
         <PaginationItem>
           <PaginationNext
-            className={isLastPage ? "opacity-50" : ""}
+            className={isLastPage ? "pointer-events-none opacity-50" : ""}
             size='default'
             to={nextPageLink}
           />
