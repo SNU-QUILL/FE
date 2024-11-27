@@ -3,7 +3,11 @@ import topArticle from "./dummy/topArticle.json";
 import { IEditorsPickListResponse } from "@/api/model/editorsPick";
 import { IMagazineResponse } from "@/api/model/magazine";
 import { IPhotoJournalResponse } from "@/api/model/photoJournal";
-import { IMostReadArticleResponse, IRecentArticleResponse } from "@/api/model/article";
+import {
+  IArticlesResponse,
+  IMostReadArticleResponse,
+  IRecentArticleResponse,
+} from "@/api/model/article";
 
 export const handlers = [
   http.get("/api/topArticle", () => HttpResponse.json(topArticle)),
@@ -16,6 +20,14 @@ export const handlers = [
     const url = new URL(request.url);
     const count = Number(url.searchParams.get("count"));
     return HttpResponse.json(mockMostReadArticles.slice(0, count));
+  }),
+  http.get("/api/articles/:category/:page", ({ request }) => {
+    const url = new URL(request.url);
+    const page = Number(url.pathname.split("/")[4]);
+    return HttpResponse.json({
+      totalPages: Math.ceil(mockArticles.length / 10),
+      content: mockArticles.slice((page - 1) * 10, page * 10),
+    });
   }),
   http.get("/api/editorPick", () => HttpResponse.json(mockEditorsPick)),
   http.get("/api/magazine/recent", () => HttpResponse.json(mockMagazine)),
@@ -103,6 +115,337 @@ const mockMostReadArticles: IMostReadArticleResponse[] = [
     id: 5,
     title: "[Opinion] Sound of EDM or Buddhist Enlightenment? Cultural clash at temple stay",
     summary: "Understanding cultural transformations in modern society",
+  },
+];
+
+const mockArticles: IArticlesResponse[] = [
+  {
+    id: 1,
+    pictureUrl: "/images/article1.jpg",
+    title: "Special Series Exploring Solutions to Various Problems in Modern Society",
+    authorName: "John Smith",
+    summary:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  },
+  {
+    id: 2,
+    pictureUrl: "/images/article2.jpg",
+    title: "The Future of Living: AI and Big Data in the Fourth Industrial Revolution",
+    authorName: "Emma Wilson",
+    summary:
+      "Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat.",
+  },
+  {
+    id: 3,
+    pictureUrl: "/images/article3.jpg",
+    title: "Expert Guidelines for Eco-friendly Living in the Climate Crisis Era",
+    authorName: "Michael Green",
+    summary:
+      "Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra.",
+  },
+  {
+    id: 4,
+    pictureUrl: "/images/article4.jpg",
+    title: "New Professional Competencies Required in the Digital Transformation Era",
+    authorName: "Sarah Johnson",
+    summary:
+      "Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa.",
+  },
+  {
+    id: 5,
+    pictureUrl: "/images/article5.jpg",
+    title: "Changed Daily Life and New Lifestyle Trends in the Post-COVID Era",
+    authorName: "David Chen",
+    summary:
+      "Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet.",
+  },
+  {
+    id: 6,
+    pictureUrl: "/images/article6.jpg",
+    title: "Sustainable Development and Environmental Protection for Future Generations",
+    authorName: "Rachel Brown",
+    summary:
+      "Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.",
+  },
+  {
+    id: 7,
+    pictureUrl: "/images/article7.jpg",
+    title: "Expert's Customized Wellbeing Life Guide for Modern People",
+    authorName: "James Wilson",
+    summary:
+      "Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+  },
+  {
+    id: 8,
+    pictureUrl: "/images/article8.jpg",
+    title: "New Cultural Arts Trends and the Future Direction of Art in the Digital Age",
+    authorName: "Lisa Park",
+    summary:
+      "Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien.",
+  },
+  {
+    id: 9,
+    pictureUrl: "/images/article9.jpg",
+    title: "Expert Investment Strategies for Individual Investors in Global Economic Crisis",
+    authorName: "Robert Lee",
+    summary:
+      "Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor.",
+  },
+  {
+    id: 10,
+    pictureUrl: "/images/article10.jpg",
+    title: "In-depth Analysis of Innovative Changes in Future Education",
+    authorName: "Emily Davis",
+    summary:
+      "Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper.",
+  },
+  {
+    id: 11,
+    pictureUrl: "/images/article11.jpg",
+    title: "The Impact of Social Media on Modern Communication",
+    authorName: "Thomas Anderson",
+    summary:
+      "Analysis of how social platforms are reshaping human interaction and society at large.",
+  },
+  {
+    id: 12,
+    pictureUrl: "/images/article12.jpg",
+    title: "Renewable Energy: The Path to a Sustainable Future",
+    authorName: "Maria Garcia",
+    summary:
+      "Exploring innovative solutions in renewable energy and their potential impact on climate change.",
+  },
+  {
+    id: 13,
+    pictureUrl: "/images/article13.jpg",
+    title: "Mental Health in the Digital Age",
+    authorName: "Dr. Kevin Park",
+    summary:
+      "Understanding the psychological impacts of technology and strategies for digital wellbeing.",
+  },
+  {
+    id: 14,
+    pictureUrl: "/images/article14.jpg",
+    title: "The Evolution of Remote Work Culture",
+    authorName: "Jennifer Lee",
+    summary: "Examining how remote work is transforming workplace dynamics and corporate culture.",
+  },
+  {
+    id: 15,
+    pictureUrl: "/images/article15.jpg",
+    title: "Artificial Intelligence in Healthcare",
+    authorName: "Dr. Mark Wilson",
+    summary: "Exploring the revolutionary applications of AI in medical diagnosis and treatment.",
+  },
+  {
+    id: 16,
+    pictureUrl: "/images/article16.jpg",
+    title: "Urban Agriculture: Growing Food in Cities",
+    authorName: "Sophie Chen",
+    summary: "Innovative approaches to sustainable food production in urban environments.",
+  },
+  {
+    id: 17,
+    pictureUrl: "/images/article17.jpg",
+    title: "The Future of Transportation",
+    authorName: "Alex Johnson",
+    summary: "Analyzing emerging trends in mobility and transportation technology.",
+  },
+  {
+    id: 18,
+    pictureUrl: "/images/article18.jpg",
+    title: "Digital Privacy in the Modern Age",
+    authorName: "Daniel Kim",
+    summary: "Understanding the challenges and solutions for protecting personal data online.",
+  },
+  {
+    id: 19,
+    pictureUrl: "/images/article19.jpg",
+    title: "The Rise of E-Sports",
+    authorName: "Ryan Park",
+    summary: "Examining the growing influence of competitive gaming in modern entertainment.",
+  },
+  {
+    id: 20,
+    pictureUrl: "/images/article20.jpg",
+    title: "Sustainable Fashion: The Future of Style",
+    authorName: "Emma Thompson",
+    summary: "Exploring eco-friendly innovations in the fashion industry.",
+  },
+  {
+    id: 21,
+    pictureUrl: "/images/article21.jpg",
+    title: "The Science of Sleep",
+    authorName: "Dr. Sarah Lee",
+    summary: "Understanding the importance of sleep and its impact on health and productivity.",
+  },
+  {
+    id: 22,
+    pictureUrl: "/images/article22.jpg",
+    title: "Blockchain Technology Beyond Cryptocurrency",
+    authorName: "Michael Chang",
+    summary: "Exploring diverse applications of blockchain in various industries.",
+  },
+  {
+    id: 23,
+    pictureUrl: "/images/article23.jpg",
+    title: "The Future of Education Technology",
+    authorName: "Professor James Kim",
+    summary: "Analyzing how technology is transforming traditional educational methods.",
+  },
+  {
+    id: 24,
+    pictureUrl: "/images/article24.jpg",
+    title: "Space Exploration: The Next Frontier",
+    authorName: "Dr. Robert Chen",
+    summary: "Latest developments and future prospects in space exploration.",
+  },
+  {
+    id: 25,
+    pictureUrl: "/images/article25.jpg",
+    title: "The Psychology of Social Media",
+    authorName: "Dr. Lisa Wong",
+    summary: "Understanding the psychological effects of social media usage.",
+  },
+  {
+    id: 26,
+    pictureUrl: "/images/article26.jpg",
+    title: "Sustainable Cities of Tomorrow",
+    authorName: "Andrew Miller",
+    summary: "Planning and designing environmentally conscious urban spaces.",
+  },
+  {
+    id: 27,
+    pictureUrl: "/images/article27.jpg",
+    title: "The Evolution of Digital Art",
+    authorName: "Michelle Park",
+    summary: "Exploring new forms of artistic expression in the digital age.",
+  },
+  {
+    id: 28,
+    pictureUrl: "/images/article28.jpg",
+    title: "Quantum Computing: A New Era",
+    authorName: "Dr. David Lee",
+    summary: "Understanding the potential impact of quantum computing technology.",
+  },
+  {
+    id: 29,
+    pictureUrl: "/images/article29.jpg",
+    title: "The Future of Work",
+    authorName: "Jessica Chen",
+    summary: "Analyzing changing workplace dynamics and future career trends.",
+  },
+  {
+    id: 30,
+    pictureUrl: "/images/article30.jpg",
+    title: "Mindfulness in the Modern World",
+    authorName: "Rachel Kim",
+    summary: "Exploring practices for maintaining mental wellness in busy times.",
+  },
+  {
+    id: 31,
+    pictureUrl: "/images/article31.jpg",
+    title: "The Rise of Plant-Based Diets",
+    authorName: "Laura Martinez",
+    summary: "Examining the growing trend of plant-based nutrition and its impact.",
+  },
+  {
+    id: 32,
+    pictureUrl: "/images/article32.jpg",
+    title: "Virtual Reality in Education",
+    authorName: "Professor Tom Wilson",
+    summary: "Exploring the potential of VR technology in learning environments.",
+  },
+  {
+    id: 33,
+    pictureUrl: "/images/article33.jpg",
+    title: "The Future of Digital Currency",
+    authorName: "Steven Chang",
+    summary: "Analyzing trends and developments in digital financial systems.",
+  },
+  {
+    id: 34,
+    pictureUrl: "/images/article34.jpg",
+    title: "Ocean Conservation Efforts",
+    authorName: "Marine Biologist Sarah Ocean",
+    summary: "Current initiatives and strategies for protecting marine ecosystems.",
+  },
+  {
+    id: 35,
+    pictureUrl: "/images/article35.jpg",
+    title: "The Science of Happiness",
+    authorName: "Dr. Emily Joy",
+    summary: "Research-based approaches to achieving lasting happiness and wellbeing.",
+  },
+  {
+    id: 36,
+    pictureUrl: "/images/article36.jpg",
+    title: "Smart Home Technology Trends",
+    authorName: "Tech Analyst John Smart",
+    summary: "Latest innovations in home automation and connected living.",
+  },
+  {
+    id: 37,
+    pictureUrl: "/images/article37.jpg",
+    title: "The Future of Genetic Engineering",
+    authorName: "Dr. Helen Gene",
+    summary: "Ethical considerations and potential applications of genetic modification.",
+  },
+  {
+    id: 38,
+    pictureUrl: "/images/article38.jpg",
+    title: "Digital Marketing Evolution",
+    authorName: "Marketing Expert Mike Digital",
+    summary: "Emerging trends and strategies in online marketing.",
+  },
+  {
+    id: 39,
+    pictureUrl: "/images/article39.jpg",
+    title: "The Psychology of Decision Making",
+    authorName: "Dr. Choice Matter",
+    summary: "Understanding how humans make decisions in various contexts.",
+  },
+  {
+    id: 40,
+    pictureUrl: "/images/article40.jpg",
+    title: "Sustainable Energy Solutions",
+    authorName: "Energy Specialist Green Power",
+    summary: "Innovative approaches to renewable energy implementation.",
+  },
+  {
+    id: 41,
+    pictureUrl: "/images/article41.jpg",
+    title: "The Future of Transportation",
+    authorName: "Transport Expert Move Fast",
+    summary: "Emerging trends in mobility and transportation technology.",
+  },
+  {
+    id: 42,
+    pictureUrl: "/images/article42.jpg",
+    title: "Artificial Intelligence Ethics",
+    authorName: "AI Researcher Think Deep",
+    summary: "Ethical considerations in AI development and implementation.",
+  },
+  {
+    id: 43,
+    pictureUrl: "/images/article43.jpg",
+    title: "The Impact of Social Media",
+    authorName: "Social Analyst Connect More",
+    summary: "Analyzing the effects of social media on society and behavior.",
+  },
+  {
+    id: 44,
+    pictureUrl: "/images/article44.jpg",
+    title: "Future of Remote Work",
+    authorName: "Work Expert Home Office",
+    summary: "Trends and predictions for the future of remote working.",
+  },
+  {
+    id: 45,
+    pictureUrl: "/images/article45.jpg",
+    title: "Cybersecurity Challenges",
+    authorName: "Security Expert Safe Net",
+    summary: "Current threats and solutions in digital security.",
   },
 ];
 

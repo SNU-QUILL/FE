@@ -19,11 +19,18 @@ export interface IMostReadArticleResponse {
 }
 
 export interface IArticlesRequest {
-  count: number;
+  pageSize: number;
 }
 
 export interface IArticlesResponse {
-  summary: string;
-  title: string;
   id: number;
+  pictureUrl: string;
+  title: string;
+  authorName: string;
+  summary: string;
+}
+
+export interface IArticlesResponseWithPage {
+  totalPages: number;
+  content: IArticlesResponse[];
 }

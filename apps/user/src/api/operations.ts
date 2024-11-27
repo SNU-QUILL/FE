@@ -1,7 +1,7 @@
 import {
   IArticleRecentRequest,
   IArticlesRequest,
-  IArticlesResponse,
+  IArticlesResponseWithPage,
   IMostReadArticleRequest,
   IMostReadArticleResponse,
   IRecentArticleResponse,
@@ -24,9 +24,9 @@ export interface IOperations {
     request: IMostReadArticleRequest;
     response: IMostReadArticleResponse[];
   };
-  "/articles/{{category}}/{{page}}": {
+  "/articles/:category/:page": {
     request: IArticlesRequest;
-    response: IArticlesResponse[];
+    response: IArticlesResponseWithPage;
   };
   "/editorPick": {
     request: any;

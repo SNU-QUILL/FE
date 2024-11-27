@@ -1,22 +1,23 @@
 interface IArticleListItemProps {
-  imgSrc: string;
-  subject: string;
-  author: string;
-  description: string;
+  id: number;
+  pictureUrl: string;
+  title: string;
+  authorName: string;
+  summary: string;
 }
 
-const ArticleListItem = ({ imgSrc, subject, author, description }: IArticleListItemProps) => {
+const ArticleListItem = ({ id, pictureUrl, title, authorName, summary }: IArticleListItemProps) => {
   return (
     <div className='flex gap-4 p-4 border border-border rounded-lg cursor-pointer hover:bg-gray-100'>
       <img
-        src={imgSrc}
+        src={pictureUrl}
         alt={"img"}
         className='w-[220px] h-[145px] object-cover rounded-lg shrink-0'
       />
       <div className='flex flex-col overflow-hidden'>
-        <p className='text-lg font-semibold overflow-hidden text-ellipsis text-nowrap'>{subject}</p>
-        <p className='mt-[5px] mb-[13px] text-text'>{author}</p>
-        <p className='text-text line-clamp-3'>{description}</p>
+        <p className='text-lg font-semibold overflow-hidden text-ellipsis text-nowrap'>{title}</p>
+        <p className='mt-[5px] mb-[13px] text-text'>{authorName}</p>
+        <p className='text-text line-clamp-3'>{summary}</p>
       </div>
     </div>
   );
