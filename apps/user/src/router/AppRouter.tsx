@@ -3,7 +3,7 @@ import GlobalLayout from "@/layouts/GlobalLayout";
 import HomePage from "@/pages/home/HomePage";
 import GlobalHeader from "@/components/GlobalHeader";
 import GlobalFooter from "@/components/GlobalFooter";
-import ArticleListPage from "@/pages/articleList/ArticleListPage";
+import ArticleListPage from "@/pages/article/ArticleListPage";
 import IntroductionPage from "@/pages/introduction/IntroductionPage";
 import MissionPage from "@/pages/mission/MissionPage";
 import ScrollToTop from "@/components/ScrollToTop";

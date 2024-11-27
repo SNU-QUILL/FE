@@ -7,6 +7,7 @@ import {
   PaginationLink,
   PaginationEllipsis,
 } from "@repo/ui";
+import { useSearchParams } from "react-router-dom";
 
 interface IPaginationBarProps {
   currentPage: number;
@@ -17,6 +18,13 @@ interface IPaginationBarProps {
 const PaginationBar = ({ currentPage, totalPages, pageLink }: IPaginationBarProps) => {
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === totalPages;
+  const searchParams = useSearchParams()[0];
+
+  const startPageLink = `${pageLink}/1?${searchParams}`;
+  const previousPageLink = `${pageLink}/${currentPage - 1}?${searchParams}`;
+  const currentPageLink = `${pageLink}/${currentPage}?${searchParams}`;
+  const nextPageLink = `${pageLink}/${currentPage + 1}?${searchParams}`;
+  const endPageLink = `${pageLink}/${totalPages}?${searchParams}`;
 
   const renderPageNumbers = () => {
     const items = [];
@@ -24,7 +32,7 @@ const PaginationBar = ({ currentPage, totalPages, pageLink }: IPaginationBarProp
     // 첫 페이지
     items.push(
       <PaginationItem key={1}>
-        <PaginationLink isActive={currentPage === 1} to={`${pageLink}/1`}>
+        <PaginationLink isActive={currentPage === 1} to={startPageLink}>
           1
         </PaginationLink>
       </PaginationItem>,
@@ -43,7 +51,7 @@ const PaginationBar = ({ currentPage, totalPages, pageLink }: IPaginationBarProp
     if (currentPage - 1 > 1) {
       items.push(
         <PaginationItem key={currentPage - 1}>
-          <PaginationLink to={`${pageLink}/${currentPage - 1}`}>{currentPage - 1}</PaginationLink>
+          <PaginationLink to={previousPageLink}>{currentPage - 1}</PaginationLink>
         </PaginationItem>,
       );
     }
@@ -52,7 +60,7 @@ const PaginationBar = ({ currentPage, totalPages, pageLink }: IPaginationBarProp
     if (currentPage !== 1 && currentPage !== totalPages) {
       items.push(
         <PaginationItem key={currentPage}>
-          <PaginationLink isActive={true} to={`${pageLink}/${currentPage}`}>
+          <PaginationLink isActive={true} to={currentPageLink}>
             {currentPage}
           </PaginationLink>
         </PaginationItem>,
@@ -63,7 +71,7 @@ const PaginationBar = ({ currentPage, totalPages, pageLink }: IPaginationBarProp
     if (currentPage + 1 < totalPages) {
       items.push(
         <PaginationItem key={currentPage + 1}>
-          <PaginationLink to={`${pageLink}/${currentPage + 1}`}>{currentPage + 1}</PaginationLink>
+          <PaginationLink to={nextPageLink}>{currentPage + 1}</PaginationLink>
         </PaginationItem>,
       );
     }
@@ -81,7 +89,7 @@ const PaginationBar = ({ currentPage, totalPages, pageLink }: IPaginationBarProp
     if (totalPages > 1) {
       items.push(
         <PaginationItem key={totalPages}>
-          <PaginationLink isActive={currentPage === totalPages} to={`${pageLink}/${totalPages}`}>
+          <PaginationLink isActive={currentPage === totalPages} to={endPageLink}>
             {totalPages}
           </PaginationLink>
         </PaginationItem>,
@@ -98,7 +106,7 @@ const PaginationBar = ({ currentPage, totalPages, pageLink }: IPaginationBarProp
           <PaginationPrevious
             className={isFirstPage ? "pointer-events-none opacity-50" : ""}
             size='default'
-            to={`${pageLink}/${currentPage - 1}`}
+            to={previousPageLink}
           />
         </PaginationItem>
 
@@ -108,7 +116,7 @@ const PaginationBar = ({ currentPage, totalPages, pageLink }: IPaginationBarProp
           <PaginationNext
             className={isLastPage ? "pointer-events-none opacity-50" : ""}
             size='default'
-            to={`${pageLink}/${currentPage + 1}`}
+            to={nextPageLink}
           />
         </PaginationItem>
       </PaginationContent>

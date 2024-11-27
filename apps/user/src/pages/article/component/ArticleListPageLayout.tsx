@@ -1,4 +1,4 @@
-import ArticleListRecentAndMost from "@/components/ArticleListRecentAndMost";
+import ArticleListRecentAndMost from "@/pages/article/component/ArticleListRecentAndMost";
 
 interface IArticleListPageLayoutProps {
   title: string;

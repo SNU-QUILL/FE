@@ -1,9 +1,9 @@
 import { Navigate, useParams } from "react-router-dom";
-import ArticleListItem from "./component/ArticleListItem";
+import ArticleListItem from "../article/component/ArticleListItem";
 import { CATEGORIES } from "@/constants/category";
 import { useGetQuery } from "@/api/query";
-import ArticleListItemSkeleton from "@/pages/articleList/component/skeleton/ArticleListItemSkeleton";
-import ArticleListPageLayout from "@/layouts/ArticleListPageLayout";
+import ArticleListItemSkeleton from "@/pages/article/component/skeleton/ArticleListItemSkeleton";
+import ArticleListPageLayout from "@/pages/article/component/ArticleListPageLayout";
 import PaginationBar from "@/components/PaginationBar";
 import { ARTICLE_INTROS } from "@/constants/article";
 

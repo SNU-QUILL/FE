@@ -1,7 +1,7 @@
 import { useGetQuery } from "@/api/query";
 import SkeletonImage from "@/components/SkeletonImage";
 import { CATEGORIES } from "@/constants/category";
-import ArticleSkeleton from "@/pages/article/component/ArticleSkeleton";
+import ArticleSkeleton from "@/pages/article/component/skeleton/ArticleSkeleton";
 import { Navigate, useParams } from "react-router-dom";
 
 const ArticlePage = () => {

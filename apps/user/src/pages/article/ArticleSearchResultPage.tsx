@@ -1,8 +1,8 @@
 import { useGetQuery } from "@/api/query";
 import PaginationBar from "@/components/PaginationBar";
-import ArticleListPageLayout from "@/layouts/ArticleListPageLayout";
-import ArticleListItem from "@/pages/articleList/component/ArticleListItem";
-import ArticleListItemSkeleton from "@/pages/articleList/component/skeleton/ArticleListItemSkeleton";
+import ArticleListPageLayout from "@/pages/article/component/ArticleListPageLayout";
+import ArticleListItem from "@/pages/article/component/ArticleListItem";
+import ArticleListItemSkeleton from "@/pages/article/component/skeleton/ArticleListItemSkeleton";
 import { Navigate, useParams, useSearchParams } from "react-router-dom";
 
 const ARTICLE_LIST_PAGE_SIZE = 10;
