@@ -2,7 +2,6 @@ import { CATEGORIES } from "@/constants/category";
 import SectionHeader from "./SectionHeader";
 import { Link } from "react-router-dom";
 import { useGetQuery } from "@/api/query";
-import { Skeleton } from "@repo/ui";
 import EditosPickItemSkeleton from "@/pages/home/component/skeleton/EditosPickItemSkeleton";
 
 const EditorsPick = () => {

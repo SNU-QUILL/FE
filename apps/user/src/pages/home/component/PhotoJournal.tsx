@@ -2,7 +2,7 @@ import { useGetQuery } from "@/api/query";
 import SkeletonImage from "@/components/SkeletonImage";
 import SectionHeader from "@/pages/home/component/SectionHeader";
 import PhotoJournalItemSkeleton from "@/pages/home/component/skeleton/PhtoJournalItemSkeleton";
-import { ArrowLeftIcon, ArrowRightIcon, Skeleton } from "@repo/ui";
+import { ArrowLeftIcon, ArrowRightIcon } from "@repo/ui";
 import {
   Carousel,
   CarouselApi,
@@ -63,16 +63,16 @@ const PhotoJournal = () => {
         </CarouselContent>
       </Carousel>
       <div className='flex justify-center items-center gap-2'>
-        <div
+        <button
           className={`p-1 rounded-full border text-primary border-primary cursor-pointer hover:bg-subPrimary ${
             canScrollPrev ? "" : "invisible"
           }`}
           onClick={() => carouselApi?.scrollPrev()}
         >
           <ArrowLeftIcon className='w-4 h-4' />
-        </div>
+        </button>
         {photoJournals?.map((_, index) => (
-          <div
+          <button
             key={index}
             className={`w-3 h-3 rounded-full cursor-pointer ${
               index === currentIndex ? "bg-primary" : "bg-subPrimary"
@@ -80,14 +80,14 @@ const PhotoJournal = () => {
             onClick={() => carouselApi?.scrollTo(index)}
           />
         ))}
-        <div
+        <button
           className={`p-1 rounded-full text-primary border border-primary cursor-pointer hover:bg-subPrimary ${
             canScrollNext ? "" : "invisible"
           }`}
           onClick={() => carouselApi?.scrollNext()}
         >
           <ArrowRightIcon className='w-4 h-4' />
-        </div>
+        </button>
       </div>
     </div>
   );
