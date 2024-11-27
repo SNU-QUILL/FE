@@ -43,7 +43,7 @@ export const MemberList = ({ onSelect }: IMemberListProps) => {
 
       <div className='grid grid-cols-5 gap-2'>
         {memberMap?.[selectedTeam]?.map(member => (
-          <div
+          <button
             key={member.id}
             className='flex flex-col justify-center items-center gap-2 p-2 break-all cursor-pointer hover:bg-gray-100'
             onClick={() => onSelect?.(member)}
@@ -56,7 +56,7 @@ export const MemberList = ({ onSelect }: IMemberListProps) => {
             <div className='text-lg font-bold'>{member.name}</div>
             <div className='text-sm text-gray-500'>{member.role}</div>
             <div className='text-sm text-gray-500'>{member.email}</div>
-          </div>
+          </button>
         ))}
       </div>
     </div>

@@ -14,7 +14,7 @@ import { ITopArticleResponse } from "@/api/model/topArticle";
 
 export interface IOperations {
   "/topArticle": {
-    request: any;
+    request: unknown;
     response: ITopArticleResponse;
   };
   "/article/recent": {
@@ -30,11 +30,11 @@ export interface IOperations {
     response: IArticlesResponseWithPage;
   };
   "/article/:id": {
-    request: any;
+    request: unknown;
     response: IArticleResponse;
   };
   "/editorPick": {
-    request: any;
+    request: unknown;
     response: IEditorsPickListResponse;
   };
   "/magazine/:page": {
@@ -42,7 +42,7 @@ export interface IOperations {
     response: IMagazineResponseWithPages;
   };
   "/photoJournal/recent": {
-    request: any;
+    request: unknown;
     response: IPhotoJournalResponse[];
   };
 }

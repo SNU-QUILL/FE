@@ -7,7 +7,7 @@ interface IMagazineCardProps {
 }
 const MagazineCard = ({ volumeNumber, volumeCoverLink, fileLink }: IMagazineCardProps) => {
   return (
-    <a key={volumeNumber} href={fileLink} target='_blank'>
+    <a key={volumeNumber} href={fileLink} target='_blank' rel='noreferrer'>
       <SkeletonImage
         src={volumeCoverLink}
         alt={`Volume ${volumeNumber}`}

@@ -7,9 +7,6 @@ import GlobalDialog from "@/app/modal/GlobalDialog";
 import { Toaster } from "@repo/ui";
 import AppRouter from "@/app/routes/AppRouter";
 
-if (import.meta.env.MODE === "development") {
-}
-
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={new QueryClient()}>

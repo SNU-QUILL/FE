@@ -16,7 +16,9 @@ const Magazine = () => {
                 <MagazineCard {...magazine} />
               </div>
             ))
-          : Array.from({ length: 3 }).map(() => <Skeleton className='w-[270px] h-[380px]' />)}
+          : Array.from({ length: 3 }).map((_, index) => (
+              <Skeleton key={index} className='w-[270px] h-[380px]' />
+            ))}
         <div className='flex justify-center items-center w-[270px] h-[380px]'>
           <Link to='/archives/1'>
             <Button variant='ghost' className='text-primary hover:text-primary hover:bg-primary/10'>

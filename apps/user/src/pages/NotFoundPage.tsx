@@ -6,7 +6,9 @@ const NotFoundPage = () => {
       <h1 className='text-8xl font-bold text-primary'>404</h1>
       <div className='text-center'>
         <p className='text-2xl text-text mb-2'>Page Not Found</p>
-        <p className='text-text'>The page you are looking for doesn't exist or has been moved.</p>
+        <p className='text-text'>
+          The page you are looking for doesn&apos;t exist or has been moved.
+        </p>
       </div>
       <Link
         to='/home'

@@ -211,6 +211,7 @@ const ArticleContentsController = () => {
     [uploadFileAsync],
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const customUploadAdapter = (loader: any) => ({
     upload: async () => {
       const file = await loader.file;
@@ -219,7 +220,9 @@ const ArticleContentsController = () => {
     },
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function uploadPlugin(editor: any) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     editor.plugins.get("FileRepository").createUploadAdapter = (loader: any) =>
       customUploadAdapter(loader);
   }
