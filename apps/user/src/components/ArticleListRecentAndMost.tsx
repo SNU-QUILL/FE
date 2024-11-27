@@ -1,16 +1,14 @@
 import { useGetQuery } from "@/api/query";
-import { ARTICLE_INTROS } from "@/constants/article";
-import { CATEGORIES } from "@/constants/category";
 import { Skeleton } from "@repo/ui";
 import { Link } from "react-router-dom";
 
 const ARTICLE_LIST_COUNT = 5;
 
 interface IArticleListRecentAndMostProps {
-  selectedCategory: (typeof CATEGORIES)[number]["value"];
+  description: string;
 }
 
-const ArticleListRecentAndMost = ({ selectedCategory }: IArticleListRecentAndMostProps) => {
+const ArticleListRecentAndMost = ({ description }: IArticleListRecentAndMostProps) => {
   const { data: recentArticles } = useGetQuery("/article/recent", { count: ARTICLE_LIST_COUNT });
   const { data: mostReadArticles } = useGetQuery("/article/mostRead", {
     count: ARTICLE_LIST_COUNT,
@@ -19,7 +17,7 @@ const ArticleListRecentAndMost = ({ selectedCategory }: IArticleListRecentAndMos
   return (
     <div className='w-[280px] tracking-normal shrink-0'>
       <p className='text-primary text-right text-[32px] font-centaur w-[210px] ml-[70px] leading-[30px]'>
-        {ARTICLE_INTROS[selectedCategory]}
+        {description}
       </p>
       <hr className='border-primary border-[1px] mt-[4.375rem]' />
       <div className='sticky top-10'>
