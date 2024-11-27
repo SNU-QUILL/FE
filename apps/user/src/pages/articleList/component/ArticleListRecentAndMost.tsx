@@ -1,3 +1,4 @@
+import { useGetQuery } from "@/api/query";
 import { ARTICLE_INTROS } from "@/constants/article";
 import { CATEGORIES } from "@/constants/category";
 import { Link } from "react-router-dom";
@@ -7,29 +8,7 @@ interface IArticleListRecentAndMostProps {
 }
 
 const ArticleListRecentAndMost = ({ selectedCategory }: IArticleListRecentAndMostProps) => {
-  const recentArticles = [
-    {
-      id: 1,
-      subject: "A YouTube Case Study: Nikocado Avocado",
-    },
-    {
-      id: 2,
-      subject:
-        "Creating space for passion: SNU's Central Campus Clubs that foster personal hobbies",
-    },
-    {
-      id: 3,
-      subject: "Chocolate: A Dark, Bitter Story",
-    },
-    {
-      id: 4,
-      subject: "[64th SNU Student Council Election] The vision for SNU's sustainable future",
-    },
-    {
-      id: 5,
-      subject: "[Opinion] Wishy washy medical reform",
-    },
-  ];
+  const { data: recentArticles } = useGetQuery("/article/recent", { count: 5 });
 
   const mostReadArticles = [
     {
@@ -64,12 +43,12 @@ const ArticleListRecentAndMost = ({ selectedCategory }: IArticleListRecentAndMos
         <div className='mt-10'>
           <p className='text-primary font-semibold'>Recent Articles</p>
           <ul>
-            {recentArticles.map(article => (
+            {recentArticles?.map(article => (
               <li
                 key={article.id}
                 className='mt-1 text-[13px] font-medium text-text w-full overflow-hidden whitespace-nowrap text-ellipsis hover:animate-hover-opacity'
               >
-                <Link to={`/article/${article.id}`}>{article.subject}</Link>
+                <Link to={`/article/${article.id}`}>{article.title}</Link>
               </li>
             ))}
           </ul>
