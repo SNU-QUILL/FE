@@ -7,11 +7,11 @@ import MagazineCardSkeleton from "@/pages/archives/component/MagzineCardSkeleton
 const PAGE_SIZE = 12;
 
 const ArchivePage = () => {
-  const page = Number(useParams().page!);
-  const { data } = useGetQuery("/magazine/:page", { pageSize: PAGE_SIZE }, { page: page });
+  const currentPage = Number(useParams().page!);
+  const { data } = useGetQuery("/magazine/:page", { pageSize: PAGE_SIZE }, { page: currentPage });
   const magazines = data?.content;
 
-  if (data && (page > data.totalPages || page < 1)) {
+  if (isNaN(currentPage) || currentPage < 1 || (data && currentPage > data.totalPages)) {
     return <Navigate to={`/archives/1`} replace />;
   }
 
@@ -32,7 +32,11 @@ const ArchivePage = () => {
               <MagazineCardSkeleton key={index} />
             ))}
       </div>
-      <PaginationBar currentPage={page} totalPages={data?.totalPages ?? 1} pageLink={`/archives`} />
+      <PaginationBar
+        currentPage={currentPage}
+        totalPages={data?.totalPages ?? 1}
+        pageLink={`/archives`}
+      />
     </div>
   );
 };

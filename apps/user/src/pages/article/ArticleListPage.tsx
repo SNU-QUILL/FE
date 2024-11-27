@@ -21,8 +21,13 @@ const ArticleListPage = () => {
     { pageSize: ARTICLE_LIST_PAGE_SIZE },
     { category: selectedCategory, page: currentPage },
   );
+  const totalPages = data?.totalPages ?? 1;
 
-  if ((data && currentPage > data.totalPages) || currentPage < 1) {
+  if (
+    isNaN(currentPage) ||
+    currentPage < 1 ||
+    (data && totalPages !== 0 && currentPage > totalPages)
+  ) {
     return <Navigate to={`/article/${selectedCategory}/1`} replace />;
   }
 
@@ -31,16 +36,22 @@ const ArticleListPage = () => {
       title={selectedCategoryLabel}
       description={ARTICLE_INTROS[selectedCategory]}
     >
-      {data
-        ? data.content.map(article => <ArticleListItem key={article.id} {...article} />)
-        : Array.from({ length: ARTICLE_LIST_PAGE_SIZE }).map((_, index) => (
-            <ArticleListItemSkeleton key={index} />
-          ))}
-      <PaginationBar
-        currentPage={currentPage}
-        totalPages={data?.totalPages ?? 1}
-        pageLink={`/article/${selectedCategory}`}
-      />
+      {totalPages === 0 ? (
+        <p className='text-center text-lg'>No articles found.</p>
+      ) : (
+        <>
+          {data
+            ? data.content.map(article => <ArticleListItem key={article.id} {...article} />)
+            : Array.from({ length: ARTICLE_LIST_PAGE_SIZE }).map((_, index) => (
+                <ArticleListItemSkeleton key={index} />
+              ))}
+          <PaginationBar
+            currentPage={currentPage}
+            totalPages={totalPages}
+            pageLink={`/article/${selectedCategory}`}
+          />
+        </>
+      )}
     </ArticleListPageLayout>
   );
 };

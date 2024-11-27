@@ -20,28 +20,38 @@ const ArticleSearchResultPage = () => {
     { page: currentPage },
     { enabled: !!searchText },
   );
+  const totalPages = data?.totalPages ?? 1;
+
+  if (!searchText) {
+    return <Navigate to={`/home`} replace />;
+  }
 
   if (
-    !searchText ||
     isNaN(currentPage) ||
     currentPage < 1 ||
-    (data && currentPage > data.totalPages)
+    (data && totalPages !== 0 && currentPage > totalPages)
   ) {
-    return <Navigate to={`/home`} replace />;
+    return <Navigate to={`/article/search/1?search-text=${searchText}`} replace />;
   }
 
   return (
     <ArticleListPageLayout title={"Search Result"} description=''>
-      {data
-        ? data.content.map(article => <ArticleListItem key={article.id} {...article} />)
-        : Array.from({ length: ARTICLE_LIST_PAGE_SIZE }).map((_, index) => (
-            <ArticleListItemSkeleton key={index} />
-          ))}
-      <PaginationBar
-        currentPage={currentPage}
-        totalPages={data?.totalPages ?? 1}
-        pageLink={`/article/search`}
-      />
+      {totalPages === 0 ? (
+        <p className='text-center text-lg'>No search results found.</p>
+      ) : (
+        <>
+          {data
+            ? data.content.map(article => <ArticleListItem key={article.id} {...article} />)
+            : Array.from({ length: ARTICLE_LIST_PAGE_SIZE }).map((_, index) => (
+                <ArticleListItemSkeleton key={index} />
+              ))}
+          <PaginationBar
+            currentPage={currentPage}
+            totalPages={totalPages}
+            pageLink={`/article/search`}
+          />
+        </>
+      )}
     </ArticleListPageLayout>
   );
 };
