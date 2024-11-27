@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import TeamMembers from "@/pages/members/component/TeamMembers";
 
 const MembersPage = () => {
@@ -351,13 +352,16 @@ const MembersPage = () => {
     },
   ];
   return (
-    <div className='flex flex-col items-center mt-[50px] mb-[200px]'>
-      <div className='text-primary text-xl font-semibold tracking-[1px]'>MEET THE STAFF</div>
-      <hr className='border-primary my-[30px] border-b-2 w-[30px]' />
-      {teams.map(team => (
-        <TeamMembers key={team.teamName} teamName={team.teamName} members={team.members} />
-      ))}
-    </div>
+    <>
+      <SEO title='Quill Members' description='Members' />
+      <div className='flex flex-col items-center mt-[50px] mb-[200px]'>
+        <div className='text-primary text-xl font-semibold tracking-[1px]'>MEET THE STAFF</div>
+        <hr className='border-primary my-[30px] border-b-2 w-[30px]' />
+        {teams.map(team => (
+          <TeamMembers key={team.teamName} teamName={team.teamName} members={team.members} />
+        ))}
+      </div>
+    </>
   );
 };
 export default MembersPage;

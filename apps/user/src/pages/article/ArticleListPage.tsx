@@ -6,6 +6,7 @@ import ArticleListItemSkeleton from "@/pages/article/component/skeleton/ArticleL
 import ArticleListPageLayout from "@/pages/article/component/ArticleListPageLayout";
 import PaginationBar from "@/components/PaginationBar";
 import { ARTICLE_INTROS } from "@/constants/article";
+import SEO from "@/components/SEO";
 
 const ARTICLE_LIST_PAGE_SIZE = 10;
 
@@ -32,27 +33,30 @@ const ArticleListPage = () => {
   }
 
   return (
-    <ArticleListPageLayout
-      title={selectedCategoryLabel}
-      description={ARTICLE_INTROS[selectedCategory]}
-    >
-      {totalPages === 0 ? (
-        <p className='text-center text-lg'>No articles found.</p>
-      ) : (
-        <>
-          {data
-            ? data.content.map(article => <ArticleListItem key={article.id} {...article} />)
-            : Array.from({ length: ARTICLE_LIST_PAGE_SIZE }).map((_, index) => (
-                <ArticleListItemSkeleton key={index} />
-              ))}
-          <PaginationBar
-            currentPage={currentPage}
-            totalPages={totalPages}
-            pageLink={`/article/${selectedCategory}`}
-          />
-        </>
-      )}
-    </ArticleListPageLayout>
+    <>
+      <SEO title={selectedCategoryLabel} description={ARTICLE_INTROS[selectedCategory]} />
+      <ArticleListPageLayout
+        title={selectedCategoryLabel}
+        description={ARTICLE_INTROS[selectedCategory]}
+      >
+        {totalPages === 0 ? (
+          <p className='text-center text-lg'>No articles found.</p>
+        ) : (
+          <>
+            {data
+              ? data.content.map(article => <ArticleListItem key={article.id} {...article} />)
+              : Array.from({ length: ARTICLE_LIST_PAGE_SIZE }).map((_, index) => (
+                  <ArticleListItemSkeleton key={index} />
+                ))}
+            <PaginationBar
+              currentPage={currentPage}
+              totalPages={totalPages}
+              pageLink={`/article/${selectedCategory}`}
+            />
+          </>
+        )}
+      </ArticleListPageLayout>
+    </>
   );
 };
 

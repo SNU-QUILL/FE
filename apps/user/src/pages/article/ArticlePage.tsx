@@ -1,8 +1,8 @@
 import { useGetQuery } from "@/api/query";
+import SEO from "@/components/SEO";
 import SkeletonImage from "@/components/SkeletonImage";
 import { CATEGORIES } from "@/constants/category";
 import ArticleSkeleton from "@/pages/article/component/skeleton/ArticleSkeleton";
-import { Helmet } from "react-helmet-async";
 import { Navigate, useParams } from "react-router-dom";
 
 const ArticlePage = () => {
@@ -15,13 +15,7 @@ const ArticlePage = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{data?.title}</title>
-        <meta name='description' content={data?.content} />
-        <meta property='og:title' content={data?.title} />
-        <meta property='og:description' content={data?.content} />
-        <meta property='og:image' content={data?.pictureUrl} />
-      </Helmet>
+      <SEO title={data?.title} description={data?.content} pictureUrl={data?.pictureUrl} />
       <div className='w-[1080px] flex flex-col items-center my-[50px]'>
         {data ? (
           <>
