@@ -1,15 +1,20 @@
 import { useGetQuery } from "@/api/query";
 import { ARTICLE_INTROS } from "@/constants/article";
 import { CATEGORIES } from "@/constants/category";
+import { Skeleton } from "@repo/ui";
 import { Link } from "react-router-dom";
+
+const ARTICLE_LIST_COUNT = 5;
 
 interface IArticleListRecentAndMostProps {
   selectedCategory: (typeof CATEGORIES)[number]["value"];
 }
 
 const ArticleListRecentAndMost = ({ selectedCategory }: IArticleListRecentAndMostProps) => {
-  const { data: recentArticles } = useGetQuery("/article/recent", { count: 5 });
-  const { data: mostReadArticles } = useGetQuery("/article/mostRead", { count: 5 });
+  const { data: recentArticles } = useGetQuery("/article/recent", { count: ARTICLE_LIST_COUNT });
+  const { data: mostReadArticles } = useGetQuery("/article/mostRead", {
+    count: ARTICLE_LIST_COUNT,
+  });
 
   return (
     <div className='w-[280px] tracking-normal shrink-0'>
@@ -21,27 +26,35 @@ const ArticleListRecentAndMost = ({ selectedCategory }: IArticleListRecentAndMos
         <div className='mt-10'>
           <p className='text-primary font-semibold'>Recent Articles</p>
           <ul>
-            {recentArticles?.map(article => (
-              <li
-                key={article.id}
-                className='mt-1 text-[13px] font-medium text-text w-full overflow-hidden whitespace-nowrap text-ellipsis hover:animate-hover-opacity'
-              >
-                <Link to={`/article/${article.id}`}>{article.title}</Link>
-              </li>
-            ))}
+            {recentArticles
+              ? recentArticles.map(article => (
+                  <li
+                    key={article.id}
+                    className='mt-1 text-[13px] font-medium text-text w-full overflow-hidden whitespace-nowrap text-ellipsis hover:animate-hover-opacity'
+                  >
+                    <Link to={`/article/${article.id}`}>{article.title}</Link>
+                  </li>
+                ))
+              : Array.from({ length: ARTICLE_LIST_COUNT }).map((_, index) => (
+                  <Skeleton key={index} className='w-full h-4 mt-2' />
+                ))}
           </ul>
         </div>
         <div className='mt-10'>
           <p className='text-primary font-semibold'>Most Read</p>
           <ul>
-            {mostReadArticles?.map(article => (
-              <li
-                key={article.id}
-                className='mt-1 text-[13px] font-medium text-text w-full overflow-hidden whitespace-nowrap text-ellipsis hover:animate-hover-opacity'
-              >
-                <Link to={`/article/${article.id}`}>{article.title}</Link>
-              </li>
-            ))}
+            {mostReadArticles
+              ? mostReadArticles.map(article => (
+                  <li
+                    key={article.id}
+                    className='mt-1 text-[13px] font-medium text-text w-full overflow-hidden whitespace-nowrap text-ellipsis hover:animate-hover-opacity'
+                  >
+                    <Link to={`/article/${article.id}`}>{article.title}</Link>
+                  </li>
+                ))
+              : Array.from({ length: ARTICLE_LIST_COUNT }).map((_, index) => (
+                  <Skeleton key={index} className='w-full h-4 mt-2' />
+                ))}
           </ul>
         </div>
       </div>

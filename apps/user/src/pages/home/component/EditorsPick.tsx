@@ -3,6 +3,7 @@ import SectionHeader from "./SectionHeader";
 import { Link } from "react-router-dom";
 import { useGetQuery } from "@/api/query";
 import { Skeleton } from "@repo/ui";
+import EditosPickItemSkeleton from "@/pages/home/component/skeleton/EditosPickItemSkeleton";
 
 const EditorsPick = () => {
   const { data: editorsPick } = useGetQuery("/editorPick", {});
@@ -44,17 +45,7 @@ const EditorsPick = () => {
                 <p className='text-text text-xl font-[450] line-clamp-3'>{article.subject}</p>
               </Link>
             ))
-          : Array.from({ length: 4 }).map((_, index) => (
-              <div
-                key={index}
-                className='flex flex-col justify-start gap-1 w-[240px] h-[150px] mt-[25px]'
-              >
-                <Skeleton className='w-20 h-4' />
-                <Skeleton className='w-60 h-6' />
-                <Skeleton className='w-40 h-6' />
-                <Skeleton className='w-32 h-6' />
-              </div>
-            ))}
+          : Array.from({ length: 4 }).map((_, index) => <EditosPickItemSkeleton key={index} />)}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { useGetQuery } from "@/api/query";
 import SkeletonImage from "@/components/SkeletonImage";
 import SectionHeader from "@/pages/home/component/SectionHeader";
+import PhotoJournalItemSkeleton from "@/pages/home/component/skeleton/PhtoJournalItemSkeleton";
 import { ArrowLeftIcon, ArrowRightIcon, Skeleton } from "@repo/ui";
 import {
   Carousel,
@@ -56,10 +57,7 @@ const PhotoJournal = () => {
               ))
             : Array.from({ length: 3 }).map((_, index) => (
                 <CarouselItem key={index}>
-                  <div className='flex flex-col justify-center h-[750px]'>
-                    <Skeleton className='w-full h-full' />
-                    <Skeleton className='w-full h-6' />
-                  </div>
+                  <PhotoJournalItemSkeleton />
                 </CarouselItem>
               ))}
         </CarouselContent>

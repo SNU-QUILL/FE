@@ -1,3 +1,4 @@
+import SkeletonImage from "@/components/SkeletonImage";
 import { Link } from "react-router-dom";
 
 interface IArticleListItemProps {
@@ -14,7 +15,7 @@ const ArticleListItem = ({ id, pictureUrl, title, authorName, summary }: IArticl
       to={`/article/${id}`}
       className='flex gap-4 p-4 border border-border rounded-lg cursor-pointer hover:bg-gray-100'
     >
-      <img
+      <SkeletonImage
         src={pictureUrl}
         alt={"img"}
         className='w-[220px] h-[145px] object-cover rounded-lg shrink-0'
