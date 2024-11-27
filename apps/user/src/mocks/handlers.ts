@@ -82,28 +82,108 @@ const mockArticles: IArticleResponse[] = Array.from({ length: 45 }, (_, i) => ({
     ][i % 10] + ` - Part ${Math.floor(i / 10) + 1}`,
   content: `
     <article>
-      <h1>Introduction</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-      
-      <h2>Background</h2>
-      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
-      
-      <h2>Main Discussion</h2>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-      
-      <h3>Key Points</h3>
+      <h1>The Evolution of Modern Technology</h1>
+      <h2>1. Text Formatting Showcase</h2>
+      <p>In this section, we'll explore various text formatting options. Here's <strong>bold text</strong> for emphasis, <em>italicized text</em> for subtle emphasis, and <u>underlined text</u> for highlighting. We can also show <s>strikethrough text</s> for outdated information.</p>
+
+      <h2>2. Complex Lists and Indentation</h2>
+      <ol>
+        <li>First Level Item
+          <ul>
+            <li>Nested unordered item</li>
+            <li>Another nested item
+              <ol>
+                <li>Deep nested ordered item</li>
+                <li>Another deep nested item</li>
+              </ol>
+            </li>
+          </ul>
+        </li>
+        <li>Second Level Item
+          <ul>
+            <li>Sub-point A</li>
+            <li>Sub-point B</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h2>3. Image Integration</h2>
+      <img src="https://picsum.photos/800/400" alt="Random Technology Image" />
+      <p>Above is a representative image showcasing modern technology.</p>
+
+      <h2>4. Heading Hierarchy</h2>
+      <h3>4.1 Third Level Heading</h3>
+      <p>This demonstrates heading hierarchy.</p>
+      <h4>4.1.1 Fourth Level Heading</h4>
+      <p>Even deeper heading level.</p>
+
+      <h2>5. Mixed Formatting</h2>
+      <p>We can combine formats like <strong><em>bold and italic</em></strong> or <u><strong>underlined and bold</strong></u>.</p>
+
+      <h2>6. Comprehensive Lists</h2>
+      <h3>Unordered List Example:</h3>
       <ul>
-        <li>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt neque porro quisquam</li>
-        <li>Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt, neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur adipisci velit</li>
-        <li>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consectetur adipisci velit sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam</li>
+        <li><strong>Major Technologies:</strong>
+          <ul>
+            <li><em>Artificial Intelligence</em>
+              <ul>
+                <li>Machine Learning</li>
+                <li>Neural Networks</li>
+                <li>Deep Learning</li>
+              </ul>
+            </li>
+            <li><em>Blockchain</em>
+              <ul>
+                <li>Cryptocurrencies</li>
+                <li>Smart Contracts</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
-      
-      <h2>Analysis</h2>
-      <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-      
-      <h2>Conclusion</h2>
-      <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
-    </article>`.repeat(5),
+
+      <h3>Ordered List Example:</h3>
+      <ol>
+        <li>Development Phases
+          <ol type="a">
+            <li>Planning
+              <ol type="i">
+                <li>Requirements Analysis</li>
+                <li>System Design</li>
+              </ol>
+            </li>
+            <li>Implementation
+              <ol type="i">
+                <li>Coding</li>
+                <li>Testing</li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+
+      <h2>7. Extended Content Section</h2>
+      <p>This section contains a mix of all elements:</p>
+      <ul>
+        <li><strong>Bold Point</strong>: Important information here</li>
+        <li><em>Italic Point</em>: Emphasized information here</li>
+        <li><u>Underlined Point</u>: Highlighted information here</li>
+        <li><s>Strikethrough Point</s>: Deprecated information here</li>
+      </ul>
+
+      <img src="https://picsum.photos/800/600" alt="Another Technology Image" />
+      <p>A second image to demonstrate multiple image handling.</p>
+
+      <h2>8. Conclusion</h2>
+      <p>This comprehensive example demonstrates various HTML formatting capabilities including:</p>
+      <ul>
+        <li>Multiple heading levels (h1-h4)</li>
+        <li>Text formatting (bold, italic, underline, strikethrough)</li>
+        <li>Complex nested lists (ordered and unordered)</li>
+        <li>Image integration</li>
+        <li>Mixed formatting combinations</li>
+      </ul>
+    </article>`.repeat(3),
   category: ["features", "snu_society", "arts_culture", "opinion", "short_articles"][
     Math.floor(Math.random() * 5)
   ],
@@ -124,7 +204,7 @@ const mockArticles: IArticleResponse[] = Array.from({ length: 45 }, (_, i) => ({
     "tech@news.com",
     "science@news.com",
   ][Math.floor(Math.random() * 5)],
-  authorPictureUrl: `https://i.pravatar.cc/150?img=${Math.floor(Math.random() * 70)}`,
+  authorPictureUrl: `https://i.pravatar.cc/100?img=${Math.floor(Math.random() * 70)}`,
 }));
 
 const mockEditorsPick: IEditorsPickListResponse = {

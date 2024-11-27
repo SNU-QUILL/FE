@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface IArticleListItemProps {
   id: number;
   pictureUrl: string;
@@ -8,7 +10,10 @@ interface IArticleListItemProps {
 
 const ArticleListItem = ({ id, pictureUrl, title, authorName, summary }: IArticleListItemProps) => {
   return (
-    <div className='flex gap-4 p-4 border border-border rounded-lg cursor-pointer hover:bg-gray-100'>
+    <Link
+      to={`/article/${id}`}
+      className='flex gap-4 p-4 border border-border rounded-lg cursor-pointer hover:bg-gray-100'
+    >
       <img
         src={pictureUrl}
         alt={"img"}
@@ -19,7 +24,7 @@ const ArticleListItem = ({ id, pictureUrl, title, authorName, summary }: IArticl
         <p className='mt-[5px] mb-[13px] text-text'>{authorName}</p>
         <p className='text-text line-clamp-3'>{summary}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 
