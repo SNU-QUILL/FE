@@ -1,4 +1,5 @@
 import { useGetQuery } from "@/api/query";
+import SkeletonImage from "@/components/SkeletonImage";
 import { Skeleton } from "@repo/ui";
 import { Link } from "react-router-dom";
 
@@ -11,15 +12,15 @@ const TopArticle = () => {
     <div className='flex gap-8'>
       {topArticle ? (
         <Link
-          className='flex flex-col justify-end w-[740px] h-[420px] shrink-0 rounded-lg'
-          style={{
-            backgroundImage: `url(${topArticle.pictureUrl})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
+          className='flex flex-col justify-end w-[740px] h-[420px] shrink-0 rounded-lg relative'
           to={`/article/${topArticle.id}`}
         >
-          <div className='bg-gradient-to-t from-black/100 to-transparent rounded-b-lg'>
+          <SkeletonImage
+            src={topArticle.pictureUrl}
+            alt={topArticle.title}
+            className='absolute top-0 w-full h-full rounded-lg'
+          />
+          <div className='absolute bottom-0 w-full bg-gradient-to-t from-black/100 to-transparent rounded-b-lg'>
             <p className='text-white text-[32px] font-medium my-[10px] mx-[30px]'>
               {topArticle.title}
             </p>

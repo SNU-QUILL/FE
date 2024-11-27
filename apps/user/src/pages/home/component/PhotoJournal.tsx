@@ -1,4 +1,5 @@
 import { useGetQuery } from "@/api/query";
+import SkeletonImage from "@/components/SkeletonImage";
 import SectionHeader from "@/pages/home/component/SectionHeader";
 import { ArrowLeftIcon, ArrowRightIcon, Skeleton } from "@repo/ui";
 import {
@@ -43,7 +44,11 @@ const PhotoJournal = () => {
           {photoJournals
             ? photoJournals.map((item, index) => (
                 <CarouselItem key={index}>
-                  <img src={item.photoLink} alt={item.description} className='rounded-lg' />
+                  <SkeletonImage
+                    src={item.photoLink}
+                    alt={item.description}
+                    className='rounded-lg h-[750px]'
+                  />
                   <p className='flex justify-center items-center text-2xl text-primary tracking-[1px]'>
                     {item.description}
                   </p>

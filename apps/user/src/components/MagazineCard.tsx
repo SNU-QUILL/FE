@@ -1,3 +1,5 @@
+import SkeletonImage from "@/components/SkeletonImage";
+
 interface IMagazineCardProps {
   volumeNumber: number;
   volumeCoverLink: string;
@@ -5,17 +7,13 @@ interface IMagazineCardProps {
 }
 const MagazineCard = ({ volumeNumber, volumeCoverLink, fileLink }: IMagazineCardProps) => {
   return (
-    <a
-      key={volumeNumber}
-      className='w-full h-full hover:animate-hover-scale inline-block'
-      style={{
-        backgroundImage: `url(${volumeCoverLink})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-      href={fileLink}
-      target='_blank'
-    />
+    <a key={volumeNumber} href={fileLink} target='_blank'>
+      <SkeletonImage
+        src={volumeCoverLink}
+        alt={`Volume ${volumeNumber}`}
+        className='w-full h-full hover:animate-hover-scale'
+      />
+    </a>
   );
 };
 export default MagazineCard;
