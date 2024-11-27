@@ -1,4 +1,3 @@
-import { CATEGORIES } from "@/constants/category";
 import {
   Pagination,
   PaginationContent,
@@ -9,22 +8,15 @@ import {
   PaginationEllipsis,
 } from "@repo/ui";
 
-interface IArticleListPaginationProps {
+interface IPaginationBarProps {
   currentPage: number;
   totalPages: number;
-  selectedCategory: (typeof CATEGORIES)[number]["value"];
+  pageLink: string;
 }
 
-const ArticleListPagination = ({
-  currentPage,
-  totalPages,
-  selectedCategory,
-}: IArticleListPaginationProps) => {
+const PaginationBar = ({ currentPage, totalPages, pageLink }: IPaginationBarProps) => {
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === totalPages;
-
-  const previousPageLink = `/article/${selectedCategory}/${currentPage - 1}`;
-  const nextPageLink = `/article/${selectedCategory}/${currentPage + 1}`;
 
   const renderPageNumbers = () => {
     const items = [];
@@ -32,7 +24,7 @@ const ArticleListPagination = ({
     // 첫 페이지
     items.push(
       <PaginationItem key={1}>
-        <PaginationLink isActive={currentPage === 1} to={`/article/${selectedCategory}/1`}>
+        <PaginationLink isActive={currentPage === 1} to={`${pageLink}/1`}>
           1
         </PaginationLink>
       </PaginationItem>,
@@ -51,7 +43,7 @@ const ArticleListPagination = ({
     if (currentPage - 1 > 1) {
       items.push(
         <PaginationItem key={currentPage - 1}>
-          <PaginationLink to={previousPageLink}>{currentPage - 1}</PaginationLink>
+          <PaginationLink to={`${pageLink}/${currentPage - 1}`}>{currentPage - 1}</PaginationLink>
         </PaginationItem>,
       );
     }
@@ -60,7 +52,7 @@ const ArticleListPagination = ({
     if (currentPage !== 1 && currentPage !== totalPages) {
       items.push(
         <PaginationItem key={currentPage}>
-          <PaginationLink isActive={true} to={`/article/${selectedCategory}/${currentPage}`}>
+          <PaginationLink isActive={true} to={`${pageLink}/${currentPage}`}>
             {currentPage}
           </PaginationLink>
         </PaginationItem>,
@@ -71,7 +63,7 @@ const ArticleListPagination = ({
     if (currentPage + 1 < totalPages) {
       items.push(
         <PaginationItem key={currentPage + 1}>
-          <PaginationLink to={nextPageLink}>{currentPage + 1}</PaginationLink>
+          <PaginationLink to={`${pageLink}/${currentPage + 1}`}>{currentPage + 1}</PaginationLink>
         </PaginationItem>,
       );
     }
@@ -89,10 +81,7 @@ const ArticleListPagination = ({
     if (totalPages > 1) {
       items.push(
         <PaginationItem key={totalPages}>
-          <PaginationLink
-            isActive={currentPage === totalPages}
-            to={`/article/${selectedCategory}/${totalPages}`}
-          >
+          <PaginationLink isActive={currentPage === totalPages} to={`${pageLink}/${totalPages}`}>
             {totalPages}
           </PaginationLink>
         </PaginationItem>,
@@ -109,7 +98,7 @@ const ArticleListPagination = ({
           <PaginationPrevious
             className={isFirstPage ? "pointer-events-none opacity-50" : ""}
             size='default'
-            to={previousPageLink}
+            to={`${pageLink}/${currentPage - 1}`}
           />
         </PaginationItem>
 
@@ -119,7 +108,7 @@ const ArticleListPagination = ({
           <PaginationNext
             className={isLastPage ? "pointer-events-none opacity-50" : ""}
             size='default'
-            to={nextPageLink}
+            to={`${pageLink}/${currentPage + 1}`}
           />
         </PaginationItem>
       </PaginationContent>
@@ -127,4 +116,4 @@ const ArticleListPagination = ({
   );
 };
 
-export default ArticleListPagination;
+export default PaginationBar;

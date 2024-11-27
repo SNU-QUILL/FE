@@ -2,7 +2,7 @@ import { Navigate, useParams } from "react-router-dom";
 import ArticleListItem from "./component/ArticleListItem";
 import { CATEGORIES } from "@/constants/category";
 import ArticleListRecentAndMost from "./component/ArticleListRecentAndMost";
-import ArticleListPagination from "./component/ArticleListPagination";
+import PaginationBar from "../../components/PaginationBar";
 import { useGetQuery } from "@/api/query";
 
 const ArticleListPage = () => {
@@ -18,7 +18,7 @@ const ArticleListPage = () => {
     { category: selectedCategory, page: currentPage },
   );
 
-  if (data && currentPage > data.totalPages) {
+  if ((data && currentPage > data.totalPages) || currentPage < 1) {
     return <Navigate to={`/article/${selectedCategory}/1`} replace />;
   }
 
@@ -29,10 +29,10 @@ const ArticleListPage = () => {
         <div className='flex flex-col gap-4 mt-10'>
           {data?.content.map(article => <ArticleListItem key={article.id} {...article} />)}
         </div>
-        <ArticleListPagination
+        <PaginationBar
           currentPage={currentPage}
           totalPages={data?.totalPages ?? 1}
-          selectedCategory={selectedCategory}
+          pageLink={`/article/${selectedCategory}`}
         />
       </div>
       <ArticleListRecentAndMost selectedCategory={selectedCategory} />
