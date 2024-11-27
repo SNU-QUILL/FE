@@ -2,7 +2,7 @@ import { useGetQuery } from "@/api/query";
 import SkeletonImage from "@/components/SkeletonImage";
 import { CATEGORIES } from "@/constants/category";
 import ArticleSkeleton from "@/pages/article/component/skeleton/ArticleSkeleton";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { Navigate, useParams } from "react-router-dom";
 
 const ArticlePage = () => {
