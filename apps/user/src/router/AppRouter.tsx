@@ -9,6 +9,7 @@ import MissionPage from "@/pages/mission/MissionPage";
 import ScrollToTop from "@/components/ScrollToTop";
 import NotFoundPage from "@/pages/NotFoundPage";
 import MembersPage from "@/pages/members/MembersPage";
+import ArchivePage from "@/pages/archives/ArchivePage";
 
 const router = createBrowserRouter([
   {
@@ -41,8 +42,12 @@ const router = createBrowserRouter([
         element: <ArticleListPage />,
       },
       {
-        path: "/article/archives",
-        element: <div>archive</div>,
+        path: "/archives",
+        element: <Navigate to='/archives/1' replace />,
+      },
+      {
+        path: "/archives/:page",
+        element: <ArchivePage />,
       },
       {
         path: "/article/archives/:page",

@@ -24,7 +24,10 @@ export default function GlobalHeader() {
       <div className='flex justify-center w-full h-10 bg-primary'>
         <div className='flex justify-evenly items-center gap-2 w-[1140px]'>
           {CATEGORIES.map(category => (
-            <Link to={`/article/${category.value}/1`} key={category.value}>
+            <Link
+              to={`${category.value === "archives" ? "/archives/1" : `/article/${category.value}/1`}`}
+              key={category.value}
+            >
               <Button
                 variant='ghost'
                 className={`text-white text-[16px] font-normal tracking-[0.8px] hover:bg-transparent ${

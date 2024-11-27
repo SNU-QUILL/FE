@@ -26,7 +26,7 @@ const ArticleListPage = () => {
     <div className='w-full flex p-4 gap-10'>
       <div className='flex-grow overflow-hidden'>
         <div className='text-primary text-[25px] font-medium'>{selectedCategoryLabel}</div>
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-4 mt-10'>
           {data?.content.map(article => <ArticleListItem key={article.id} {...article} />)}
         </div>
         <ArticleListPagination

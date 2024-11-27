@@ -7,7 +7,11 @@ import {
   IRecentArticleResponse,
 } from "@/api/model/article";
 import { IEditorsPickListResponse } from "@/api/model/editorsPick";
-import { IMagazineResponse } from "@/api/model/magazine";
+import {
+  IMagazineRequest,
+  IMagazineResponse,
+  IMagazineResponseWithPages,
+} from "@/api/model/magazine";
 import { IPhotoJournalResponse } from "@/api/model/photoJournal";
 import { ITopArticleResponse } from "@/api/model/topArticle";
 
@@ -32,9 +36,9 @@ export interface IOperations {
     request: any;
     response: IEditorsPickListResponse;
   };
-  "/magazine/recent": {
-    request: any;
-    response: IMagazineResponse[];
+  "/magazine/:page": {
+    request: IMagazineRequest;
+    response: IMagazineResponseWithPages;
   };
   "/photoJournal/recent": {
     request: any;
