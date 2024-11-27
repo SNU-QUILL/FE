@@ -1,6 +1,6 @@
 import { useGetQuery } from "@/api/query";
 import SectionHeader from "@/pages/home/component/SectionHeader";
-import { ArrowLeftIcon, ArrowRightIcon } from "@repo/ui";
+import { ArrowLeftIcon, ArrowRightIcon, Skeleton } from "@repo/ui";
 import {
   Carousel,
   CarouselApi,
@@ -40,14 +40,23 @@ const PhotoJournal = () => {
       <SectionHeader title='Photojournals' />
       <Carousel setApi={setCarouselApi}>
         <CarouselContent>
-          {photoJournals?.map((item, index) => (
-            <CarouselItem key={index}>
-              <img src={item.photoLink} alt={item.description} className='rounded-lg' />
-              <p className='flex justify-center items-center text-2xl text-primary tracking-[1px]'>
-                {item.description}
-              </p>
-            </CarouselItem>
-          ))}
+          {photoJournals
+            ? photoJournals.map((item, index) => (
+                <CarouselItem key={index}>
+                  <img src={item.photoLink} alt={item.description} className='rounded-lg' />
+                  <p className='flex justify-center items-center text-2xl text-primary tracking-[1px]'>
+                    {item.description}
+                  </p>
+                </CarouselItem>
+              ))
+            : Array.from({ length: 3 }).map((_, index) => (
+                <CarouselItem key={index}>
+                  <div className='flex flex-col justify-center h-[750px]'>
+                    <Skeleton className='w-full h-full' />
+                    <Skeleton className='w-full h-6' />
+                  </div>
+                </CarouselItem>
+              ))}
         </CarouselContent>
       </Carousel>
       <div className='flex justify-center items-center gap-2'>

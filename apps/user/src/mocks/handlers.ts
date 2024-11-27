@@ -6,8 +6,12 @@ import { IPhotoJournalResponse } from "@/api/model/photoJournal";
 import { IArticleResponse } from "@/api/model/article";
 
 export const handlers = [
-  http.get("/api/topArticle", () => HttpResponse.json(topArticle)),
-  http.get("/api/article/recent", ({ request }) => {
+  http.get("/api/topArticle", async () => {
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    return HttpResponse.json(topArticle);
+  }),
+  http.get("/api/article/recent", async ({ request }) => {
+    await new Promise(resolve => setTimeout(resolve, 3000));
     const url = new URL(request.url);
     const count = Number(url.searchParams.get("count"));
     return HttpResponse.json(
@@ -18,7 +22,8 @@ export const handlers = [
       })),
     );
   }),
-  http.get("/api/article/mostRead", ({ request }) => {
+  http.get("/api/article/mostRead", async ({ request }) => {
+    await new Promise(resolve => setTimeout(resolve, 3000));
     const url = new URL(request.url);
     const count = Number(url.searchParams.get("count"));
     return HttpResponse.json(
@@ -32,7 +37,8 @@ export const handlers = [
         })),
     );
   }),
-  http.get("/api/articles/:category/:page", ({ request }) => {
+  http.get("/api/articles/:category/:page", async ({ request }) => {
+    await new Promise(resolve => setTimeout(resolve, 3000));
     const url = new URL(request.url);
     const page = Number(url.pathname.split("/")[4]);
     return HttpResponse.json({
@@ -46,14 +52,22 @@ export const handlers = [
       })),
     });
   }),
-  http.get("/api/article/:id", ({ request }) => {
+  http.get("/api/article/:id", async ({ request }) => {
+    await new Promise(resolve => setTimeout(resolve, 3000));
     const url = new URL(request.url);
     const id = Number(url.pathname.split("/")[3]);
     return HttpResponse.json(mockArticles.find(article => article.id === id));
   }),
-  http.get("/api/editorPick", () => HttpResponse.json(mockEditorsPick)),
-  http.get("/api/photoJournal/recent", () => HttpResponse.json(mockPhotoJournal)),
-  http.get("/api/magazine/:page", ({ request }) => {
+  http.get("/api/editorPick", async () => {
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    return HttpResponse.json(mockEditorsPick);
+  }),
+  http.get("/api/photoJournal/recent", async () => {
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    return HttpResponse.json(mockPhotoJournal);
+  }),
+  http.get("/api/magazine/:page", async ({ request }) => {
+    await new Promise(resolve => setTimeout(resolve, 3000));
     const url = new URL(request.url);
     const pageSize = Number(url.searchParams.get("pageSize"));
     const page = Number(url.pathname.split("/")[3]);
