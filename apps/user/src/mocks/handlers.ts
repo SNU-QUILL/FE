@@ -3,7 +3,7 @@ import topArticle from "./dummy/topArticle.json";
 import { IEditorsPickListResponse } from "@/api/model/editorsPick";
 import { IMagazineResponse } from "@/api/model/magazine";
 import { IPhotoJournalResponse } from "@/api/model/photoJournal";
-import { IRecentArticleResponse } from "@/api/model/article";
+import { IMostReadArticleResponse, IRecentArticleResponse } from "@/api/model/article";
 
 export const handlers = [
   http.get("/api/topArticle", () => HttpResponse.json(topArticle)),
@@ -11,6 +11,11 @@ export const handlers = [
     const url = new URL(request.url);
     const count = Number(url.searchParams.get("count"));
     return HttpResponse.json(mockRecentArticles.slice(0, count));
+  }),
+  http.get("/api/article/mostRead", ({ request }) => {
+    const url = new URL(request.url);
+    const count = Number(url.searchParams.get("count"));
+    return HttpResponse.json(mockMostReadArticles.slice(0, count));
   }),
   http.get("/api/editorPick", () => HttpResponse.json(mockEditorsPick)),
   http.get("/api/magazine/recent", () => HttpResponse.json(mockMagazine)),
@@ -69,6 +74,35 @@ const mockRecentArticles: IRecentArticleResponse[] = [
     id: 10,
     title: "The Final Chapter",
     summary: "Nondisplaced fracture of lateral condyle of right tibia, initial encounter",
+  },
+];
+
+const mockMostReadArticles: IMostReadArticleResponse[] = [
+  {
+    id: 1,
+    title: "[Opinion] Gaza, 'If only I were a candle in the dark': A reflection on humanity",
+    summary:
+      "Laceration of intrinsic muscle and tendon at ankle and foot level, left foot, initial encounter",
+  },
+  {
+    id: 2,
+    title: "Private campus tours impact SNU campus life: The growing commercialization debate",
+    summary: "Exploring the untold stories of urban development and community growth",
+  },
+  {
+    id: 3,
+    title: "City bus strike derails SNU students' mornings: Transportation crisis hits campus",
+    summary: "An in-depth analysis of emerging technologies and their societal impact",
+  },
+  {
+    id: 4,
+    title: "Growing influence of franchise chains at SNU: Local businesses face tough competition",
+    summary: "Investigating sustainable solutions for environmental challenges",
+  },
+  {
+    id: 5,
+    title: "[Opinion] Sound of EDM or Buddhist Enlightenment? Cultural clash at temple stay",
+    summary: "Understanding cultural transformations in modern society",
   },
 ];
 
