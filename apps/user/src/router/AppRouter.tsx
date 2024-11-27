@@ -10,6 +10,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import NotFoundPage from "@/pages/NotFoundPage";
 import MembersPage from "@/pages/members/MembersPage";
 import ArchivePage from "@/pages/archives/ArchivePage";
+import ArticlePage from "@/pages/article/ArticlePage";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/article/:id",
-        element: <div>article</div>,
+        element: <ArticlePage />,
       },
       {
         path: "/article/:category/:page",
