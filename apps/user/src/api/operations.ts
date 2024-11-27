@@ -1,6 +1,7 @@
 import {
   IArticleRecentRequest,
   IArticleResponse,
+  IArticleSearchRequest,
   IArticlesRequest,
   IArticlesResponseWithPage,
   IMostReadArticleRequest,
@@ -32,6 +33,10 @@ export interface IOperations {
   "/article/:id": {
     request: unknown;
     response: IArticleResponse;
+  };
+  "/article/search/:page": {
+    request: IArticleSearchRequest;
+    response: IArticlesResponseWithPage;
   };
   "/editorPick": {
     request: unknown;

@@ -52,12 +52,36 @@ export const handlers = [
       })),
     });
   }),
+  http.get("/api/article/search/:page", async ({ request }) => {
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    const url = new URL(request.url);
+    const page = Number(url.pathname.split("/")[4]);
+    const searchText = url.searchParams.get("searchText")!;
+    const pageSize = Number(url.searchParams.get("pageSize"));
+
+    const filteredArticles = mockArticles
+      .filter(
+        article => article.title.includes(searchText) || article.category.includes(searchText),
+      )
+      .map(article => ({
+        id: article.id,
+        pictureUrl: article.pictureUrl,
+        title: article.title,
+        authorName: article.authorName,
+        summary: article.content.slice(0, 300).replace(/<[^>]*>/g, ""),
+      }));
+    return HttpResponse.json({
+      totalPages: Math.ceil(filteredArticles.length / pageSize),
+      content: filteredArticles.slice((page - 1) * pageSize, page * pageSize),
+    });
+  }),
   http.get("/api/article/:id", async ({ request }) => {
     await new Promise(resolve => setTimeout(resolve, 3000));
     const url = new URL(request.url);
     const id = Number(url.pathname.split("/")[3]);
     return HttpResponse.json(mockArticles.find(article => article.id === id));
   }),
+
   http.get("/api/editorPick", async () => {
     await new Promise(resolve => setTimeout(resolve, 3000));
     return HttpResponse.json(mockEditorsPick);

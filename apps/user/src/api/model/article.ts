@@ -48,3 +48,8 @@ export interface IArticleResponse {
   authorEmail: string;
   authorPictureUrl: string;
 }
+
+export interface IArticleSearchRequest {
+  searchText: string;
+  pageSize: number;
+}

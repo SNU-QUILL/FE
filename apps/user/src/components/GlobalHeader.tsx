@@ -1,10 +1,17 @@
 import { CATEGORIES } from "@/constants/category";
 import { Button, Input, MagnifyingGlassIcon } from "@repo/ui";
-import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function GlobalHeader() {
+  const navigate = useNavigate();
   const location = useLocation();
+  const [searchText, setSearchText] = useState("");
   const selectedCategory = location.pathname.split("/")[2];
+
+  const goToSearchResultPage = (query: string) => {
+    navigate(`/article/search/1?search-text=${query}`);
+  };
 
   return (
     <header className='flex flex-col items-center gap-4 w-full mt-10'>
@@ -17,8 +24,20 @@ export default function GlobalHeader() {
       </div>
       <div className='flex w-[1140px] justify-end'>
         <div className='flex items-center gap-2 border-b-primary border-b-4 w-60'>
-          <MagnifyingGlassIcon className='text-primary w-8 h-8' />
-          <Input className='border-none focus-visible:ring-0 shadow-none' />
+          <MagnifyingGlassIcon
+            className='text-primary w-8 h-8'
+            onClick={() => goToSearchResultPage(searchText)}
+          />
+          <Input
+            className='border-none focus-visible:ring-0 shadow-none'
+            onChange={e => setSearchText(e.target.value)}
+            value={searchText}
+            onKeyDown={e => {
+              if (e.key === "Enter") {
+                goToSearchResultPage(searchText);
+              }
+            }}
+          />
         </div>
       </div>
       <div className='flex justify-center w-full h-10 bg-primary'>

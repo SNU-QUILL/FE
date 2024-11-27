@@ -17,10 +17,10 @@ type PathParamsObject<T extends string> = Record<ExtractPathParams<T>, string | 
 export const useGetQuery = <T extends keyof IOperations>(
   path: T,
   params?: IOperations[T]["request"],
-  ...args: HasPathParams<T> extends true ? [pathParams: PathParamsObject<T>] : []
+  pathParams?: HasPathParams<T> extends true ? PathParamsObject<T> : undefined,
+  { enabled }: { enabled: boolean } = { enabled: true },
 ) => {
   let urlPath: string = path;
-  const pathParams = args[0];
   // Replace path variables with actual values
   if (pathParams) {
     Object.entries(pathParams).forEach(([key, value]) => {
@@ -36,5 +36,6 @@ export const useGetQuery = <T extends keyof IOperations>(
       });
       return response.data;
     },
+    enabled,
   });
 };

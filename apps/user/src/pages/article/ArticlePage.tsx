@@ -2,11 +2,16 @@ import { useGetQuery } from "@/api/query";
 import SkeletonImage from "@/components/SkeletonImage";
 import { CATEGORIES } from "@/constants/category";
 import ArticleSkeleton from "@/pages/article/component/ArticleSkeleton";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 const ArticlePage = () => {
   const id = Number(useParams().id!);
   const { data } = useGetQuery("/article/:id", {}, { id });
+
+  if (isNaN(id) || id < 1) {
+    return <Navigate to='/home' replace />;
+  }
+
   return (
     <div className='w-[1080px] flex flex-col items-center my-[50px]'>
       {data ? (

@@ -11,6 +11,7 @@ import NotFoundPage from "@/pages/NotFoundPage";
 import MembersPage from "@/pages/members/MembersPage";
 import ArchivePage from "@/pages/archives/ArchivePage";
 import ArticlePage from "@/pages/article/ArticlePage";
+import ArticleSearchResultPage from "@/pages/article/ArticleSearchResultPage";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/article/:category/:page",
         element: <ArticleListPage />,
+      },
+      {
+        path: "/article/search/:page",
+        element: <ArticleSearchResultPage />,
       },
       {
         path: "/archives",
