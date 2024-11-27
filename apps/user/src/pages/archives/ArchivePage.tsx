@@ -18,8 +18,11 @@ const ArchivePage = () => {
       <div className='text-primary text-[25px] font-medium'>Issue</div>
       <div className='grid grid-cols-4 gap-x-4 gap-y-4 m-[10px_20px]'>
         {magazines?.map((magazine: IMagazineResponse) => (
-          <div key={magazine.volumeNumber} className='w-[240px] h-[350px]'>
-            <MagazineCard {...magazine} />
+          <div key={magazine.volumeNumber}>
+            <div className='w-[240px] h-[350px]'>
+              <MagazineCard {...magazine} />
+            </div>
+            <p className='text-center text-sm text-gray-500'>VOL.{magazine.volumeNumber}</p>
           </div>
         ))}
       </div>
