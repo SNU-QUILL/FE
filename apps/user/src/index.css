@@ -5,15 +5,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (min-width: 1280px) {
+  body,
+  #root {
+    min-width: 1140px;
+  }
+}
+
 body,
 #root {
   width: 100%;
-  min-width: 1140px;
 }
 
 @font-face {
   font-family: "Jost";
-  src: url("/fonts/Jost-VariableFont_wght.ttf");
 }
 
 * {

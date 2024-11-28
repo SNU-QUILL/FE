@@ -1,7 +1,7 @@
 import { Button } from "@repo/ui";
 import { Link } from "react-router-dom";
 
-const GlobalFooter = () => {
+const DesktopFooter = () => {
   return (
     <footer className='w-full bg-primary flex flex-col items-center text-white font-light text-lg'>
       <div className='grid grid-cols-3 w-full py-10'>
@@ -30,7 +30,7 @@ const GlobalFooter = () => {
         </div>
         <p className='m-auto font-light whitespace-pre-wrap'>
           {
-            "Gwanak-ro, Gwanak-gu, Seoul\nCopyright 2023 The SNU QUILL.\nAll rights reserved.\nmail to snuquill@gmail.com"
+            "1 Gwanak-ro, Gwanak-gu, Seoul\nCopyright 2023 The SNU QUILL.\nAll rights reserved.\nmail to snuquill@gmail.com"
           }
         </p>
       </div>
@@ -46,4 +46,4 @@ const GlobalFooter = () => {
   );
 };
 
-export default GlobalFooter;
+export default DesktopFooter;

@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 import { Outlet } from "react-router-dom";
 
-interface IGlobalLayoutProps {
+interface IDesktopLayoutProps {
   header: ReactNode;
   footer: ReactNode;
 }
 
-export default function GlobalLayout({ header, footer }: IGlobalLayoutProps) {
+export default function DesktopLayout({ header, footer }: IDesktopLayoutProps) {
   return (
     <>
       {header}

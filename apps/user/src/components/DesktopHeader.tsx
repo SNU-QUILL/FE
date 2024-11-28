@@ -3,7 +3,7 @@ import { Button, Input, MagnifyingGlassIcon } from "@repo/ui";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-export default function GlobalHeader() {
+export default function DesktopHeader() {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchText, setSearchText] = useState("");
