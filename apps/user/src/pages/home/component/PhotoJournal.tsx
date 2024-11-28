@@ -48,7 +48,7 @@ const PhotoJournal = () => {
                   <SkeletonImage
                     src={item.photoLink}
                     alt={item.description}
-                    className='rounded-lg h-[750px]'
+                    className='rounded-lg h-[300px] xl:h-[750px]'
                   />
                   <p className='flex justify-center items-center text-2xl text-primary tracking-[1px]'>
                     {item.description}

@@ -18,6 +18,7 @@ import MobileFooter from "@/components/MobileFooter";
 import useMobileView from "@/store/useMobileView";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { useEffect } from "react";
+import MobileHomePage from "@/pages/home/MobileHomePage";
 
 const AppRoutes = () => {
   const mobileViewStore = useMobileView();
@@ -50,7 +51,7 @@ const AppRoutes = () => {
         },
         {
           path: "/home",
-          element: <HomePage />,
+          element: mobileViewStore.isMobileView ? <MobileHomePage /> : <HomePage />,
         },
         {
           path: "/article",

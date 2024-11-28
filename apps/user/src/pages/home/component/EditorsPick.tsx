@@ -32,12 +32,12 @@ const EditorsPick = () => {
   return (
     <div>
       <SectionHeader title="Editor's Pick" />
-      <div className='flex justify-between h-[150px]'>
+      <div className='grid grid-cols-2 xl:grid xl:grid-cols-4 xl:justify-between'>
         {editorsPick
           ? categoryMappedEditorsPick.map(article => (
               <Link
                 key={article.id}
-                className='flex flex-col justify-start w-[240px] gap-[5px] mt-[25px] p-2 rounded-lg hover:animate-hover-opacity'
+                className='flex flex-col justify-start h-[150px] gap-[5px] mt-[25px] p-2 rounded-lg hover:animate-hover-opacity xl:w-[240px]'
                 to={`/article/${article.id}`}
               >
                 <p className='text-primary text-[15px] font-[450]'>{article.category}</p>
