@@ -43,6 +43,8 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        text: "hsl(var(--text))",
+        subPrimary: "hsl(var(--sub-primary))",
         chart: {
           1: "hsl(var(--chart-1))",
           2: "hsl(var(--chart-2))",
@@ -50,6 +52,23 @@ export default {
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
         },
+      },
+      fontFamily: {
+        centaur: ["Centaur", "serif"],
+      },
+      keyframes: {
+        "hover-scale": {
+          "0%": { transform: "scale(1)" },
+          "100%": { transform: "scale(1.05)" },
+        },
+        "hover-opacity": {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0.5" },
+        },
+      },
+      animation: {
+        "hover-scale": "hover-scale 0.3s ease forwards",
+        "hover-opacity": "hover-opacity 0.3s ease forwards",
       },
     },
   },

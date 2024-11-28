@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap");
+@import "@repo/ui/src/index.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (min-width: 1280px) {
+  body,
+  #root {
+    min-width: 1140px;
+  }
+}
+
+body,
+#root {
+  width: 100%;
+}
+
+@font-face {
+  font-family: "Jost";
+}
+
+* {
+  font-family: "Jost", sans-serif;
+}
