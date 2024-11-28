@@ -12,13 +12,23 @@ import MembersPage from "@/pages/members/MembersPage";
 import ArchivePage from "@/pages/archives/ArchivePage";
 import ArticlePage from "@/pages/article/ArticlePage";
 import ArticleSearchResultPage from "@/pages/article/ArticleSearchResultPage";
-import useMediaQuery from "@/hooks/useMediaQuery";
 import MobileLayout from "@/layouts/MobileLayout";
 import MobileHeader from "@/components/MobileHeader";
 import MobileFooter from "@/components/MobileFooter";
+import useMobileView from "@/store/useMobileView";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import { useEffect } from "react";
 
 const AppRoutes = () => {
-  const isMobile = useMediaQuery("(max-width: 1280px)");
+  const mobileViewStore = useMobileView();
+  const isMobileByMediaQuery = useMediaQuery("(max-width: 1280px)");
+
+  useEffect(() => {
+    if (mobileViewStore.isMobileView !== isMobileByMediaQuery) {
+      mobileViewStore.setIsMobileView(isMobileByMediaQuery);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMobileByMediaQuery]);
 
   const router = createBrowserRouter([
     {
@@ -26,7 +36,7 @@ const AppRoutes = () => {
       element: (
         <>
           <ScrollToTop />
-          {isMobile ? (
+          {mobileViewStore.isMobileView ? (
             <MobileLayout header={<MobileHeader />} footer={<MobileFooter />} />
           ) : (
             <DesktopLayout header={<DesktopHeader />} footer={<DesktopFooter />} />
