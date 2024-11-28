@@ -14,3 +14,4 @@ export * from "./toaster";
 export * from "./select";
 export * from "./pagination";
 export * from "./skeleton";
+export * from "./drawer";
