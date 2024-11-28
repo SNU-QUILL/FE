@@ -31,7 +31,7 @@ const MobileFooter = () => {
           </div>
         </div>
       </div>
-      <p className='font-light whitespace-pre-wrap'>
+      <p className='self-end text-end font-light whitespace-pre-wrap'>
         {
           "1 Gwanak-ro, Gwanak-gu, Seoul\nCopyright 2023 The SNU QUILL.\nAll rights reserved.\nmail to snuquill@gmail.com"
         }
