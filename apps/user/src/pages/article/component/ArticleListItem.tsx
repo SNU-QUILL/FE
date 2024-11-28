@@ -18,7 +18,7 @@ const ArticleListItem = ({ id, pictureUrl, title, authorName, summary }: IArticl
       <SkeletonImage
         src={pictureUrl}
         alt={"img"}
-        className='w-[220px] h-[145px] object-cover rounded-lg shrink-0'
+        className='object-cover rounded-lg shrink-0 w-[100px] xl:w-[220px] xl:h-[145px]'
       />
       <div className='flex flex-col overflow-hidden'>
         <p className='text-lg font-semibold overflow-hidden text-ellipsis text-nowrap'>{title}</p>

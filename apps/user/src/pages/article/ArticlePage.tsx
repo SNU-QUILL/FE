@@ -16,19 +16,19 @@ const ArticlePage = () => {
   return (
     <>
       <SEO title={data?.title} description={data?.content} pictureUrl={data?.pictureUrl} />
-      <div className='w-[1080px] flex flex-col items-center my-[50px]'>
+      <div className='flex flex-col items-center my-[50px] xl:w-[1080px]'>
         {data ? (
           <>
             <SkeletonImage
               src={data.pictureUrl}
               alt={data.title}
-              className='w-[1080px] h-[540px] object-fit'
+              className='object-fit w-full xl:h-[540px] xl:w-[1080px]'
             />
             <p className='mt-6 text-primary text-sm font-medium tracking-[0.14px]'>
               {CATEGORIES.find(category => category.value === data.category)?.label}
             </p>
             <p className='text-center text-text text-[32px] font-medium min-h-8'>{data.title}</p>
-            <div className='flex flex-col items-center m-[50px_200px]'>
+            <div className='flex flex-col items-center mt-10 xl:m-[50px_200px]'>
               <p
                 className='prose text-text text-lg tracking-[0.18px]'
                 dangerouslySetInnerHTML={{ __html: data.content }}

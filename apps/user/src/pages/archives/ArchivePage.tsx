@@ -19,13 +19,13 @@ const ArchivePage = () => {
   return (
     <>
       <SEO title='Archives' description='Archives' />
-      <div className='m-[20px_50px]'>
+      <div className='xl:m-[20px_50px]'>
         <div className='text-primary text-[25px] font-medium'>Issue</div>
         <div className='grid grid-cols-4 gap-x-4 gap-y-4 m-[10px_20px]'>
           {magazines
             ? magazines.map(magazine => (
                 <div key={magazine.volumeNumber}>
-                  <div className='w-[240px] h-[350px]'>
+                  <div className='h-[120px] md:w-[240px] md:h-[350px]'>
                     <MagazineCard {...magazine} />
                   </div>
                   <p className='text-center text-sm text-gray-500'>VOL.{magazine.volumeNumber}</p>
