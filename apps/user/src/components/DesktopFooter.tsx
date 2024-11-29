@@ -1,14 +1,6 @@
-import useMobileView from "@/store/useMobileView";
-import { Button } from "@repo/ui";
 import { Link } from "react-router-dom";
 
 const DesktopFooter = () => {
-  const mobileViewStore = useMobileView();
-  const goToMobileVersion = () => {
-    mobileViewStore.setIsMobileView(true);
-    scrollTo(0, 0);
-  };
-
   return (
     <footer className='w-full bg-primary flex flex-col items-center text-white font-light text-lg'>
       <div className='grid grid-cols-3 w-full py-10'>
@@ -41,13 +33,6 @@ const DesktopFooter = () => {
           }
         </p>
       </div>
-      <Button
-        variant='default'
-        className='text-white border-white border'
-        onClick={goToMobileVersion}
-      >
-        Mobile Version
-      </Button>
     </footer>
   );
 };
