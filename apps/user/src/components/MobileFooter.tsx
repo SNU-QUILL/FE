@@ -32,15 +32,6 @@ const MobileFooter = () => {
           "1 Gwanak-ro, Gwanak-gu, Seoul\nCopyright 2023 The SNU QUILL.\nAll rights reserved.\nmail to snuquill@gmail.com"
         }
       </p>
-      {/* <div className='flex justify-center'>
-        <Button
-          variant='default'
-          className='text-white border-white border'
-          onClick={goToPCVersion}
-        >
-          PC Version
-        </Button>
-      </div> */}
     </div>
   );
 };

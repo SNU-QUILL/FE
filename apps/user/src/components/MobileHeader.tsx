@@ -21,7 +21,7 @@ const MobileHeader = () => {
   return (
     <div className='relative bg-secondary border-b border-primary h-14 flex justify-between items-center px-4 text-primary shadow-lg'>
       <MobileDrawer />
-      <Link to='/' className='flex items-center gap-2'>
+      <Link to='/home' className='flex items-center gap-2'>
         <img src={"/logo.svg"} alt='logo' className='h-8' />
         <p className='text-2xl font-medium'>SNU QUILL</p>
       </Link>

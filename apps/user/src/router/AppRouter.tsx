@@ -15,21 +15,11 @@ import ArticleSearchResultPage from "@/pages/article/ArticleSearchResultPage";
 import MobileLayout from "@/layouts/MobileLayout";
 import MobileHeader from "@/components/MobileHeader";
 import MobileFooter from "@/components/MobileFooter";
-import useMobileView from "@/store/useMobileView";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import { useEffect } from "react";
 import MobileHomePage from "@/pages/home/MobileHomePage";
 
 const AppRoutes = () => {
-  const mobileViewStore = useMobileView();
-  const isMobileByMediaQuery = useMediaQuery("(max-width: 1280px)");
-
-  useEffect(() => {
-    if (mobileViewStore.isMobileView !== isMobileByMediaQuery) {
-      mobileViewStore.setIsMobileView(isMobileByMediaQuery);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMobileByMediaQuery]);
+  const isMobileView = useMediaQuery("(max-width: 1280px)");
 
   const router = createBrowserRouter([
     {
@@ -37,7 +27,7 @@ const AppRoutes = () => {
       element: (
         <>
           <ScrollToTop />
-          {mobileViewStore.isMobileView ? (
+          {isMobileView ? (
             <MobileLayout header={<MobileHeader />} footer={<MobileFooter />} />
           ) : (
             <DesktopLayout header={<DesktopHeader />} footer={<DesktopFooter />} />
@@ -51,7 +41,7 @@ const AppRoutes = () => {
         },
         {
           path: "/home",
-          element: mobileViewStore.isMobileView ? <MobileHomePage /> : <HomePage />,
+          element: isMobileView ? <MobileHomePage /> : <HomePage />,
         },
         {
           path: "/article",
