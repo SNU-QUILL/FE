@@ -2,8 +2,6 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationPrevious,
-  PaginationNext,
   PaginationLink,
   PaginationEllipsis,
 } from "@repo/ui";
@@ -16,8 +14,6 @@ interface IPaginationBarProps {
 }
 
 const PaginationBar = ({ currentPage, totalPages, pageLink }: IPaginationBarProps) => {
-  const isFirstPage = currentPage === 1;
-  const isLastPage = currentPage === totalPages;
   const searchParams = useSearchParams()[0];
 
   const startPageLink = `${pageLink}/1?${searchParams}`;
@@ -102,23 +98,7 @@ const PaginationBar = ({ currentPage, totalPages, pageLink }: IPaginationBarProp
   return (
     <Pagination>
       <PaginationContent className='flex items-center gap-4 select-none mt-4'>
-        <PaginationItem>
-          <PaginationPrevious
-            className={isFirstPage ? "pointer-events-none opacity-50" : ""}
-            size='default'
-            to={previousPageLink}
-          />
-        </PaginationItem>
-
         {renderPageNumbers()}
-
-        <PaginationItem>
-          <PaginationNext
-            className={isLastPage ? "pointer-events-none opacity-50" : ""}
-            size='default'
-            to={nextPageLink}
-          />
-        </PaginationItem>
       </PaginationContent>
     </Pagination>
   );
