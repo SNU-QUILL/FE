@@ -15,11 +15,11 @@ import ArticleSearchResultPage from "@/pages/article/ArticleSearchResultPage";
 import MobileLayout from "@/layouts/MobileLayout";
 import MobileHeader from "@/components/MobileHeader";
 import MobileFooter from "@/components/MobileFooter";
-import useMediaQuery from "@/hooks/useMediaQuery";
 import MobileHomePage from "@/pages/home/MobileHomePage";
+import useMobileView from "@/hooks/useMobileView";
 
 const AppRoutes = () => {
-  const isMobileView = useMediaQuery("(max-width: 1280px)");
+  const isMobileView = useMobileView();
 
   const router = createBrowserRouter([
     {

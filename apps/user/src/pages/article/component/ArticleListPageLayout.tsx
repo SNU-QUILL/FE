@@ -1,5 +1,5 @@
 import ArticleListRecentAndMost from "@/pages/article/component/ArticleListRecentAndMost";
-import useMobileView from "@/store/useMobileView";
+import useMobileView from "@/hooks/useMobileView";
 
 interface IArticleListPageLayoutProps {
   title: string;
@@ -8,7 +8,7 @@ interface IArticleListPageLayoutProps {
 }
 
 const ArticleListPageLayout = ({ title, description, children }: IArticleListPageLayoutProps) => {
-  const { isMobileView } = useMobileView();
+  const isMobileView = useMobileView();
   return (
     <div className='w-full flex p-4 gap-10'>
       <div className='flex-grow overflow-hidden'>

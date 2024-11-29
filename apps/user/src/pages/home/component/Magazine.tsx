@@ -1,7 +1,7 @@
 import { useGetQuery } from "@/api/query";
 import MagazineCard from "@/components/MagazineCard";
 import SectionHeader from "@/pages/home/component/SectionHeader";
-import useMobileView from "@/store/useMobileView";
+import useMobileView from "@/hooks/useMobileView";
 import { ArrowRightIcon, Button, Skeleton } from "@repo/ui";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -94,7 +94,7 @@ const MagazineMobile = () => {
 };
 
 const Magazine = () => {
-  const { isMobileView } = useMobileView();
+  const isMobileView = useMobileView();
 
   return isMobileView ? <MagazineMobile /> : <MagazineDesktop />;
 };
