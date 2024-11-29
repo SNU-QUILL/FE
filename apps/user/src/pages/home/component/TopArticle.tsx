@@ -7,7 +7,7 @@ const TopArticle = () => {
   const { data: topArticle } = useGetQuery("/topArticle", {});
   return topArticle ? (
     <Link
-      className='flex flex-col justify-end shrink-0 rounded-lg relative w-full h-[300px] md:h-[360px] xl:w-[740px] xl:h-[420px]'
+      className='flex flex-col justify-end shrink-0 rounded-lg relative w-full h-[300px] md:h-[600px] xl:w-[740px] xl:h-[420px]'
       to={`/article/${topArticle.id}`}
     >
       <SkeletonImage
