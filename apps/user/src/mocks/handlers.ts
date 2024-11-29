@@ -4,6 +4,7 @@ import { IEditorsPickListResponse } from "@/api/model/editorsPick";
 import { IMagazineResponse } from "@/api/model/magazine";
 import { IPhotoJournalResponse } from "@/api/model/photoJournal";
 import { IArticleResponse } from "@/api/model/article";
+import { TCategoryValue } from "@/constants/category";
 
 export const handlers = [
   http.get("/api/topArticle", () => {
@@ -215,7 +216,7 @@ const mockArticles: IArticleResponse[] = Array.from({ length: 45 }, (_, i) => ({
     </article>`.repeat(3),
   category: ["features", "snu_society", "arts_culture", "opinion", "short_articles"][
     Math.floor(Math.random() * 5)
-  ],
+  ] as TCategoryValue,
   authorName: ["Emma Thompson", "James Wilson", "Sarah Parker", "Michael Chen", "Rachel Kim"][
     Math.floor(Math.random() * 5)
   ],
