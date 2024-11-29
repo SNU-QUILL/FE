@@ -2,7 +2,6 @@ import { useGetQuery } from "@/api/query";
 import MagazineCard from "@/components/MagazineCard";
 import { Navigate, useParams } from "react-router-dom";
 import PaginationBar from "@/components/PaginationBar";
-import MagazineCardSkeleton from "@/pages/archives/component/MagzineCardSkeleton";
 import SEO from "@/components/SEO";
 
 const PAGE_SIZE = 12;
@@ -25,14 +24,14 @@ const ArchivePage = () => {
           {magazines
             ? magazines.map(magazine => (
                 <div key={magazine.volumeNumber}>
-                  <div className='h-[120px] md:w-[240px] md:h-[350px]'>
+                  <div className='h-[120px] xl:h-[350px]'>
                     <MagazineCard {...magazine} />
                   </div>
                   <p className='text-center text-sm text-gray-500'>VOL.{magazine.volumeNumber}</p>
                 </div>
               ))
             : Array.from({ length: PAGE_SIZE }).map((_, index) => (
-                <MagazineCardSkeleton key={index} />
+                <MagazineCard.Skeleton key={index} />
               ))}
         </div>
         <PaginationBar

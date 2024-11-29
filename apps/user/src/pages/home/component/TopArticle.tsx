@@ -21,7 +21,7 @@ const TopArticle = () => {
       </div>
     </Link>
   ) : (
-    <Skeleton className=' w-full h-[300px] xl:w-[740px] xl:h-[420px]' />
+    <Skeleton className=' w-full h-[300px] md:h-[600px] xl:w-[740px] xl:h-[420px]' />
   );
 };
 
