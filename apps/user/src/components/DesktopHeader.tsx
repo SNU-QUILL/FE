@@ -1,16 +1,15 @@
+import IconInput from "@/components/IconInput";
 import { CATEGORIES } from "@/constants/category";
-import { Button, Input, MagnifyingGlassIcon } from "@repo/ui";
-import { useState } from "react";
+import { Button, MagnifyingGlassIcon } from "@repo/ui";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function DesktopHeader() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [searchText, setSearchText] = useState("");
   const selectedCategory = location.pathname.split("/")[2];
 
-  const goToSearchResultPage = (query: string) => {
-    navigate(`/article/search/1?search-text=${query}`);
+  const goToSearchResultPage = (value: string) => {
+    navigate(`/article/search/1?search-text=${value}`);
   };
 
   return (
@@ -23,22 +22,14 @@ export default function DesktopHeader() {
         <div className='text-primary text-sm tracking-[0.28px]'>since 2005</div>
       </div>
       <div className='flex w-[1140px] justify-end'>
-        <div className='flex items-center gap-2 border-b-primary border-b-4 w-60'>
-          <MagnifyingGlassIcon
-            className='text-primary w-8 h-8'
-            onClick={() => goToSearchResultPage(searchText)}
-          />
-          <Input
-            className='border-none focus-visible:ring-0 shadow-none'
-            onChange={e => setSearchText(e.target.value)}
-            value={searchText}
-            onKeyDown={e => {
-              if (e.key === "Enter") {
-                goToSearchResultPage(searchText);
-              }
-            }}
-          />
-        </div>
+        <IconInput
+          wrapperClassName='border-b-primary border-b-4'
+          icon={<MagnifyingGlassIcon className='text-primary w-8 h-8' />}
+          inputProps={{
+            className: "border-none focus-visible:ring-0 shadow-none",
+          }}
+          onEnter={goToSearchResultPage}
+        />
       </div>
       <div className='flex justify-center w-full h-10 bg-primary'>
         <div className='flex justify-evenly items-center gap-2 w-[1140px]'>
