@@ -1,6 +1,6 @@
 import { Navigate, useParams } from "react-router-dom";
 import ArticleListItem from "../article/component/ArticleListItem";
-import { CATEGORIES } from "@/constants/category";
+import { CATEGORIES, TCategoryLabel, TCategoryValue } from "@/constants/category";
 import { useGetQuery } from "@/api/query";
 import ArticleListPageLayout from "@/pages/article/component/ArticleListPageLayout";
 import PaginationBar from "@/components/PaginationBar";
@@ -10,10 +10,9 @@ import SEO from "@/components/SEO";
 const ARTICLE_LIST_PAGE_SIZE = 10;
 
 const ArticleListPage = () => {
-  const selectedCategory = useParams().category!;
-  const selectedCategoryLabel = CATEGORIES.find(
-    category => category.value === selectedCategory,
-  )!.label;
+  const selectedCategory = useParams().category! as TCategoryValue;
+  const selectedCategoryLabel = CATEGORIES.find(category => category.value === selectedCategory)!
+    .label as TCategoryLabel;
   const currentPage = Number(useParams().page!);
 
   const { data } = useGetQuery(

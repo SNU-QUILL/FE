@@ -1,6 +1,6 @@
-import { CATEGORIES } from "./category";
+import { TCategoryValue } from "./category";
 
-export const ARTICLE_INTROS: Record<(typeof CATEGORIES)[number]["value"], string> = {
+export const ARTICLE_INTROS: Record<TCategoryValue, string> = {
   features: "Deals with general affairs, from domestic to international news.",
   snu_society: "Deals with news on campus.",
   arts_culture: "Deals with the current creative trends.",

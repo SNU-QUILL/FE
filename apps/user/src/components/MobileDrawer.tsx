@@ -24,7 +24,7 @@ const MobileDrawer = () => {
             {CATEGORIES.map(category => (
               <Link
                 key={category.value}
-                to={`/article/${category.value}/1`}
+                to={`${category.link}/1`}
                 className='text-lg font-medium border-b border-secondary w-full flex items-center justify-between'
                 onClick={() => setIsOpen(false)}
               >
