@@ -7,11 +7,15 @@ import {
   DrawerTrigger,
   HamburgerMenuIcon,
 } from "@repo/ui";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const MobileDrawer = () => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
   return (
     <Drawer direction='left' open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger>
@@ -26,7 +30,6 @@ const MobileDrawer = () => {
                 key={category.value}
                 to={`${category.link}/1`}
                 className='text-lg font-medium border-b border-secondary w-full flex items-center justify-between'
-                onClick={() => setIsOpen(false)}
               >
                 <p>{category.label}</p>
                 <ChevronRightIcon className='h-4 w-4' />
