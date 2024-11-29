@@ -9,7 +9,7 @@ interface IMemberCardProps {
 const MemberCard = ({ imgSrc, name, role, email }: IMemberCardProps) => {
   return (
     <div className='flex flex-col items-center my-5'>
-      <SkeletonImage src={imgSrc} alt='avatar' className='h-[150px] object-cover' loading='lazy' />
+      <SkeletonImage src={imgSrc} alt='avatar' className='h-[150px] object-cover' />
       <div className='text-text font-medium tracking-[0.8px] break-words text-center w-full'>
         {name}
       </div>
