@@ -7,6 +7,7 @@ interface IconInputProps {
   wrapperClassName?: string;
   onEnter: (value: string) => void;
 }
+
 const IconInput = ({ icon, inputProps, wrapperClassName, onEnter }: IconInputProps) => {
   const [searchText, setSearchText] = useState("");
   return (
