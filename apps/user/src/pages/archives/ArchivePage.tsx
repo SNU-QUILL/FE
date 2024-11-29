@@ -22,14 +22,7 @@ const ArchivePage = () => {
         <div className='text-primary text-[25px] font-medium'>Issue</div>
         <div className='grid grid-cols-4 gap-x-4 gap-y-4 m-[10px_20px]'>
           {magazines
-            ? magazines.map(magazine => (
-                <div key={magazine.volumeNumber}>
-                  <div className='h-[120px] xl:h-[350px]'>
-                    <MagazineCard {...magazine} />
-                  </div>
-                  <p className='text-center text-sm text-gray-500'>VOL.{magazine.volumeNumber}</p>
-                </div>
-              ))
+            ? magazines.map(magazine => <MagazineCard key={magazine.volumeNumber} {...magazine} />)
             : Array.from({ length: PAGE_SIZE }).map((_, index) => (
                 <MagazineCard.Skeleton key={index} />
               ))}
