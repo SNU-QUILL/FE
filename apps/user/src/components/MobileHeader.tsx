@@ -30,7 +30,7 @@ const MobileHeader = () => {
         onClick={() => setOpenSearchInput(true)}
       />
       <IconInput
-        wrapperClassName={`absolute right-0 top-0 z-[1] h-full bg-white transition-all duration-300 ${openSearchInput ? "w-full" : "w-0 hidden"}`}
+        wrapperClassName={`absolute right-0 top-0 h-full bg-white transition-all duration-300 ${openSearchInput ? "w-full p-4" : "w-0 overflow-hidden"}`}
         icon={<ChevronRightIcon className='h-8 w-8' onClick={() => setOpenSearchInput(false)} />}
         onEnter={goToSearchResultPage}
         inputProps={{
