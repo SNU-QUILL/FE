@@ -4,11 +4,11 @@ const MobileFooter = () => {
   return (
     <div className='flex flex-col gap-6 bg-primary text-white p-4'>
       <div className='flex flex-col gap-6'>
-        <div className='grid grid-cols-2'>
+        <div className='grid grid-cols-2 gap-2'>
           <p className='text-lg font-medium'>About SNU QUILL</p>
           <p className='text-lg font-medium'>Contact Us</p>
         </div>
-        <div className='grid grid-cols-2'>
+        <div className='grid grid-cols-2 gap-2'>
           <div className='flex flex-col gap-2'>
             <hr />
             <div className='flex flex-col gap-2'>

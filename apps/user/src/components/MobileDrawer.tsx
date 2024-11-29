@@ -17,7 +17,7 @@ const MobileDrawer = () => {
       <DrawerTrigger>
         <HamburgerMenuIcon className='h-8 w-8' />
       </DrawerTrigger>
-      <DrawerContent className='flex flex-col justify-between h-full w-[80%] rounded-tl-none rounded-r-lg border-none overflow-y-auto scrollbar-hide'>
+      <DrawerContent className='flex flex-col justify-between h-full w-[80%] max-w-[320px] rounded-tl-none rounded-r-lg border-none overflow-y-auto scrollbar-hide'>
         <div className='flex flex-col'>
           <div className='p-4 text-lg font-bold text-primary'>The SNU QUILL</div>
           <div className='flex flex-col gap-4 p-4'>
