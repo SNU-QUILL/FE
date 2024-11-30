@@ -7,13 +7,13 @@ const TopArticle = () => {
   const { data: topArticle } = useGetQuery("/topArticle", {});
   return topArticle ? (
     <Link
-      className='flex flex-col justify-end shrink-0 rounded-lg relative w-full h-[300px] xl:w-[740px] xl:h-[420px]'
+      className='flex flex-col justify-end shrink-0 rounded-lg relative w-full h-[300px] md:h-[600px] xl:w-[740px] xl:h-[420px]'
       to={`/article/${topArticle.id}`}
     >
       <SkeletonImage
         src={topArticle.pictureUrl}
         alt={topArticle.title}
-        className='absolute top-0 w-full h-full rounded-lg'
+        className='absolute top-0 w-full h-full rounded-lg object-cover'
       />
       <div className='absolute bottom-0 w-full bg-gradient-to-t from-black/100 to-transparent rounded-b-lg'>
         <p className='text-white text-[32px] font-medium my-[10px] mx-[30px]'>{topArticle.title}</p>
@@ -21,7 +21,7 @@ const TopArticle = () => {
       </div>
     </Link>
   ) : (
-    <Skeleton className=' w-full h-[300px] xl:w-[740px] xl:h-[420px]' />
+    <Skeleton className=' w-full h-[300px] md:h-[600px] xl:w-[740px] xl:h-[420px]' />
   );
 };
 

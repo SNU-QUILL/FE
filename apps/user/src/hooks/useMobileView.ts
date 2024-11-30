@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-export default function useMediaQuery(query: string): boolean {
+export default function useMobileView(): boolean {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia(query);
+    const mediaQuery = window.matchMedia("(max-width: 1280px)");
 
     // Initial check
     setMatches(mediaQuery.matches);
@@ -20,7 +20,7 @@ export default function useMediaQuery(query: string): boolean {
     return () => {
       mediaQuery.removeEventListener("change", handler);
     };
-  }, [query]);
+  }, []);
 
   return matches;
 }

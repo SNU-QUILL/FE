@@ -13,7 +13,7 @@ const SkeletonImage = ({ src, alt, className, ...props }: ISkeletonImageProps) =
       <img
         src={src}
         alt={alt}
-        className={cn(className, isLoaded ? "" : "w-0 h-0")}
+        className={cn(className, isLoaded ? "" : "hidden")}
         onLoad={() => setIsLoaded(true)}
         {...props}
       />

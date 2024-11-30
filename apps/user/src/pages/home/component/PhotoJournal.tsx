@@ -1,8 +1,7 @@
 import { useGetQuery } from "@/api/query";
 import SkeletonImage from "@/components/SkeletonImage";
 import SectionHeader from "@/pages/home/component/SectionHeader";
-import PhotoJournalItemSkeleton from "@/pages/home/component/skeleton/PhtoJournalItemSkeleton";
-import { ArrowLeftIcon, ArrowRightIcon } from "@repo/ui";
+import { ArrowLeftIcon, ArrowRightIcon, Skeleton } from "@repo/ui";
 import {
   Carousel,
   CarouselApi,
@@ -10,6 +9,13 @@ import {
   CarouselItem,
 } from "@repo/ui/src/components/ui/carousel";
 import { useEffect, useState } from "react";
+
+const PhotoJournalItemSkeleton = () => (
+  <div className='flex flex-col items-center gap-1 h-[300px] w-full md:h-[500px] xl:h-[750px]'>
+    <Skeleton className='w-full h-full' />
+    <Skeleton className='w-80 h-6' />
+  </div>
+);
 
 const PhotoJournal = () => {
   const { data: photoJournals } = useGetQuery("/photoJournal/recent", {});
@@ -48,7 +54,7 @@ const PhotoJournal = () => {
                   <SkeletonImage
                     src={item.photoLink}
                     alt={item.description}
-                    className='rounded-lg h-[300px] xl:h-[750px]'
+                    className='rounded-lg h-[300px] w-full md:h-[500px] xl:h-[750px]'
                   />
                   <p className='flex justify-center items-center text-2xl text-primary tracking-[1px]'>
                     {item.description}

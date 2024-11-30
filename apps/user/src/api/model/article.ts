@@ -1,4 +1,4 @@
-import { CATEGORIES } from "@/constants/category";
+import { TCategoryValue } from "@/constants/category";
 
 export interface IArticleRecentRequest {
   count: number;
@@ -42,7 +42,7 @@ export interface IArticleResponse {
   pictureUrl: string;
   title: string;
   content: string;
-  category: (typeof CATEGORIES)[number]["value"];
+  category: TCategoryValue;
   authorName: string;
   authorRole: string;
   authorEmail: string;

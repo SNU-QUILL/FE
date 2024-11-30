@@ -12,8 +12,10 @@ interface ITeamMembersProps {
 const TeamMembers = ({ teamName, members }: ITeamMembersProps) => {
   return (
     <div className='w-full'>
-      <div className='text-primary text-xl font-bold tracking-[1px] m-[10px_50px]'>{teamName}</div>
-      <div className='grid grid-cols-5'>
+      <div className='text-primary text-xl font-bold tracking-[1px] xl:m-[10px_50px]'>
+        {teamName}
+      </div>
+      <div className='grid grid-cols-3 xl:grid-cols-5 gap-5'>
         {members.map(member => (
           <MemberCard
             key={member.email}

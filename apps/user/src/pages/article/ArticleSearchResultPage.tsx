@@ -2,7 +2,6 @@ import { useGetQuery } from "@/api/query";
 import PaginationBar from "@/components/PaginationBar";
 import ArticleListPageLayout from "@/pages/article/component/ArticleListPageLayout";
 import ArticleListItem from "@/pages/article/component/ArticleListItem";
-import ArticleListItemSkeleton from "@/pages/article/component/skeleton/ArticleListItemSkeleton";
 import { Navigate, useParams, useSearchParams } from "react-router-dom";
 
 const ARTICLE_LIST_PAGE_SIZE = 10;
@@ -43,7 +42,7 @@ const ArticleSearchResultPage = () => {
           {data
             ? data.content.map(article => <ArticleListItem key={article.id} {...article} />)
             : Array.from({ length: ARTICLE_LIST_PAGE_SIZE }).map((_, index) => (
-                <ArticleListItemSkeleton key={index} />
+                <ArticleListItem.Skeleton key={index} />
               ))}
           <PaginationBar
             currentPage={currentPage}

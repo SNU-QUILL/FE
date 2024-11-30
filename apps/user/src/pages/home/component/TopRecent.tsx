@@ -2,6 +2,13 @@ import { useGetQuery } from "@/api/query";
 import { Skeleton } from "@repo/ui";
 import { Link } from "react-router-dom";
 
+const TopRecentSkeleton = () => (
+  <>
+    <Skeleton className='w-40 h-6' />
+    <Skeleton className='w-80 h-4' />
+  </>
+);
+
 const TopRecent = () => {
   const { data: recentArticles } = useGetQuery("/article/recent", {
     count: 3,
@@ -24,8 +31,7 @@ const TopRecent = () => {
               key={index}
               className={`flex-1 flex flex-col justify-center gap-1 border-b border-border ${index === 2 ? "border-b-0" : ""}`}
             >
-              <Skeleton className='w-40 h-6' />
-              <Skeleton className='w-80 h-4' />
+              <TopRecentSkeleton />
             </div>
           ))}
     </div>
