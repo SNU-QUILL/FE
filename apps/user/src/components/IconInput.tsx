@@ -1,5 +1,5 @@
 import { cn, Input, InputProps } from "@repo/ui";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IconInputProps {
   icon: React.ReactNode;
@@ -9,7 +9,12 @@ interface IconInputProps {
 }
 
 const IconInput = ({ icon, inputProps, wrapperClassName, onEnter }: IconInputProps) => {
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState((inputProps?.value as string) || "");
+
+  useEffect(() => {
+    setSearchText((inputProps?.value as string) || "");
+  }, [inputProps?.value]);
+
   return (
     <div className={cn("flex items-center gap-2", wrapperClassName)}>
       {icon}

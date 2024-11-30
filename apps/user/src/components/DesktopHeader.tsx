@@ -1,12 +1,14 @@
 import IconInput from "@/components/IconInput";
 import { CATEGORIES } from "@/constants/category";
 import { Button, MagnifyingGlassIcon } from "@repo/ui";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 export default function DesktopHeader() {
   const navigate = useNavigate();
   const location = useLocation();
   const selectedCategory = location.pathname.split("/")[2];
+  const [searchParams] = useSearchParams();
+  const searchText = searchParams.get("search-text");
 
   const goToSearchResultPage = (value: string) => {
     navigate(`/article/search/1?search-text=${value}`);
@@ -27,6 +29,7 @@ export default function DesktopHeader() {
           icon={<MagnifyingGlassIcon className='text-primary w-8 h-8' />}
           inputProps={{
             className: "border-none focus-visible:ring-0 shadow-none",
+            value: searchText || "",
           }}
           onEnter={goToSearchResultPage}
         />

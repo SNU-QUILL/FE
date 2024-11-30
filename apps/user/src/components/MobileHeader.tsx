@@ -2,11 +2,13 @@ import IconInput from "@/components/IconInput";
 import MobileDrawer from "@/components/MobileDrawer";
 import { ChevronRightIcon, MagnifyingGlassIcon } from "@repo/ui";
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 const MobileHeader = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const searchText = searchParams.get("search-text");
 
   const [openSearchInput, setOpenSearchInput] = useState(false);
 
@@ -36,7 +38,7 @@ const MobileHeader = () => {
         inputProps={{
           placeholder: "Search...",
           className: "text-black",
-          onBlur: () => setOpenSearchInput(false),
+          value: searchText || "",
         }}
       />
     </div>
