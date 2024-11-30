@@ -44,10 +44,6 @@ const AppRoutes = () => {
           element: isMobileView ? <MobileHomePage /> : <HomePage />,
         },
         {
-          path: "/article",
-          element: <Navigate to='/home' replace />,
-        },
-        {
           path: "/article/:id",
           element: <ArticlePage />,
         },
@@ -60,16 +56,8 @@ const AppRoutes = () => {
           element: <ArticleSearchResultPage />,
         },
         {
-          path: "/archives",
-          element: <Navigate to='/archives/1' replace />,
-        },
-        {
           path: "/archives/:page",
           element: <ArchivePage />,
-        },
-        {
-          path: "/article/archives/:page",
-          element: <Navigate to='/article/archives' replace />,
         },
         {
           path: "/introduction",
