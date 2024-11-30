@@ -1,12 +1,11 @@
 import IconInput from "@/components/IconInput";
 import { CATEGORIES } from "@/constants/category";
 import { Button, MagnifyingGlassIcon } from "@repo/ui";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 export default function DesktopHeader() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const selectedCategory = location.pathname.split("/")[2];
+  const { category: selectedCategory } = useParams();
   const [searchParams] = useSearchParams();
   const searchText = searchParams.get("search-text");
 
