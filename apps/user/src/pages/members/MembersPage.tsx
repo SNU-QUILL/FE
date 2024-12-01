@@ -353,7 +353,7 @@ const MembersPage = () => {
   ];
   return (
     <>
-      <SEO title='Quill Members' description='Members' />
+      <SEO title='SNU QUILL - Members' description='Members' />
       <div className='flex flex-col items-center mt-[50px] mb-[200px]'>
         <div className='text-primary text-xl font-semibold tracking-[1px]'>MEET THE STAFF</div>
         <hr className='border-primary my-[30px] border-b-2 w-[30px]' />

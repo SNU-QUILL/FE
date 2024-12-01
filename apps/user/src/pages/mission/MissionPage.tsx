@@ -5,7 +5,7 @@ const MissionPage = () => {
     "As an independent press organization at Seoul National University, The SNU Quill's mission is to enhance SNU's campus experience by providing quality journalism from a fresh, yet critical, student perspective.";
   return (
     <>
-      <SEO title='Quill Mission' description={description} />
+      <SEO title='SNU QUILL - Mission' description={description} />
       <PlainPageLayout title='OUR MISSION' description={description} />
     </>
   );

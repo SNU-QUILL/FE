@@ -60,7 +60,11 @@ const ArticlePage = () => {
 
   return (
     <>
-      <SEO title={data?.title} description={data?.content} pictureUrl={data?.pictureUrl} />
+      <SEO
+        title={`SNU QUILL - ${data?.title}`}
+        description={data?.content}
+        pictureUrl={data?.pictureUrl}
+      />
       <div className='flex flex-col items-center my-[50px] xl:w-[1080px]'>
         {data ? (
           <>

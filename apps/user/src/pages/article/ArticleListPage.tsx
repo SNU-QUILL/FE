@@ -32,7 +32,10 @@ const ArticleListPage = () => {
 
   return (
     <>
-      <SEO title={selectedCategoryLabel} description={ARTICLE_INTROS[selectedCategory]} />
+      <SEO
+        title={`SNU QUILL - ${selectedCategoryLabel}`}
+        description={ARTICLE_INTROS[selectedCategory]}
+      />
       <ArticleListPageLayout
         title={selectedCategoryLabel}
         description={ARTICLE_INTROS[selectedCategory]}

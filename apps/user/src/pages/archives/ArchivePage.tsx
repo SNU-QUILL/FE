@@ -17,7 +17,7 @@ const ArchivePage = () => {
 
   return (
     <>
-      <SEO title='Archives' description='Archives' />
+      <SEO title='SNU QUILL - Archives' description='SNU QUILL Archives' />
       <div className='xl:m-[20px_50px]'>
         <div className='text-primary text-[25px] font-medium'>Issue</div>
         <div className='grid grid-cols-4 gap-x-4 gap-y-4 m-[10px_20px]'>
