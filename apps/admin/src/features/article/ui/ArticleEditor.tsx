@@ -25,7 +25,41 @@ import {
   defaultArticleSchema,
 } from "@/entities/article/schema/article";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
+import {
+  Alignment,
+  Autoformat,
+  BlockQuote,
+  Bold,
+  DecoupledEditor,
+  Essentials,
+  FontBackgroundColor,
+  FontColor,
+  FontFamily,
+  FontSize,
+  Heading,
+  Image,
+  ImageCaption,
+  ImageResize,
+  ImageStyle,
+  ImageToolbar,
+  ImageUpload,
+  Indent,
+  IndentBlock,
+  Italic,
+  Link,
+  List,
+  ListProperties,
+  MediaEmbed,
+  Paragraph,
+  PasteFromOffice,
+  PictureEditing,
+  Strikethrough,
+  Table,
+  TableToolbar,
+  TextTransformation,
+  Underline,
+} from "ckeditor5";
+import "ckeditor5/ckeditor5.css";
 import { useGlobalDialogStore } from "@/shared/store/globalDialog";
 import { MemberList } from "@/features/member/ui/MemberList";
 import useConfirmDialog from "@/features/dialog/hooks/useConfirmDialog";
@@ -245,6 +279,54 @@ const ArticleContentsController = () => {
                   }
                 }}
                 config={{
+                  licenseKey: "GPL",
+                  // 기존 @ckeditor/ckeditor5-build-decoupled-document 빌드의 플러그인·설정 (클라우드 연동 플러그인 제외)
+                  plugins: [
+                    Essentials,
+                    Alignment,
+                    FontSize,
+                    FontFamily,
+                    FontColor,
+                    FontBackgroundColor,
+                    Autoformat,
+                    Bold,
+                    Italic,
+                    Strikethrough,
+                    Underline,
+                    BlockQuote,
+                    Heading,
+                    Image,
+                    ImageCaption,
+                    ImageResize,
+                    ImageStyle,
+                    ImageToolbar,
+                    ImageUpload,
+                    PictureEditing,
+                    Indent,
+                    IndentBlock,
+                    Link,
+                    List,
+                    ListProperties,
+                    MediaEmbed,
+                    Paragraph,
+                    PasteFromOffice,
+                    Table,
+                    TableToolbar,
+                    TextTransformation,
+                  ],
+                  image: {
+                    resizeUnit: "px",
+                    toolbar: [
+                      "imageStyle:inline",
+                      "imageStyle:wrapText",
+                      "imageStyle:breakText",
+                      "|",
+                      "toggleImageCaption",
+                      "imageTextAlternative",
+                    ],
+                  },
+                  table: { contentToolbar: ["tableColumn", "tableRow", "mergeTableCells"] },
+                  list: { properties: { styles: true, startIndex: true, reversed: true } },
                   extraPlugins: [uploadPlugin],
                   toolbar: [
                     "heading",
